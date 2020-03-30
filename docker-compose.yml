@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  test:
+    build:
+      context: .
+      dockerfile: ./container/test/Dockerfile
+  lint:
+    build:
+      context: .
+      dockerfile: ./container/lint/Dockerfile
+  build:
+    build:
+      context: .
+      dockerfile: ./container/build/Dockerfile

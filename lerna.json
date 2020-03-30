@@ -1,0 +1,22 @@
+{
+  "packages": ["packages/*"],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "independent",
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "yes": true,
+      "allowBranch": "dev",
+      "amend": true
+    }
+  },
+  "changelog": {
+    "labels": {
+      "enhancement": ":rocket: New Feature",
+      "core": ":earth_asia: Core",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation"
+    }
+  }
+}

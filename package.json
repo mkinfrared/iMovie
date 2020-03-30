@@ -1,0 +1,62 @@
+{
+  "name": "imovie",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "version": "0.0.0",
+  "main": "packages/server/dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "build:web": "cd packages/web && yarn build",
+    "build:server": "cd packages/server && yarn build",
+    "build:common": "cd packages/common && yarn build",
+    "prod": "cd packages/server && yarn start:prod",
+    "start": "yarn build:common && concurrently \"yarn start:server\" \"yarn start:web\"",
+    "start:common": "cd packages/common && yarn start",
+    "start:server": "cd packages/server && yarn start",
+    "start:web": "cd packages/web && yarn start",
+    "test": "lerna run test",
+    "test:web": "cd packages/web && yarn test",
+    "test:server": "cd packages/server && yarn test",
+    "lint": "yarn format && yarn lint:styles && yarn lint:ts ",
+    "lint:ts": "eslint --fix \"packages/**/*.ts?(x)\"",
+    "lint:styles": "stylelint \"**/*.scss\" --syntax scss --fix",
+    "format": "prettier --write \"packages/**/*.ts?(x)\"",
+    "version": "lerna version --conventional-commits --yes",
+    "clean": "lerna clean --yes",
+    "precommit": "yarn lint && yarn test && git add ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "lerna-changelog": "^1.0.1",
+    "lint-staged": "^10.0.10",
+    "prettier": "1.19.1",
+    "stylelint": "^13.2.1",
+    "stylelint-order": "^4.0.0",
+    "stylelint-prettier": "^1.1.2",
+    "typescript": "3.7.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@imovie/common",
+  "private": true,
+  "version": "0.0.0",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/yup": "^0.26.33",
+    "ts-node-dev": "^1.0.0-pre.44"
+  },
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "yup": "^0.28.3"
+  }
+}

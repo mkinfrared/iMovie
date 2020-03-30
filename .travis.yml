@@ -1,0 +1,38 @@
+language: node
+
+sudo: required
+
+env:
+  - COMPOSE_VERSION=1.25.4
+
+before_install:
+  # Docker Compose Install
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  # Download and install Docker libs
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  # Travis CI has its own postgres which conflicts with docker postgres
+  - sudo service postgresql stop
+
+stages:
+  - name: lint
+  - name: test
+  - name: build
+
+jobs:
+  include:
+    - stage: lint
+      before_script: docker-compose build lint
+      script: docker-compose run lint
+
+    - stage: test
+      before_script: docker-compose build test
+      script: docker-compose run test
+
+    - stage: build
+      before_script: docker-compose build build
+      script: docker-compose run build
