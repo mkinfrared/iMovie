@@ -46,7 +46,7 @@
     "no-empty": ["error", { "allowEmptyCatch": true }],
     "no-useless-constructor": "off",
     "comma-dangle": ["error", "never"],
-    "linebreak-style": "off",
+    "linebreak-style": ["error", "unix"],
     "no-console": "error",
     "quotes": ["error", "double"],
     "@typescript-eslint/no-unused-vars": [
@@ -151,6 +151,13 @@
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      "typescript": {
+        "alwaysTryTypes": true
+        // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+      }
     },
     "react": {
       "pragma": "React",
