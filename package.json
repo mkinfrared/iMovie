@@ -26,7 +26,7 @@
     "lint": "yarn format && yarn lint:styles && yarn lint:ts ",
     "lint:ts": "eslint --fix \"packages/**/*.ts?(x)\"",
     "lint:styles": "stylelint \"**/*.scss\" --syntax scss --fix",
-    "format": "prettier --write \"packages/**/*.ts?(x)\"",
+    "format": "prettier --write \"packages/**/*.{ts?(x),json}\"",
     "version": "lerna version --conventional-commits --yes",
     "clean": "lerna clean --yes",
     "coverage": "yarn coverage:web && yarn coverage:server",

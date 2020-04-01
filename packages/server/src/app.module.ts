@@ -1,27 +1,14 @@
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USERNAME } from "config/secrets";
+import { DatabaseModule } from "config/db/database.module";
+import { UserModule } from "modules/user/user.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { LoggerModule } from "./config/logger/logger.module";
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      host: DB_HOST,
-      port: 5432,
-      username: DB_USERNAME,
-      password: DB_PASSWORD,
-      database: DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
-      dropSchema: true
-    }),
-    LoggerModule
-  ],
+  imports: [DatabaseModule, LoggerModule, UserModule],
   controllers: [AppController],
   providers: [AppService]
 })
