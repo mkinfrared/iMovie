@@ -2,6 +2,12 @@ FROM node:12.16.1-alpine
 
 WORKDIR /usr/app
 
+RUN echo "building test image"
+RUN echo "$DB_HOST_TEST"
+RUN echo "$POSTGRES_DB"
+RUN echo "$POSTGRES_USER"
+RUN echo "$POSTGRES_HOST_AUTH_METHOD"
+
 COPY ./package.json .
 COPY ./yarn.lock .
 COPY ./lerna.json .
@@ -19,5 +25,11 @@ ENV SERVER_PORT="4000"
 
 #CORS
 ENV CORS=["http://localhost:3000"]
+
+# DATABASE
+ENV DB_HOST="db"
+ENV DB_NAME="test"
+ENV DB_USERNAME="test"
+ENV DB_PASSWORD="test"
 
 CMD ["yarn",  "test"]

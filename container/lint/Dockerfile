@@ -2,6 +2,9 @@ FROM node:12.16.1-alpine
 
 WORKDIR /usr/app
 
+RUN echo "building lint image"
+RUN echo "$DB_HOST_TEST"
+
 COPY ./package.json .
 COPY ./yarn.lock .
 COPY ./lerna.json .
@@ -9,11 +12,5 @@ COPY ./lerna.json .
 RUN yarn
 
 COPY . .
-
-#SERVER
-ENV SERVER_PORT="4000"
-
-#CORS
-ENV CORS=["http://localhost:3000"]
 
 CMD ["yarn",  "lint"]
