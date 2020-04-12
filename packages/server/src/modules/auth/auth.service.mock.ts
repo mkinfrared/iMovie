@@ -4,8 +4,8 @@ const authServiceMock = {
   loginUser: jest.fn()
 };
 const authDtoMock: AuthDto = {
-  username: "Towelie",
-  password: "Marklar"
+  username: "marklar",
+  password: "Foobar42@"
 };
 
 export { authServiceMock, authDtoMock };
