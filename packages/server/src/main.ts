@@ -1,6 +1,5 @@
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
@@ -15,7 +14,6 @@ async function bootstrap() {
   });
 
   app.set("trust proxy", 1);
-  app.use(cookieParser());
   app.enableCors({ origin: CORS });
   app.use(helmet());
   app.use(

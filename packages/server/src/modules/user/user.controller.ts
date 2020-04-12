@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Req,
   UseFilters,
   UsePipes
 } from "@nestjs/common";
@@ -15,6 +16,7 @@ import {
 import { DatabaseException } from "exceptions/database.exception";
 import { ValidationException } from "exceptions/validation.exception";
 import { RegisterPipe } from "pipes/register.pipe";
+import { AuthRequest } from "types";
 
 import { UpdateUserDto, UserDto } from "./dto/user.dto";
 import { UserService } from "./user.service";
@@ -31,8 +33,14 @@ export class UserController {
   }
 
   @Get()
-  getAll() {
-    return this.userService.getAll();
+  getCurrent(@Req() req: AuthRequest) {
+    if (!req.userData) {
+      throw new HttpException("", HttpStatus.UNAUTHORIZED);
+    }
+
+    const { id } = req.userData;
+
+    return this.userService.getOne(id);
   }
 
   @Get(":id")

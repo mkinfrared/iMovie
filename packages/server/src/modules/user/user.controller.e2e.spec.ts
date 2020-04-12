@@ -1,13 +1,14 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
-import { getConnection } from "typeorm";
+import { Connection, getConnection } from "typeorm";
 
 import { AppModule } from "app.module";
 import { userDtoMock } from "modules/user/user.service.mock";
 
 describe("UserController (e2e)", () => {
   let app: INestApplication;
+  let connection: Connection;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -15,12 +16,14 @@ describe("UserController (e2e)", () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    connection = getConnection();
+
+    await connection.dropDatabase();
+    await connection.synchronize();
     await app.init();
   });
 
   afterAll(async () => {
-    const connection = getConnection();
-
     await connection.dropDatabase();
     await app.close();
   });

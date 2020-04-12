@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import jwt from "jsonwebtoken";
+import omit from "lodash/omit";
 
 import { LoggerService } from "config/logger/logger.service";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "config/secrets";
@@ -13,7 +14,7 @@ export class TokenService {
 
   generateTokens(value: JwtValue): [string, string] {
     this.loggerService.log("Generating tokens");
-    const data = { ...value };
+    const data = omit(value, ["iat", "exp"]);
     const accessToken = jwt.sign(data, ACCESS_TOKEN_KEY, { expiresIn: "1m" });
     const refreshToken = jwt.sign(data, REFRESH_TOKEN_KEY, {
       expiresIn: "7d"
@@ -31,6 +32,7 @@ export class TokenService {
       data = jwt.verify(accessToken, ACCESS_TOKEN_KEY) as JwtValue;
     } catch (e) {
       this.loggerService.log("Access token is outdated");
+      throw new Error();
     }
 
     return data;
