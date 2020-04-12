@@ -14,6 +14,9 @@ services:
       - "6379:6379"
   test:
     build:
+      args:
+        USERNAME: ${USERNAME}
+        PASSWORD: ${PASSWORD}
       context: .
       dockerfile: ./container/test/Dockerfile
     links:

@@ -14,7 +14,7 @@ describe("AuthService", () => {
 
   let service: AuthService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
@@ -29,12 +29,16 @@ describe("AuthService", () => {
     service = module.get<AuthService>(AuthService);
   });
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should be defined", () => {
     expect(service).toBeDefined();
   });
 
   it("should return 'undefined' when user was not found", async () => {
-    userServiceMock.findByUsername.mockReturnValueOnce(undefined);
+    userServiceMock.getByUsername.mockReturnValueOnce(undefined);
 
     const result = await service.loginUser(authDtoMock);
 
@@ -42,7 +46,7 @@ describe("AuthService", () => {
   });
 
   it("should return 'undefined' when passwords do not match", async () => {
-    userServiceMock.findByUsername.mockReturnValueOnce({ password: "marklar" });
+    userServiceMock.getByUsername.mockReturnValueOnce({ password: "marklar" });
 
     const result = await service.loginUser({
       username: "foo",
@@ -56,7 +60,7 @@ describe("AuthService", () => {
     const password = "foo";
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    userServiceMock.findByUsername.mockReturnValueOnce({
+    userServiceMock.getByUsername.mockReturnValueOnce({
       username: "Towelie",
       password: hashedPassword
     });
@@ -68,5 +72,35 @@ describe("AuthService", () => {
 
     expect(result).toBeDefined();
     expect(result!.username).toBe("Towelie");
+  });
+
+  it("should set 'isActive' on user to true and return user", async () => {
+    const email = "marklar@foo.bar";
+    const id = "42";
+
+    userServiceMock.getByEmail.mockReturnValueOnce({
+      ...authDtoMock,
+      id,
+      email,
+      isActive: false
+    });
+
+    const result = await service.activateUser(email);
+
+    expect(result).toBeDefined();
+    expect(result!.email).toBe(email);
+    expect(result!.isActive).toBe(true);
+    expect(userServiceMock.updateUser).toHaveBeenCalled();
+    expect(userServiceMock.updateUser).toHaveBeenCalledWith(id, result);
+  });
+
+  it("should return undefined when user was not found", async () => {
+    const email = "marklar@foo.bar";
+
+    userServiceMock.getByEmail.mockReturnValueOnce(undefined);
+
+    const result = await service.activateUser(email);
+
+    expect(result).toBeUndefined();
   });
 });

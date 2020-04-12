@@ -4,7 +4,9 @@ const userServiceMock = {
   create: jest.fn(),
   getAll: jest.fn(),
   getOne: jest.fn(),
-  findByUsername: jest.fn(),
+  getByUsername: jest.fn(),
+  getByEmail: jest.fn(),
+  updateUser: jest.fn(),
   removeUser: jest.fn()
 };
 const userDtoMock: UserDto = {

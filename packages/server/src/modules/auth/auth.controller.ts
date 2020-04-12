@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Res,
   UseFilters,
@@ -10,6 +12,7 @@ import {
 } from "@nestjs/common";
 import { Response } from "express";
 
+import { CORS, NODE_ENV } from "config/secrets";
 import { ValidationException } from "exceptions/validation.exception";
 import { TokenService } from "modules/token/token.service";
 import { LoginPipe } from "pipes/login.pipe";
@@ -44,5 +47,29 @@ export class AuthController {
     res.cookie("access-token", accessToken, { httpOnly: true });
     res.cookie("refresh-token", refreshToken, { httpOnly: true });
     res.status(HttpStatus.OK).send(user);
+  }
+
+  @Get(":token")
+  async activate(@Param("token") token: string, @Res() res: Response) {
+    const data = this.tokenService.verifyEmailToken(token);
+
+    if (!data) {
+      throw new HttpException("Token is invalid", HttpStatus.BAD_REQUEST);
+    }
+
+    const user = await this.authService.activateUser(data.email);
+
+    if (!user) {
+      throw new HttpException("Token is invalid", HttpStatus.BAD_REQUEST);
+    }
+
+    const [accessToken, refreshToken] = this.tokenService.generateTokens(user);
+
+    res.cookie("access-token", accessToken, { httpOnly: true });
+    res.cookie("refresh-token", refreshToken, { httpOnly: true });
+
+    const url = NODE_ENV === "production" ? "/" : CORS[0];
+
+    res.redirect(url);
   }
 }

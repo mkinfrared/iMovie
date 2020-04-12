@@ -4,6 +4,8 @@ import { getConnection } from "typeorm";
 import uuid from "uuid/v4";
 
 import { DatabaseModule } from "config/db/database.module";
+import { MailerService } from "utils/mailer/mailer.service";
+import { mailerServiceMock } from "utils/mailer/mailer.service.mock";
 
 import { UserController } from "./user.controller";
 import { User } from "./user.entity";
@@ -14,11 +16,16 @@ describe("User Controller", () => {
   let controller: UserController;
   let userId: string;
 
+  const mockMailerService = jest.fn(() => ({ ...mailerServiceMock }));
+
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [DatabaseModule, TypeOrmModule.forFeature([User])],
       controllers: [UserController],
-      providers: [UserService]
+      providers: [
+        UserService,
+        { provide: MailerService, useClass: mockMailerService }
+      ]
     }).compile();
 
     controller = module.get<UserController>(UserController);
@@ -36,7 +43,8 @@ describe("User Controller", () => {
   });
 
   it("should create a new user", async () => {
-    const result = await controller.create(userDtoMock);
+    const request = {} as any;
+    const result = await controller.create(userDtoMock, request);
 
     expect(result).toHaveProperty("id");
     expect(result.email).toBe(userDtoMock.email);

@@ -3,8 +3,12 @@ import jwt from "jsonwebtoken";
 import omit from "lodash/omit";
 
 import { LoggerService } from "config/logger/logger.service";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "config/secrets";
-import { JwtValue } from "types";
+import {
+  ACCESS_TOKEN_KEY,
+  EMAIL_TOKEN_KEY,
+  REFRESH_TOKEN_KEY
+} from "config/secrets";
+import { EmailData, JwtValue } from "types";
 
 @Injectable()
 export class TokenService {
@@ -31,7 +35,7 @@ export class TokenService {
 
       data = jwt.verify(accessToken, ACCESS_TOKEN_KEY) as JwtValue;
     } catch (e) {
-      this.loggerService.log("Access token is outdated");
+      this.loggerService.log("Access token is invalid");
       throw new Error();
     }
 
@@ -46,7 +50,25 @@ export class TokenService {
 
       data = jwt.verify(refreshToken, REFRESH_TOKEN_KEY) as JwtValue;
     } catch (e) {
-      this.loggerService.log("Refresh token is outdated");
+      this.loggerService.log("Refresh token is invalid");
+    }
+
+    return data;
+  }
+
+  generateEmailToken(email: string) {
+    return jwt.sign({ email }, EMAIL_TOKEN_KEY, { expiresIn: "3 days" });
+  }
+
+  verifyEmailToken(emailToken: string) {
+    let data: EmailData | undefined;
+
+    try {
+      this.loggerService.log("Verifying email token");
+
+      data = jwt.verify(emailToken, EMAIL_TOKEN_KEY) as EmailData;
+    } catch (e) {
+      this.loggerService.log("Email token is invalid");
     }
 
     return data;
