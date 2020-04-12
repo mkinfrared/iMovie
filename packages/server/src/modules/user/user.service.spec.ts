@@ -1,36 +1,21 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 
+import { repositoryMock } from "config/db/database.service.mock";
+import { userDtoMock } from "modules/user/user.service.mock";
+
 import { UserDto } from "./dto/user.dto";
 import { User } from "./user.entity";
 import { UserService } from "./user.service";
 
-export const user: UserDto = {
-  username: "marklar",
-  password: "foobar",
-  email: "marklar@foo.bar",
-  firstName: "Randy",
-  lastName: "Marsh"
-};
-
 describe("UserService", () => {
-  const save = jest.fn((userDto: UserDto) => userDto);
-  const find = jest.fn(() => [user]);
-  const findOne = jest.fn((id: string): UserDto | undefined => user);
-  const update = jest.fn((id: string, userDto: UserDto) => ({
-    ...user,
-    ...userDto
-  }));
-  const deleteUser = jest.fn(() => "deleted");
-  const mockUserRepository = jest.fn(() => ({
-    save,
-    find,
-    findOne,
-    update,
-    delete: deleteUser
-  }));
+  const mockUserRepository = jest.fn(() => ({ ...repositoryMock }));
 
   let service: UserService;
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -48,17 +33,20 @@ describe("UserService", () => {
   });
 
   it("should return a new saved user", async () => {
-    const result = await service.create(user);
+    repositoryMock.save.mockReturnValueOnce(userDtoMock);
+
+    const result = await service.create(userDtoMock);
 
     expect(result).toBeDefined();
-    expect(result.username).toBe(user.username);
-    expect(result.password).toBe(user.password);
-    expect(result.email).toBe(user.email);
-    expect(result.firstName).toBe(user.firstName);
-    expect(result.lastName).toBe(user.lastName);
+    expect(result.username).toBe(userDtoMock.username);
+    expect(result.email).toBe(userDtoMock.email);
+    expect(result.firstName).toBe(userDtoMock.firstName);
+    expect(result.lastName).toBe(userDtoMock.lastName);
   });
 
   it("should return all users", async () => {
+    repositoryMock.find.mockReturnValueOnce([userDtoMock]);
+
     const result = await service.getAll();
 
     expect(result).toBeDefined();
@@ -67,39 +55,53 @@ describe("UserService", () => {
   });
 
   it("should return a user by id", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
+
     const result = await service.getOne("42");
 
     expect(result).toBeDefined();
-    expect(result).toMatchObject(user);
+    expect(result!.email).toBe(userDtoMock.email);
+    expect(result!.username).toBe(userDtoMock.username);
   });
 
   it("should return undefined when user was not found", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(undefined);
+
     const updatedUser: UserDto = {
       email: "marklar",
       username: "towelie",
       password: "gethigh",
+      passwordConfirm: "gethigh",
       firstName: "Steven",
       lastName: "McTowelie"
     };
-
-    findOne.mockImplementationOnce(() => undefined);
     const result = await service.updateUser("42", updatedUser);
 
     expect(result).toBeUndefined();
   });
 
   it("should return an updated user by id", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
+    repositoryMock.update.mockImplementationOnce(
+      (_: string, newValue: any) => ({ ...userDtoMock, ...newValue })
+    );
+
     const updatedUser: UserDto = {
       email: "marklar",
       username: "towelie",
       password: "gethigh",
+      passwordConfirm: "gethigh",
       firstName: "Steven",
       lastName: "McTowelie"
     };
     const result = await service.updateUser("42", updatedUser);
 
     expect(result).toBeDefined();
-    expect(result).toMatchObject(updatedUser);
+    expect(result!.email).toBe(updatedUser.email);
+    expect(result!.username).toBe(updatedUser.username);
+    expect(result!.firstName).toBe(updatedUser.firstName);
+    expect(result!.lastName).toBe(updatedUser.lastName);
+    expect(result!.email).toBe(updatedUser.email);
   });
 
   it("should remove a user", async () => {

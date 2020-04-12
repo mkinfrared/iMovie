@@ -4,7 +4,7 @@ import request from "supertest";
 import { getConnection } from "typeorm";
 
 import { AppModule } from "app.module";
-import { user } from "modules/user/user.service.spec";
+import { userDtoMock } from "modules/user/user.service.mock";
 
 describe("UserController (e2e)", () => {
   let app: INestApplication;
@@ -25,13 +25,19 @@ describe("UserController (e2e)", () => {
     await app.close();
   });
 
-  it("/user (POST)", () => {
-    return request(app.getHttpServer())
+  it("/user (POST)", async () => {
+    const result = await request(app.getHttpServer())
       .post("/user")
-      .send(user)
+      .send(userDtoMock)
       .expect(201)
       .expect((res) => {
-        expect(res.body).toMatchObject(user);
+        expect(res.body.email).toBe(userDtoMock.email);
+        expect(res.body.username).toBe(userDtoMock.username);
+        expect(res.body.isActive).toBe(false);
+        expect(res.body.role).toBe("user");
+        expect(res.body.id).toBeDefined();
       });
+
+    return result;
   });
 });

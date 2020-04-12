@@ -8,7 +8,7 @@ import { DatabaseModule } from "config/db/database.module";
 import { UserController } from "./user.controller";
 import { User } from "./user.entity";
 import { UserService } from "./user.service";
-import { user } from "./user.service.spec";
+import { updateUserDtoMock, userDtoMock } from "./user.service.mock";
 
 describe("User Controller", () => {
   let controller: UserController;
@@ -36,10 +36,10 @@ describe("User Controller", () => {
   });
 
   it("should create a new user", async () => {
-    const result = await controller.create(user);
+    const result = await controller.create(userDtoMock);
 
-    expect(result).toMatchObject(user);
     expect(result).toHaveProperty("id");
+    expect(result.email).toBe(userDtoMock.email);
     expect(result.isActive).toBe(false);
     expect(result.role).toBe("user");
 
@@ -51,13 +51,15 @@ describe("User Controller", () => {
 
     expect(Array.isArray(result)).toBe(true);
     expect(result).toHaveLength(1);
-    expect(result[0].email).toBe(user.email);
+    expect(result[0].email).toBe(userDtoMock.email);
   });
 
   it("should return a user by id", async () => {
     const result = await controller.getOne(userId);
 
-    expect(result).toMatchObject(user);
+    expect(result.email).toBe(userDtoMock.email);
+    expect(result.username).toBe(userDtoMock.username);
+    expect(result.username).toBe(userDtoMock.username);
   });
 
   it("should return an error when user was not found", async () => {
@@ -74,7 +76,7 @@ describe("User Controller", () => {
 
   it("should return an error when user was not found", async () => {
     const id = uuid();
-    const updatedUser = { ...user, firstName: "Stan" };
+    const updatedUser = { ...updateUserDtoMock, firstName: "Stan" };
 
     try {
       await controller.update(id, updatedUser);
@@ -86,11 +88,11 @@ describe("User Controller", () => {
   });
 
   it("should update a user with new data", async () => {
-    const updatedUser = { ...user, firstName: "Stan" };
+    const updatedUser = { ...updateUserDtoMock, firstName: "Stan" };
     const result = await controller.update(userId, updatedUser);
 
     expect(result).toBeDefined();
-    expect(result.email).toBe(user.email);
+    expect(result.email).toBe(userDtoMock.email);
     expect(result.firstName).toBe(updatedUser.firstName);
   });
 

@@ -7,10 +7,16 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put
+  Put,
+  UseFilters,
+  UsePipes
 } from "@nestjs/common";
 
-import { UserDto } from "./dto/user.dto";
+import { DatabaseException } from "exceptions/database.exception";
+import { ValidationException } from "exceptions/validation.exception";
+import { RegisterPipe } from "pipes/register.pipe";
+
+import { UpdateUserDto, UserDto } from "./dto/user.dto";
 import { UserService } from "./user.service";
 
 @Controller("user")
@@ -18,7 +24,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() userDto: UserDto) {
+  @UsePipes(new RegisterPipe())
+  @UseFilters(DatabaseException, ValidationException)
+  async create(@Body() userDto: UserDto) {
     return this.userService.create(userDto);
   }
 
@@ -39,7 +47,7 @@ export class UserController {
   }
 
   @Put(":id")
-  async update(@Param("id") id: string, @Body() userDto: UserDto) {
+  async update(@Param("id") id: string, @Body() userDto: UpdateUserDto) {
     const user = await this.userService.updateUser(id, userDto);
 
     if (!user) {

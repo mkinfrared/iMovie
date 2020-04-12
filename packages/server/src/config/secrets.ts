@@ -8,7 +8,10 @@ const DB_NAME = process.env.DB_NAME;
 const DB_HOST = process.env.DB_HOST;
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
+const ACCESS_TOKEN_KEY = String(process.env.ACCESS_TOKEN_KEY);
+const REFRESH_TOKEN_KEY = String(process.env.REFRESH_TOKEN_KEY);
 const CORS = process.env.CORS?.split(",");
+const REDIS_HOST = process.env.REDIS_HOST;
 
 export {
   SERVER_PORT,
@@ -17,5 +20,8 @@ export {
   DB_PASSWORD,
   DB_USERNAME,
   NODE_ENV,
-  CORS
+  CORS,
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  REDIS_HOST
 };

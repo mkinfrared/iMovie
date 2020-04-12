@@ -5,7 +5,7 @@ const { printf, combine, timestamp } = format;
 const getMeta = format((info) => {
   return { ...info, context: info.context };
 });
-const myFormat = printf(({ level, message, label, timestamp, context }) => {
+const myFormat = printf(({ level, message, timestamp, context }) => {
   return `${timestamp} [${context}] ${level}: ${message}`;
 });
 

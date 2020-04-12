@@ -4,3 +4,6 @@ test
 serviceWorker.ts
 Graphql.d.*
 Graphql.type.*
+**/types/index.ts
+packages/**/dist
+packages/**/build

@@ -20,6 +20,8 @@ RUN yarn bootstrap
 
 COPY . .
 
+RUN yarn build:common
+
 #SERVER
 ENV SERVER_PORT="4000"
 
@@ -31,5 +33,12 @@ ENV DB_HOST="db"
 ENV DB_NAME="test"
 ENV DB_USERNAME="test"
 ENV DB_PASSWORD="test"
+
+# TOKENS
+ENV ACCESS_TOKEN_KEY="jimmy"
+ENV REFRESH_TOKEN_KEY="timmy"
+
+# REDIS
+ENV REDIS_HOST="redis"
 
 CMD ["yarn",  "test"]
