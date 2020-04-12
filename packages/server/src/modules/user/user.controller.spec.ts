@@ -46,12 +46,14 @@ describe("User Controller", () => {
     userId = result.id;
   });
 
-  it("should return an array of saved users", async () => {
-    const result = await controller.getAll();
+  it("should throw an error when userData is not defined", async () => {
+    const request = {} as any;
 
-    expect(Array.isArray(result)).toBe(true);
-    expect(result).toHaveLength(1);
-    expect(result[0].email).toBe(userDtoMock.email);
+    try {
+      await controller.getCurrent(request);
+    } catch (e) {
+      expect(e.status).toBe(401);
+    }
   });
 
   it("should return a user by id", async () => {

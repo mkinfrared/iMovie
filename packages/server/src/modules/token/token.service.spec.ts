@@ -54,9 +54,11 @@ describe("TokenService", () => {
   });
 
   it("should return undefined when access token is invalid", () => {
-    const result = service.verifyAccessToken("marklar");
-
-    expect(result).toBeUndefined();
+    try {
+      service.verifyAccessToken("marklar");
+    } catch (e) {
+      expect(service.verifyAccessToken).toThrow();
+    }
   });
 
   it("should return a decrypted data from refresh token", () => {

@@ -25,7 +25,17 @@ export class UserService {
   }
 
   getAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      select: [
+        "id",
+        "email",
+        "username",
+        "firstName",
+        "lastName",
+        "isActive",
+        "role"
+      ]
+    });
   }
 
   async getOne(id: string) {
