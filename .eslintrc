@@ -7,7 +7,6 @@
   "extends": [
     "airbnb",
     "prettier",
-    "plugin:security/recommended",
     "prettier/@typescript-eslint",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
@@ -26,7 +25,6 @@
     "sourceType": "module"
   },
   "plugins": [
-    "security",
     "react",
     "@typescript-eslint",
     "prettier",
@@ -148,6 +146,7 @@
       }
     ],
     "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "prettier/prettier": ["error"]
   },
   "settings": {
@@ -178,6 +177,18 @@
       "files": ["react-app-env.d.ts"],
       "rules": {
         "spaced-comment": "off"
+      }
+    },
+    {
+      "files": ["*.{spec,test}.{ts,tsx}"],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    },
+    {
+      "files": ["*.dto.ts"],
+      "rules": {
+        "max-classes-per-file": "off"
       }
     }
   ]

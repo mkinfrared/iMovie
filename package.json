@@ -24,15 +24,15 @@
     "test:web": "cd packages/web && yarn test",
     "test:server": "cd packages/server && yarn test",
     "lint": "yarn format && yarn lint:styles && yarn lint:ts ",
-    "lint:ts": "eslint --fix \"packages/**/*.ts?(x)\"",
-    "lint:styles": "stylelint \"**/*.scss\" --syntax scss --fix",
+    "lint:ts": "eslint --cache --fix \"packages/**/*.ts?(x)\"",
+    "lint:styles": "stylelint \"**/*.scss\" --syntax scss --fix --cache",
     "format": "prettier --write \"packages/**/*.{ts?(x),json}\"",
     "version": "lerna version --conventional-commits --yes",
     "clean": "lerna clean --yes",
     "coverage": "yarn coverage:web && yarn coverage:server",
     "coverage:web": "open-cli packages/web/coverage/lcov-report/index.html",
     "coverage:server": "open-cli packages/server/coverage/lcov-report/index.html",
-    "precommit": "lint-staged && yarn test"
+    "precommit": "yarn lint && yarn test && git add ."
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.25.0",
@@ -47,7 +47,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "eslint-plugin-security": "^1.4.0",
     "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lerna-changelog": "^1.0.1",

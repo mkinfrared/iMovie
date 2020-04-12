@@ -18,7 +18,8 @@ export class LoggerService extends Logger {
     this.logger.debug(message, { context });
   }
 
-  error(message: any, trace?: string, context?: string) {
+  // _ = trace
+  error(message: any, _?: string, context?: string) {
     super.error(message, context);
     this.logger.error(message, { context });
   }

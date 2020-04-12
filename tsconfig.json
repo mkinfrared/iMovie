@@ -14,11 +14,12 @@
     "strictPropertyInitialization": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "suppressExcessPropertyErrors": false
   },
   "exclude": ["node_modules"]
 }
