@@ -3,6 +3,10 @@ import { User } from "modules/user/user.entity";
 
 export type JwtValue = Omit<User, "password" | "firstName" | "lastName">;
 
+export type EmailData = {
+  email: string;
+};
+
 export type AuthRequest = Request & {
   userData?: JwtValue;
 };

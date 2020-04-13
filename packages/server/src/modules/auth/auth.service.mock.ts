@@ -1,7 +1,8 @@
 import { AuthDto } from "./dto/auth.dto";
 
 const authServiceMock = {
-  loginUser: jest.fn()
+  loginUser: jest.fn(),
+  activateUser: jest.fn()
 };
 const authDtoMock: AuthDto = {
   username: "marklar",

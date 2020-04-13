@@ -62,4 +62,68 @@ describe("Auth Controller", () => {
     expect(response.status).toHaveBeenCalled();
     expect(response.status).toHaveBeenCalledWith(200);
   });
+
+  it("should create new tokens and put them in cookies and redirect", async () => {
+    const token = "marklar";
+    const data = { email: "marklar@foo.bar" };
+
+    tokenServiceMock.verifyEmailToken.mockReturnValueOnce(data);
+    tokenServiceMock.generateTokens.mockReturnValueOnce(["foo", "bar"]);
+    authServiceMock.activateUser.mockReturnValueOnce(userDtoMock);
+
+    const response = {
+      cookie: jest.fn(),
+      redirect: jest.fn(),
+      status: jest.fn(() => ({ send: jest.fn() }))
+    } as any;
+
+    await controller.activate(token, response);
+
+    expect(response.cookie).toHaveBeenCalledTimes(2);
+    expect(response.redirect).toHaveBeenCalled();
+  });
+
+  it("should return 'bad request' when token is invalid", async () => {
+    const token = "marklar";
+
+    tokenServiceMock.verifyEmailToken.mockReturnValueOnce(undefined);
+
+    const response = {
+      cookie: jest.fn(),
+      redirect: jest.fn(),
+      status: jest.fn(() => ({ send: jest.fn() }))
+    } as any;
+
+    try {
+      await controller.activate(token, response);
+    } catch (e) {
+      expect(e.response).toBeDefined();
+      expect(e.status).toBe(400);
+      expect(response.cookie).not.toHaveBeenCalled();
+      expect(response.redirect).not.toHaveBeenCalled();
+    }
+  });
+
+  it("should return 'bad request' when user was not found", async () => {
+    const token = "marklar";
+    const data = { email: "marklar@foo.bar" };
+
+    tokenServiceMock.verifyEmailToken.mockReturnValueOnce(data);
+    authServiceMock.activateUser.mockReturnValueOnce(undefined);
+
+    const response = {
+      cookie: jest.fn(),
+      redirect: jest.fn(),
+      status: jest.fn(() => ({ send: jest.fn() }))
+    } as any;
+
+    try {
+      await controller.activate(token, response);
+    } catch (e) {
+      expect(e.response).toBeDefined();
+      expect(e.status).toBe(400);
+      expect(response.cookie).not.toHaveBeenCalled();
+      expect(response.redirect).not.toHaveBeenCalled();
+    }
+  });
 });

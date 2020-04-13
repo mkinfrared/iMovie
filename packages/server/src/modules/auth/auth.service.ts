@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private readonly userService: UserService) {}
 
   async loginUser(authDto: AuthDto) {
-    const user = await this.userService.findByUsername(authDto.username);
+    const user = await this.userService.getByUsername(authDto.username);
 
     if (!user) {
       return;
@@ -24,5 +24,19 @@ export class AuthService {
     }
 
     return omit(user, "password");
+  }
+
+  async activateUser(email: string) {
+    const user = await this.userService.getByEmail(email);
+
+    if (!user) {
+      return;
+    }
+
+    user.isActive = true;
+
+    this.userService.updateUser(user.id, user);
+
+    return user;
   }
 }

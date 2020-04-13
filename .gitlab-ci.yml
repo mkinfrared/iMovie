@@ -27,6 +27,7 @@ variables:
   # build container.
   DOCKER_TLS_CERTDIR: ""
   DOCKER_HOST: tcp://docker:2375/
+  EMAIL_USR: "$EMAIL_USERNAME.com"
 
 services:
   - docker:dind
@@ -53,7 +54,10 @@ build:
     - docker-compose run build
 
 test:
+  before_script:
+    - export $EMAIL_USERNAME
+    - export $EMAIL_PASSWORD
   stage: test
   script:
-    - docker-compose build test
+    - USERNAME=$EMAIL_USERNAME PASSWORD=$EMAIL_PASSWORD docker-compose build test
     - docker-compose run test

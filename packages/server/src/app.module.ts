@@ -11,6 +11,7 @@ import { UserModule } from "modules/user/user.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { MailerModule } from "./utils/mailer/mailer.module";
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AppService } from "./app.service";
     UserModule,
     AuthModule,
     TokenModule,
-    RedisModule
+    RedisModule,
+    MailerModule
   ],
   controllers: [AppController],
   providers: [AppService]

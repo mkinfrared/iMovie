@@ -50,22 +50,29 @@ export class UserService {
 
   async updateUser(id: string, userDto: UpdateUserDto) {
     const user = await this.getOne(id);
+    const updateInfo = omit(userDto, "id");
 
     if (!user) {
       return;
     }
 
-    const updatedUser = { ...user, ...userDto };
+    const updatedUser = { ...user, ...updateInfo };
 
     this.userRepository.update({ id }, { ...updatedUser });
 
     return omit(updatedUser, "password");
   }
 
-  async findByUsername(username: string) {
+  async getByUsername(username: string) {
     const user = await this.userRepository.findOne({ where: { username } });
 
     return user;
+  }
+
+  async getByEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    return omit(user, "password");
   }
 
   removeUser(id: string) {
