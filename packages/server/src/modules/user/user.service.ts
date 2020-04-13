@@ -1,14 +1,17 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import bcrypt from "bcryptjs";
 import omit from "lodash/omit";
 import { Repository } from "typeorm";
 
+import { NODE_ENV } from "config/secrets";
+import createDefaultUser from "utils/createDefaultUser";
+
 import { UpdateUserDto, UserDto } from "./dto/user.dto";
 import { User } from "./user.entity";
 
 @Injectable()
-export class UserService {
+export class UserService implements OnApplicationBootstrap {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>
@@ -72,10 +75,22 @@ export class UserService {
   async getByEmail(email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
 
+    if (!user) {
+      return;
+    }
+
     return omit(user, "password");
   }
 
   removeUser(id: string) {
     return this.userRepository.delete(id);
+  }
+
+  onApplicationBootstrap() {
+    if (NODE_ENV !== "test") {
+      const user = createDefaultUser();
+
+      this.create(user);
+    }
   }
 }
