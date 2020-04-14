@@ -152,3 +152,5 @@ typings/
 # IDE - VSCode
 .vscode/*
 .idea
+
+user.json

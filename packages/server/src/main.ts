@@ -22,6 +22,7 @@ async function bootstrap() {
       max: 60 // limit each IP to 60 requests per windowMs
     })
   );
+  app.enableShutdownHooks();
 
   await app.listen(SERVER_PORT);
 }

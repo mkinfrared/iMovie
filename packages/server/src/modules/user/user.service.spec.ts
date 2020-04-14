@@ -110,4 +110,40 @@ describe("UserService", () => {
     expect(result).toBeDefined();
     expect(result).toBe("deleted");
   });
+
+  it("should return undefined when user was not found", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(undefined);
+
+    const result = await service.getByUsername("marklar");
+
+    expect(result).toBeUndefined();
+  });
+
+  it("should return undefined when user was not found", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
+
+    const result = await service.getByUsername("marklar");
+
+    expect(result).toBeDefined();
+    expect(result?.username).toBe(userDtoMock.username);
+    expect(result?.email).toBe(userDtoMock.email);
+  });
+
+  it("should return undefined when user was not found", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(undefined);
+
+    const result = await service.getByEmail("marklar");
+
+    expect(result).toBeUndefined();
+  });
+
+  it("should return undefined when user was not found", async () => {
+    repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
+
+    const result = await service.getByEmail("marklar");
+
+    expect(result).toBeDefined();
+    expect(result?.username).toBe(userDtoMock.username);
+    expect(result?.email).toBe(userDtoMock.email);
+  });
 });
