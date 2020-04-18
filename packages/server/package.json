@@ -23,6 +23,7 @@
     "@nestjs/typeorm": "^7.0.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.2.3",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",

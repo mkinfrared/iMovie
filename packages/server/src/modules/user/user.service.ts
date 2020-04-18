@@ -1,7 +1,6 @@
 import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import bcrypt from "bcryptjs";
-import omit from "lodash/omit";
 import { Repository } from "typeorm";
 
 import { NODE_ENV } from "config/secrets";
@@ -19,26 +18,16 @@ export class UserService implements OnApplicationBootstrap {
 
   async create(userDto: UserDto) {
     const hashedPassword = await bcrypt.hash(userDto.password, 12);
-    const user = await this.userRepository.save({
+    const user = this.userRepository.create({
       ...userDto,
       password: hashedPassword
     });
 
-    return omit(user, "password");
+    return this.userRepository.save(user);
   }
 
   getAll() {
-    return this.userRepository.find({
-      select: [
-        "id",
-        "email",
-        "username",
-        "firstName",
-        "lastName",
-        "isActive",
-        "role"
-      ]
-    });
+    return this.userRepository.find();
   }
 
   async getOne(id: string) {
@@ -48,22 +37,19 @@ export class UserService implements OnApplicationBootstrap {
       return;
     }
 
-    return omit(user, "password");
+    return user;
   }
 
   async updateUser(id: string, userDto: UpdateUserDto) {
     const user = await this.getOne(id);
-    const updateInfo = omit(userDto, "id");
 
     if (!user) {
       return;
     }
 
-    const updatedUser = { ...user, ...updateInfo };
+    this.userRepository.update({ id }, { ...userDto });
 
-    this.userRepository.update({ id }, { ...updatedUser });
-
-    return omit(updatedUser, "password");
+    return { ...user, ...userDto } as User;
   }
 
   async getByUsername(username: string) {
@@ -79,7 +65,7 @@ export class UserService implements OnApplicationBootstrap {
       return;
     }
 
-    return omit(user, "password");
+    return user;
   }
 
   removeUser(id: string) {

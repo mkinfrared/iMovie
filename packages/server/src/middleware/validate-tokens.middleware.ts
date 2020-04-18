@@ -12,7 +12,9 @@ export class ValidateTokensMiddleware implements NestMiddleware {
     private readonly tokenService: TokenService,
     private readonly redisService: RedisService,
     private readonly loggerService: LoggerService
-  ) {}
+  ) {
+    this.loggerService.setContext(ValidateTokensMiddleware.name);
+  }
 
   async use(req: AuthRequest, res: Response, next: NextFunction) {
     const accessToken = req.cookies["access-token"];

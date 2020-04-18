@@ -38,10 +38,7 @@ describe("UserService", () => {
     const result = await service.create(userDtoMock);
 
     expect(result).toBeDefined();
-    expect(result.username).toBe(userDtoMock.username);
-    expect(result.email).toBe(userDtoMock.email);
-    expect(result.firstName).toBe(userDtoMock.firstName);
-    expect(result.lastName).toBe(userDtoMock.lastName);
+    expect(repositoryMock.save).not.toHaveBeenCalledWith(userDtoMock);
   });
 
   it("should return all users", async () => {

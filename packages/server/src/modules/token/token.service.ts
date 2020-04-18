@@ -13,7 +13,7 @@ import { EmailData, JwtValue } from "types";
 @Injectable()
 export class TokenService {
   constructor(private readonly loggerService: LoggerService) {
-    this.loggerService.setContext("TokenService");
+    this.loggerService.setContext(TokenService.name);
   }
 
   generateTokens(value: JwtValue): [string, string] {

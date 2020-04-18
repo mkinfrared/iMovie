@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import bcrypt from "bcryptjs";
-import omit from "lodash/omit";
 
 import { UserService } from "modules/user/user.service";
 
@@ -23,7 +22,7 @@ export class AuthService {
       return;
     }
 
-    return omit(user, "password");
+    return user;
   }
 
   async activateUser(email: string) {
