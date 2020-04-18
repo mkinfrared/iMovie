@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -10,6 +11,7 @@ import {
   Put,
   Req,
   UseFilters,
+  UseInterceptors,
   UsePipes
 } from "@nestjs/common";
 import { Request } from "express";
@@ -24,6 +26,7 @@ import { UpdateUserDto, UserDto } from "./dto/user.dto";
 import { UserService } from "./user.service";
 
 @Controller("user")
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(
     private readonly userService: UserService,
@@ -50,6 +53,11 @@ export class UserController {
     const { id } = req.userData;
 
     return this.userService.getOne(id);
+  }
+
+  @Get("all")
+  getAll() {
+    return this.userService.getAll();
   }
 
   @Get(":id")

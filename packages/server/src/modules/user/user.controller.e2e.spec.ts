@@ -43,6 +43,7 @@ describe("UserController (e2e)", () => {
         expect(res.body.isActive).toBe(false);
         expect(res.body.role).toBe("user");
         expect(res.body.id).toBeDefined();
+        expect(res.body.password).toBeUndefined();
       });
 
     return result;
@@ -59,6 +60,7 @@ describe("UserController (e2e)", () => {
         expect(res.body.isActive).toBe(false);
         expect(res.body.role).toBe("user");
         expect(res.body.id).toBeDefined();
+        expect(res.body.password).toBeUndefined();
       });
 
     return result;
@@ -75,6 +77,23 @@ describe("UserController (e2e)", () => {
         expect(res.body.isActive).toBe(false);
         expect(res.body.role).toBe("user");
         expect(res.body.id).toBeDefined();
+        expect(res.body.password).toBeUndefined();
+      });
+
+    return result;
+  });
+
+  it("/user/all (GET)", async () => {
+    const result = await agent
+      .get("/user/all")
+      .send()
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toBeDefined();
+        expect(res.body).toHaveLength(1);
+        expect(res.body[0].id).toBeDefined();
+        expect(res.body[0].username).toBe(userDtoMock.username);
+        expect(res.body[0].password).toBeUndefined();
       });
 
     return result;

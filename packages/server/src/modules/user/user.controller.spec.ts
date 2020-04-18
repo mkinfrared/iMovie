@@ -50,6 +50,7 @@ describe("User Controller", () => {
     expect(result.email).toBe(userDtoMock.email);
     expect(result.isActive).toBe(false);
     expect(result.role).toBe("user");
+    expect(result.password).not.toBe(userDtoMock.password);
 
     userId = result.id;
   });
@@ -62,6 +63,15 @@ describe("User Controller", () => {
     } catch (e) {
       expect(e.status).toBe(401);
     }
+  });
+
+  it("should return a user", async () => {
+    const request = {
+      userData: { id: userId }
+    } as any;
+    const result = await controller.getCurrent(request);
+
+    expect(result).toBeDefined();
   });
 
   it("should return a user by id", async () => {
@@ -104,6 +114,14 @@ describe("User Controller", () => {
     expect(result).toBeDefined();
     expect(result.email).toBe(userDtoMock.email);
     expect(result.firstName).toBe(updatedUser.firstName);
+  });
+
+  it("should return an array of users", async () => {
+    const result = await controller.getAll();
+
+    expect(result).toBeDefined();
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBeDefined();
   });
 
   it("should return an error when user was not found", async () => {

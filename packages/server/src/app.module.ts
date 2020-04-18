@@ -11,6 +11,10 @@ import { UserModule } from "modules/user/user.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { CityModule } from "./modules/city/city.module";
+import { CountryModule } from "./modules/country/country.module";
+import { StateModule } from "./modules/state/state.module";
+import { ZipcodeModule } from "./modules/zipcode/zipcode.module";
 import { MailerModule } from "./utils/mailer/mailer.module";
 
 @Module({
@@ -21,7 +25,11 @@ import { MailerModule } from "./utils/mailer/mailer.module";
     AuthModule,
     TokenModule,
     RedisModule,
-    MailerModule
+    MailerModule,
+    CountryModule,
+    StateModule,
+    CityModule,
+    ZipcodeModule
   ],
   controllers: [AppController],
   providers: [AppService]

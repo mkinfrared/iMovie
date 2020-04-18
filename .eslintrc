@@ -48,7 +48,7 @@
     "comma-dangle": ["error", "never"],
     "linebreak-style": "off",
     "no-console": "error",
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double", "avoid-escape"],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

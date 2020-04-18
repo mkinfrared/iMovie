@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
   HttpException,
@@ -8,19 +9,23 @@ import {
   Post,
   Res,
   UseFilters,
+  UseInterceptors,
   UsePipes
 } from "@nestjs/common";
+import { classToPlain } from "class-transformer";
 import { Response } from "express";
 
 import { CORS, NODE_ENV } from "config/secrets";
 import { ValidationException } from "exceptions/validation.exception";
 import { TokenService } from "modules/token/token.service";
 import { LoginPipe } from "pipes/login.pipe";
+import { JwtValue } from "types";
 
 import { AuthService } from "./auth.service";
 import { AuthDto } from "./dto/auth.dto";
 
 @Controller("auth")
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -42,13 +47,15 @@ export class AuthController {
       );
     }
 
-    const [accessToken, refreshToken] = this.tokenService.generateTokens(user);
+    const data = classToPlain(user) as JwtValue;
+    const [accessToken, refreshToken] = this.tokenService.generateTokens(data);
 
     res.cookie("access-token", accessToken, { httpOnly: true });
     res.cookie("refresh-token", refreshToken, { httpOnly: true });
-    res.status(HttpStatus.OK).send(user);
+    res.status(HttpStatus.OK).send(data);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(":token")
   async activate(@Param("token") token: string, @Res() res: Response) {
     const data = this.tokenService.verifyEmailToken(token);
@@ -63,7 +70,10 @@ export class AuthController {
       throw new HttpException("Token is invalid", HttpStatus.BAD_REQUEST);
     }
 
-    const [accessToken, refreshToken] = this.tokenService.generateTokens(user);
+    const newData = classToPlain(user) as JwtValue;
+    const [accessToken, refreshToken] = this.tokenService.generateTokens(
+      newData
+    );
 
     res.cookie("access-token", accessToken, { httpOnly: true });
     res.cookie("refresh-token", refreshToken, { httpOnly: true });
