@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { ScheduleModule } from "@nestjs/schedule";
 import cookieParser from "cookie-parser";
 
 import { DatabaseModule } from "config/db/database.module";
@@ -19,6 +20,7 @@ import { MailerModule } from "./utils/mailer/mailer.module";
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     DatabaseModule,
     LoggerModule,
     UserModule,

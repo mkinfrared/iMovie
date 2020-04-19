@@ -1,5 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
+import axios from "axios";
 
 import { repositoryMock } from "config/db/database.service.mock";
 import { LoggerService } from "config/logger/logger.service";
@@ -9,13 +10,16 @@ import { countryMock } from "modules/country/country.service.mock";
 import { Country } from "./country.entity";
 import { CountryService } from "./country.service";
 
+jest.mock("axios");
+
 describe("CountryService", () => {
+  const axiosMock = axios as jest.Mocked<typeof axios>;
   const mockCountryRepository = jest.fn(() => ({ ...repositoryMock }));
   const mockLoggerService = jest.fn(() => ({ ...loggerServiceMock }));
 
   let service: CountryService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CountryService,
@@ -56,5 +60,39 @@ describe("CountryService", () => {
     expect(result).toBeDefined();
     expect(result?.name).toBe(countryMock.name);
     expect(result?.alpha2Code).toBe(countryMock.alpha2Code);
+  });
+
+  it("should fetch countries and create entities", async () => {
+    const countryData = {
+      ...countryMock,
+      callingCodes: [`${countryMock.callingCode}`]
+    };
+    const data = [countryData];
+
+    axiosMock.get.mockReturnValueOnce(
+      new Promise((resolve) => resolve({ data }))
+    );
+
+    await service.fetchCountries();
+
+    expect(repositoryMock.values).toHaveBeenCalled();
+    expect(repositoryMock.execute).toHaveBeenCalled();
+  });
+
+  it("should call 'fetchCountries'", async () => {
+    const countryData = {
+      ...countryMock,
+      callingCodes: [`${countryMock.callingCode}`]
+    };
+    const data = [countryData];
+
+    axiosMock.get.mockReturnValueOnce(
+      new Promise((resolve) => resolve({ data }))
+    );
+
+    await service.handleCron();
+
+    expect(repositoryMock.values).toHaveBeenCalled();
+    expect(repositoryMock.execute).toHaveBeenCalled();
   });
 });
