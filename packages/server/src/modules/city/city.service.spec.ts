@@ -11,7 +11,7 @@ describe("CityService", () => {
 
   let service: CityService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CityService,
@@ -34,8 +34,12 @@ describe("CityService", () => {
     repositoryMock.execute.mockReturnValueOnce({
       generatedMaps: [{ name, stateId, countryId }]
     });
+
     const result = await service.upsert(name, stateId, countryId);
 
     expect(result).toBeDefined();
+    expect(result.name).toBe(name);
+    expect(result.stateId).toBe(stateId);
+    expect(result.countryId).toBe(countryId);
   });
 });
