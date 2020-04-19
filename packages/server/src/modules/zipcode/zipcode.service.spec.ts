@@ -192,8 +192,8 @@ describe("ZipcodeService", () => {
     const result = await service.getByCodeAndCountry(code, countryId);
 
     expect(result).toBeDefined();
-    expect(result.code).toBe(zipcodeMock.code);
-    expect(result.cityId).toBe(cityMock.id);
+    expect(result?.code).toBe(zipcodeMock.code);
+    expect(result?.cityId).toBe(cityMock.id);
     expect(stateServiceMock.upsert).toHaveBeenCalled();
     expect(stateServiceMock.upsert).toHaveBeenCalledWith(
       stateMock.name,

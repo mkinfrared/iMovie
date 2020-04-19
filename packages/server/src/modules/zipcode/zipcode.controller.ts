@@ -24,14 +24,22 @@ export class ZipcodeController {
   }
 
   @Get(":countryId/:code")
-  getByCodeAndCountry(
+  async getByCodeAndCountry(
     @Param("countryId") countryId: string,
     @Param("code") code: string
   ) {
-    try {
-      return this.zipcodeService.getByCodeAndCountry(code, countryId);
-    } catch (e) {
-      throw new HttpException(e, HttpStatus.BAD_REQUEST);
+    const zipcode = await this.zipcodeService.getByCodeAndCountry(
+      code,
+      countryId
+    );
+
+    if (!zipcode) {
+      throw new HttpException(
+        "Bad request or entity was not found",
+        HttpStatus.BAD_REQUEST
+      );
     }
+
+    return zipcode;
   }
 }

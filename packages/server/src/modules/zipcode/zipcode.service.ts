@@ -83,7 +83,7 @@ export class ZipcodeService {
     } catch (e) {
       this.loggerService.error(e);
 
-      throw new Error(e);
+      return undefined;
     }
   }
 
