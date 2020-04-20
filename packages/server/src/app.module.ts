@@ -12,6 +12,7 @@ import { UserModule } from "modules/user/user.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { CinemaModule } from "./modules/cinema/cinema.module";
 import { CityModule } from "./modules/city/city.module";
 import { CountryModule } from "./modules/country/country.module";
 import { StateModule } from "./modules/state/state.module";
@@ -31,7 +32,8 @@ import { MailerModule } from "./utils/mailer/mailer.module";
     CountryModule,
     StateModule,
     CityModule,
-    ZipcodeModule
+    ZipcodeModule,
+    CinemaModule
   ],
   controllers: [AppController],
   providers: [AppService]

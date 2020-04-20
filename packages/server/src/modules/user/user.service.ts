@@ -41,15 +41,13 @@ export class UserService implements OnApplicationBootstrap {
   }
 
   async updateUser(id: string, userDto: UpdateUserDto) {
-    const user = await this.getOne(id);
+    const result = await this.userRepository.update({ id }, { ...userDto });
 
-    if (!user) {
+    if (!result.affected) {
       return;
     }
 
-    this.userRepository.update({ id }, { ...userDto });
-
-    return { ...user, ...userDto } as User;
+    return this.getOne(id);
   }
 
   async getByUsername(username: string) {
@@ -59,17 +57,17 @@ export class UserService implements OnApplicationBootstrap {
   }
 
   async getByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+    return this.userRepository.findOne({ where: { email } });
+  }
 
-    if (!user) {
+  async removeUser(id: string) {
+    const result = await this.userRepository.delete(id);
+
+    if (!result.affected) {
       return;
     }
 
-    return user;
-  }
-
-  removeUser(id: string) {
-    return this.userRepository.delete(id);
+    return result;
   }
 
   onApplicationBootstrap() {

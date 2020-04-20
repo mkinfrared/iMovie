@@ -62,7 +62,7 @@ describe("UserService", () => {
   });
 
   it("should return undefined when user was not found", async () => {
-    repositoryMock.findOne.mockReturnValueOnce(undefined);
+    repositoryMock.update.mockReturnValueOnce({ affected: 0 });
 
     const updatedUser: UserDto = {
       email: "marklar",
@@ -79,33 +79,34 @@ describe("UserService", () => {
 
   it("should return an updated user by id", async () => {
     repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
-    repositoryMock.update.mockImplementationOnce(
-      (_: string, newValue: any) => ({ ...userDtoMock, ...newValue })
-    );
+    repositoryMock.update.mockReturnValueOnce({ affected: 1 });
 
-    const updatedUser: UserDto = {
-      email: "marklar",
-      username: "towelie",
-      password: "gethigh",
-      passwordConfirm: "gethigh",
-      firstName: "Steven",
-      lastName: "McTowelie"
-    };
-    const result = await service.updateUser("42", updatedUser);
+    const result = await service.updateUser("42", userDtoMock);
 
     expect(result).toBeDefined();
-    expect(result!.email).toBe(updatedUser.email);
-    expect(result!.username).toBe(updatedUser.username);
-    expect(result!.firstName).toBe(updatedUser.firstName);
-    expect(result!.lastName).toBe(updatedUser.lastName);
-    expect(result!.email).toBe(updatedUser.email);
+    expect(result!.email).toBe(userDtoMock.email);
+    expect(result!.username).toBe(userDtoMock.username);
+    expect(result!.firstName).toBe(userDtoMock.firstName);
+    expect(result!.lastName).toBe(userDtoMock.lastName);
+    expect(result!.email).toBe(userDtoMock.email);
   });
 
-  it("should remove a user", async () => {
+  it("should return a delete result", async () => {
+    repositoryMock.delete.mockReturnValueOnce({ affected: 1 });
+
     const result = await service.removeUser("42");
 
     expect(result).toBeDefined();
-    expect(result).toBe("deleted");
+    expect(repositoryMock.delete).toHaveBeenCalled();
+  });
+
+  it("should return undefined when user was not found", async () => {
+    repositoryMock.delete.mockReturnValueOnce({ affected: 0 });
+
+    const result = await service.removeUser("42");
+
+    expect(result).toBeUndefined();
+    expect(repositoryMock.delete).toHaveBeenCalled();
   });
 
   it("should return undefined when user was not found", async () => {

@@ -98,13 +98,17 @@ describe("User Controller", () => {
     const id = uuid();
     const updatedUser = { ...updateUserDtoMock, firstName: "Stan" };
 
+    let error: any;
+
     try {
       await controller.update(id, updatedUser);
     } catch (e) {
-      expect(e.message).toBe("User not found");
-      expect(e.response).toBe("User not found");
-      expect(e.status).toBe(404);
+      error = e;
     }
+
+    expect(error.message).toBe("User not found");
+    expect(error.response).toBe("User not found");
+    expect(error.status).toBe(404);
   });
 
   it("should update a user with new data", async () => {
@@ -127,13 +131,17 @@ describe("User Controller", () => {
   it("should return an error when user was not found", async () => {
     const id = uuid();
 
+    let error: any;
+
     try {
       await controller.delete(id);
     } catch (e) {
-      expect(e.message).toBe("User not found");
-      expect(e.response).toBe("User not found");
-      expect(e.status).toBe(404);
+      error = e;
     }
+
+    expect(error.message).toBe("User not found");
+    expect(error.response).toBe("User not found");
+    expect(error.status).toBe(404);
   });
 
   it("should return a delete result", async () => {
