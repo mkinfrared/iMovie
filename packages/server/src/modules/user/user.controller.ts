@@ -86,7 +86,7 @@ export class UserController {
   async delete(@Param("id") id: string) {
     const result = await this.userService.removeUser(id);
 
-    if (!result.affected) {
+    if (!result) {
       throw new HttpException("User not found", HttpStatus.NOT_FOUND);
     }
 

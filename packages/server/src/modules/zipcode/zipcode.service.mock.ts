@@ -9,6 +9,7 @@ const zipcodeServiceMock = {
   createZipcodesByCity: jest.fn()
 };
 const zipcodeMock = {
+  id: 47,
   code: "92506",
   longitude: "42.99",
   latitude: "99.42",
