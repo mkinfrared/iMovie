@@ -21,7 +21,7 @@ export class CinemaService {
   }
 
   get(id: number) {
-    return this.cinemaRepository.findOne(id);
+    return this.cinemaRepository.findOne(id, { relations: ["auditorium"] });
   }
 
   async getAll(offset = 1, limit = 20) {

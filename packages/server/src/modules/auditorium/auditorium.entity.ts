@@ -9,11 +9,11 @@ import {
   UpdateDateColumn
 } from "typeorm";
 
-import { Zipcode } from "modules/zipcode/zipcode.entity";
+import { Cinema } from "modules/cinema/cinema.entity";
 
 @Entity()
-@Unique(["name", "zipcodeId"])
-export class Cinema {
+@Unique(["name", "cinemaId"])
+export class Auditorium {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,14 +21,14 @@ export class Cinema {
   name: string;
 
   @Column()
-  zipcodeId: number;
+  cinemaId: number;
 
   @ManyToOne(
-    () => Zipcode,
-    (zipcode) => zipcode.id
+    () => Cinema,
+    (cinema) => cinema.id
   )
-  @JoinColumn({ name: "zipcodeId" })
-  zipcode: Zipcode;
+  @JoinColumn({ name: "cinemaId" })
+  cinema: Cinema;
 
   @CreateDateColumn()
   createdAt: Date;
