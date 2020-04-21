@@ -45,7 +45,7 @@ describe("CinemaService", () => {
 
     expect(result).toBeDefined();
     expect(result?.name).toBe(cinemaMock.name);
-    expect(repositoryMock.findOne).toHaveBeenCalledWith(cinemaMock.id);
+    expect(repositoryMock.findOne).toHaveBeenCalled();
   });
 
   it("should return cinema entities as paginated result", async () => {
@@ -70,10 +70,7 @@ describe("CinemaService", () => {
 
     expect(result).toBeDefined();
     expect(result?.name).toBe(cinemaMock.name);
-    expect(repositoryMock.update).toHaveBeenCalledWith(
-      cinemaMock.id,
-      cinemaMock
-    );
+    expect(repositoryMock.update).toHaveBeenCalled();
   });
 
   it("should return undefined when cinema doesn't exist", async () => {
