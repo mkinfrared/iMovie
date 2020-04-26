@@ -1,0 +1,36 @@
+.Header {
+
+  .menu {
+    margin-right: 12px;
+    padding: 12px;
+  }
+
+  .toolbar {
+    align-items: center;
+    display: flex;
+
+    > a {
+      align-items: center;
+      color: inherit;
+      display: flex;
+      height: 1.6em;
+      text-decoration: none;
+
+      > svg {
+        height: 100%;
+      }
+
+      > h6 {
+        margin-left: 10px;
+      }
+    }
+
+    .loginButton {
+      margin-left: auto;
+    }
+  }
+}
+
+.list {
+  width: 250px;
+}
