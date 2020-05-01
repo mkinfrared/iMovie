@@ -46,19 +46,25 @@ describe("CountryService", () => {
     const total = 1;
 
     repositoryMock.findAndCount.mockReturnValueOnce([countries, total]);
+
     const result = await service.getAll();
 
     expect(result).toBeDefined();
+
     expect(result.result).toHaveLength(1);
+
     expect(result.total).toBe(1);
   });
 
   it("should return a country by alpha2code", async () => {
     repositoryMock.findOne.mockReturnValueOnce(countryMock);
+
     const result = await service.getOne("42");
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(countryMock.name);
+
     expect(result?.alpha2Code).toBe(countryMock.alpha2Code);
   });
 
@@ -67,6 +73,7 @@ describe("CountryService", () => {
       ...countryMock,
       callingCodes: [`${countryMock.callingCode}`]
     };
+
     const data = [countryData];
 
     axiosMock.get.mockReturnValueOnce(
@@ -76,6 +83,7 @@ describe("CountryService", () => {
     await service.fetchCountries();
 
     expect(repositoryMock.values).toHaveBeenCalled();
+
     expect(repositoryMock.execute).toHaveBeenCalled();
   });
 
@@ -84,6 +92,7 @@ describe("CountryService", () => {
       ...countryMock,
       callingCodes: [`${countryMock.callingCode}`]
     };
+
     const data = [countryData];
 
     axiosMock.get.mockReturnValueOnce(
@@ -93,6 +102,7 @@ describe("CountryService", () => {
     await service.handleCron();
 
     expect(repositoryMock.values).toHaveBeenCalled();
+
     expect(repositoryMock.execute).toHaveBeenCalled();
   });
 });

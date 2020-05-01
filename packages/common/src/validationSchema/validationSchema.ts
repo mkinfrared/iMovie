@@ -6,6 +6,7 @@ const passwordRegex = {
   number: new RegExp("[0-9]"),
   special: new RegExp("[#?!@$%^&*-]")
 };
+
 const passwordValidation = yup
   .string()
   .required()
@@ -23,6 +24,7 @@ const passwordValidation = yup
     passwordRegex.special,
     "password must contain at least one special character"
   );
+
 const registerValidation = yup.object().shape({
   email: yup
     .string()
@@ -38,6 +40,7 @@ const registerValidation = yup.object().shape({
     .required("confirm is a required field")
     .oneOf([yup.ref("password")], "passwords should match")
 });
+
 const loginValidation = yup.object().shape({
   username: yup.string().required(),
   password: yup.string().required()

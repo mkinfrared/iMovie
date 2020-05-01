@@ -42,13 +42,16 @@ describe("Auth Controller", () => {
       await controller.login(authDtoMock, response);
     } catch (e) {
       expect(e.response).toBeDefined();
+
       expect(e.response.username).toHaveLength(1);
+
       expect(e.status).toBe(400);
     }
   });
 
   it("should create new tokens and put them in cookies", async () => {
     authServiceMock.loginUser.mockReturnValueOnce(userDtoMock);
+
     tokenServiceMock.generateTokens.mockReturnValueOnce(["foo", "bar"]);
 
     const response = {
@@ -59,7 +62,9 @@ describe("Auth Controller", () => {
     await controller.login(authDtoMock, response);
 
     expect(response.cookie).toHaveBeenCalledTimes(2);
+
     expect(response.status).toHaveBeenCalled();
+
     expect(response.status).toHaveBeenCalledWith(200);
   });
 
@@ -68,7 +73,9 @@ describe("Auth Controller", () => {
     const data = { email: "marklar@foo.bar" };
 
     tokenServiceMock.verifyEmailToken.mockReturnValueOnce(data);
+
     tokenServiceMock.generateTokens.mockReturnValueOnce(["foo", "bar"]);
+
     authServiceMock.activateUser.mockReturnValueOnce(userDtoMock);
 
     const response = {
@@ -80,6 +87,7 @@ describe("Auth Controller", () => {
     await controller.activate(token, response);
 
     expect(response.cookie).toHaveBeenCalledTimes(2);
+
     expect(response.redirect).toHaveBeenCalled();
   });
 
@@ -98,8 +106,11 @@ describe("Auth Controller", () => {
       await controller.activate(token, response);
     } catch (e) {
       expect(e.response).toBeDefined();
+
       expect(e.status).toBe(400);
+
       expect(response.cookie).not.toHaveBeenCalled();
+
       expect(response.redirect).not.toHaveBeenCalled();
     }
   });
@@ -109,6 +120,7 @@ describe("Auth Controller", () => {
     const data = { email: "marklar@foo.bar" };
 
     tokenServiceMock.verifyEmailToken.mockReturnValueOnce(data);
+
     authServiceMock.activateUser.mockReturnValueOnce(undefined);
 
     const response = {
@@ -121,8 +133,11 @@ describe("Auth Controller", () => {
       await controller.activate(token, response);
     } catch (e) {
       expect(e.response).toBeDefined();
+
       expect(e.status).toBe(400);
+
       expect(response.cookie).not.toHaveBeenCalled();
+
       expect(response.redirect).not.toHaveBeenCalled();
     }
   });

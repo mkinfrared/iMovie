@@ -37,6 +37,7 @@ describe("Country Controller", () => {
     await controller.getAll(offset, limit);
 
     expect(countryServiceMock.getAll).toHaveBeenCalled();
+
     expect(countryServiceMock.getAll).toHaveBeenCalledWith(+offset, +limit);
   });
 
@@ -46,7 +47,9 @@ describe("Country Controller", () => {
     const result = await controller.get(countryMock.alpha2Code);
 
     expect(result?.name).toBe(countryMock.name);
+
     expect(countryServiceMock.getOne).toHaveBeenCalled();
+
     expect(countryServiceMock.getOne).toHaveBeenCalledWith(
       countryMock.alpha2Code
     );

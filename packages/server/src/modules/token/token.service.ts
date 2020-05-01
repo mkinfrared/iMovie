@@ -18,8 +18,10 @@ export class TokenService {
 
   generateTokens(value: JwtValue): [string, string] {
     this.loggerService.log("Generating tokens");
+
     const data = omit(value, ["iat", "exp"]);
     const accessToken = jwt.sign(data, ACCESS_TOKEN_KEY, { expiresIn: "1m" });
+
     const refreshToken = jwt.sign(data, REFRESH_TOKEN_KEY, {
       expiresIn: "7d"
     });
@@ -36,6 +38,7 @@ export class TokenService {
       data = jwt.verify(accessToken, ACCESS_TOKEN_KEY) as JwtValue;
     } catch (e) {
       this.loggerService.log("Access token is invalid");
+
       throw new Error();
     }
 

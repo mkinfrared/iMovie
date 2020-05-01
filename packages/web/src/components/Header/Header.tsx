@@ -1,53 +1,88 @@
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
+import AdminMenu from "components/AdminMenu";
+import Menu from "components/Menu";
 import Imovie from "icons/imovie";
+import loadableModal from "utils/loadable";
 
 import css from "./Header.module.scss";
-import { Navigation } from "./Header.type";
+import { HeaderProps } from "./Header.type";
 
-const navigation: Navigation[] = [
-  {
-    text: "Lorem",
-    icon: <InboxIcon />
-  },
-  {
-    text: "Ipsum",
-    icon: <MailIcon />
-  }
-];
+const Login = loadableModal(() => import("containers/Login"));
+const SignUp = loadableModal(() => import("components/SignUp"));
 
-const Header = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const list = useMemo(
-    () =>
-      navigation.map(({ icon, text }) => (
-        <ListItem button key={text}>
-          <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      )),
-    []
-  );
+type ActiveForm = "signin" | "signup" | null;
+
+const Header = ({ isAuth }: HeaderProps) => {
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [activeForm, setActiveForm] = useState<ActiveForm>(null);
+
   const openDrawer = useCallback(() => {
-    setIsDrawerOpen(true);
+    setIsAdminOpen(true);
   }, []);
+
   const closeDrawer = useCallback(() => {
-    setIsDrawerOpen(false);
+    setIsAdminOpen(false);
   }, []);
+
+  const openLogin = useCallback(() => {
+    setActiveForm("signin");
+  }, []);
+
+  const openSignUp = useCallback(() => {
+    setActiveForm("signup");
+  }, []);
+
+  const closeForms = useCallback(() => {
+    setActiveForm(null);
+  }, []);
+
+  const renderButton = () => {
+    if (isAuth) {
+      return <Menu className={css.loginButton} />;
+    }
+
+    return (
+      <Button
+        color="inherit"
+        className={css.loginButton}
+        onClick={openLogin}
+        aria-label="login"
+      >
+        Login
+      </Button>
+    );
+  };
+
+  const renderForm = () => {
+    switch (activeForm) {
+      case "signin":
+        return (
+          <Login
+            open={activeForm === "signin"}
+            onClose={closeForms}
+            openSingUp={openSignUp}
+          />
+        );
+      case "signup":
+        return (
+          <SignUp
+            open={activeForm === "signup"}
+            onClose={closeForms}
+            openLogin={openLogin}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -66,14 +101,11 @@ const Header = () => {
             <Imovie />
             <Typography variant="h6">iMovie</Typography>
           </Link>
-          <Button color="inherit" className={css.loginButton}>
-            Login
-          </Button>
+          {renderButton()}
         </Toolbar>
       </AppBar>
-      <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-        <List className={css.list}>{list}</List>
-      </Drawer>
+      <AdminMenu isOpen={isAdminOpen} onClose={closeDrawer} />
+      {renderForm()}
     </>
   );
 };

@@ -19,7 +19,9 @@ export class DatabaseException implements ExceptionFilter {
 
       response
         .status(HttpStatus.CONFLICT)
-        .json({ [column]: `${column} is already taken` });
+        .json({ [column]: [`${column} is already taken`] });
+
+      return;
     }
 
     response.status(HttpStatus.CONFLICT).json({

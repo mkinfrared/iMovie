@@ -1,5 +1,5 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+/* eslint-disable global-require */
+import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 
 import reducers from "./reducers";
@@ -7,10 +7,15 @@ import rootSaga from "./saga";
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
-const store = createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = configureStore({ reducer: reducers, middleware });
+
+if (process.env.NODE_ENV === "development" && module.hot) {
+  module.hot.accept("./reducers", () => {
+    const newRootReducer = require("./reducers").default;
+
+    store.replaceReducer(newRootReducer);
+  });
+}
 
 sagaMiddleware.run(rootSaga);
 

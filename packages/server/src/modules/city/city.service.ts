@@ -16,6 +16,7 @@ export class CityService {
       stateId,
       countryId
     });
+
     const { generatedMaps } = await this.cityRepository
       .createQueryBuilder()
       .insert()
@@ -27,6 +28,7 @@ export class CityService {
       .setParameter("now", new Date())
       .returning("*")
       .execute();
+
     const [result] = generatedMaps;
 
     return result as City;

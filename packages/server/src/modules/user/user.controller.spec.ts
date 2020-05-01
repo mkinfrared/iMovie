@@ -35,6 +35,7 @@ describe("User Controller", () => {
     const connection = getConnection();
 
     await connection.dropDatabase();
+
     await connection.close();
   });
 
@@ -47,9 +48,13 @@ describe("User Controller", () => {
     const result = await controller.create(userDtoMock, request);
 
     expect(result).toHaveProperty("id");
+
     expect(result.email).toBe(userDtoMock.email);
+
     expect(result.isActive).toBe(false);
+
     expect(result.role).toBe("user");
+
     expect(result.password).not.toBe(userDtoMock.password);
 
     userId = result.id;
@@ -69,6 +74,7 @@ describe("User Controller", () => {
     const request = {
       userData: { id: userId }
     } as any;
+
     const result = await controller.getCurrent(request);
 
     expect(result).toBeDefined();
@@ -78,7 +84,9 @@ describe("User Controller", () => {
     const result = await controller.getOne(userId);
 
     expect(result.email).toBe(userDtoMock.email);
+
     expect(result.username).toBe(userDtoMock.username);
+
     expect(result.username).toBe(userDtoMock.username);
   });
 
@@ -89,7 +97,9 @@ describe("User Controller", () => {
       await controller.getOne(id);
     } catch (e) {
       expect(e.message).toBe("User not found");
+
       expect(e.response).toBe("User not found");
+
       expect(e.status).toBe(404);
     }
   });
@@ -107,7 +117,9 @@ describe("User Controller", () => {
     }
 
     expect(error.message).toBe("User not found");
+
     expect(error.response).toBe("User not found");
+
     expect(error.status).toBe(404);
   });
 
@@ -116,7 +128,9 @@ describe("User Controller", () => {
     const result = await controller.update(userId, updatedUser);
 
     expect(result).toBeDefined();
+
     expect(result.email).toBe(userDtoMock.email);
+
     expect(result.firstName).toBe(updatedUser.firstName);
   });
 
@@ -124,7 +138,9 @@ describe("User Controller", () => {
     const result = await controller.getAll();
 
     expect(result).toBeDefined();
+
     expect(result).toHaveLength(1);
+
     expect(result[0].id).toBeDefined();
   });
 
@@ -140,7 +156,9 @@ describe("User Controller", () => {
     }
 
     expect(error.message).toBe("User not found");
+
     expect(error.response).toBe("User not found");
+
     expect(error.status).toBe(404);
   });
 
@@ -148,6 +166,7 @@ describe("User Controller", () => {
     const result = await controller.delete(userId);
 
     expect(result).toBeDefined();
+
     expect(result.affected).toBe(1);
   });
 });

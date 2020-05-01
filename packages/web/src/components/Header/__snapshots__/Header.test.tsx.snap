@@ -82,6 +82,7 @@ exports[`<Header /> should match a snapshot 1`] = `
         </h6>
       </a>
       <button
+        aria-label="login"
         class="MuiButtonBase-root MuiButton-root MuiButton-text loginButton MuiButton-colorInherit"
         tabindex="0"
         type="button"
@@ -97,5 +98,12 @@ exports[`<Header /> should match a snapshot 1`] = `
       </button>
     </div>
   </header>
+  <div
+    data-testid="components/AdminMenu"
+  >
+    <code>
+      {"isOpen":false}
+    </code>
+  </div>
 </div>
 `;

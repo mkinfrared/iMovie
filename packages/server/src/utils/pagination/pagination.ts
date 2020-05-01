@@ -11,7 +11,9 @@ class Pagination<Entity> {
 
   constructor(result: Entity[], total: number, page: number) {
     this.result = result;
+
     this.total = total;
+
     this.page = page;
   }
 }

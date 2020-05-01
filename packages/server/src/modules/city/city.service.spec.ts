@@ -38,8 +38,11 @@ describe("CityService", () => {
     const result = await service.upsert(name, stateId, countryId);
 
     expect(result).toBeDefined();
+
     expect(result.name).toBe(name);
+
     expect(result.stateId).toBe(stateId);
+
     expect(result.countryId).toBe(countryId);
   });
 });

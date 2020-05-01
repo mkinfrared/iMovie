@@ -59,16 +59,19 @@ export class ZipcodeService {
       const response = await axios.get(
         `http://api.zippopotam.us/${countryId}/${code}`
       );
+
       const { places } = response.data;
       const [place] = places;
       // Create state
       const stateName = place.state;
       const stateAbbr = place["state abbreviation"];
+
       const state = await this.stateService.upsert(
         stateName,
         countryId,
         stateAbbr
       );
+
       // Create city
       const cityName = place["place name"];
       const city = await this.cityService.upsert(cityName, state.id, countryId);
@@ -108,6 +111,7 @@ export class ZipcodeService {
       const response = await axios.get(
         `http://api.zippopotam.us/${countryId}/${state.abbreviation}/${city.name}`
       );
+
       const { places } = response.data;
 
       if (!places) {
@@ -123,6 +127,7 @@ export class ZipcodeService {
           countryId
         });
       });
+
       const queryRunner = this.connection.createQueryRunner();
 
       await queryRunner.manager.transaction(async (entityManager) => {

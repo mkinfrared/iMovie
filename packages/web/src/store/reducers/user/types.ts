@@ -1,8 +1,11 @@
-export interface User {
-  username: string;
-  loading: boolean;
-}
+export type Role = "user" | "admin";
 
-export enum UserActions {
-  FETCH_USER = "@@user/FETCH_USER"
+export interface User {
+  username?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  id?: string;
+  role?: Role;
+  isActive?: boolean;
 }

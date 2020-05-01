@@ -33,8 +33,11 @@ describe("CinemaService", () => {
     const result = await service.create(cinemaDtoMock);
 
     expect(result).toBeDefined();
+
     expect(result.name).toBe(cinemaMock.name);
+
     expect(repositoryMock.create).toHaveBeenCalledWith(cinemaDtoMock);
+
     expect(repositoryMock.save).toHaveBeenCalled();
   });
 
@@ -44,7 +47,9 @@ describe("CinemaService", () => {
     const result = await service.get(cinemaMock.id);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(cinemaMock.name);
+
     expect(repositoryMock.findOne).toHaveBeenCalled();
   });
 
@@ -57,19 +62,25 @@ describe("CinemaService", () => {
     const result = await service.getAll();
 
     expect(result).toBeDefined();
+
     expect(result.result).toHaveLength(1);
+
     expect(result.result[0].name).toBe(cinemaMock.name);
+
     expect(repositoryMock.findAndCount).toHaveBeenCalled();
   });
 
   it("should return an updated result", async () => {
     repositoryMock.update.mockReturnValueOnce({ affected: 1 });
+
     repositoryMock.findOne.mockReturnValueOnce(cinemaMock);
 
     const result = await service.update(cinemaMock.id, cinemaMock);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(cinemaMock.name);
+
     expect(repositoryMock.update).toHaveBeenCalled();
   });
 
@@ -79,6 +90,7 @@ describe("CinemaService", () => {
     const result = await service.update(cinemaMock.id, cinemaMock);
 
     expect(result).toBeUndefined();
+
     expect(repositoryMock.update).toHaveBeenCalledWith(
       cinemaMock.id,
       cinemaMock
@@ -91,6 +103,7 @@ describe("CinemaService", () => {
     const result = await service.delete(cinemaMock.id);
 
     expect(result).toBeDefined();
+
     expect(repositoryMock.delete).toHaveBeenCalledWith(cinemaMock.id);
   });
 
@@ -100,6 +113,7 @@ describe("CinemaService", () => {
     const result = await service.delete(cinemaMock.id);
 
     expect(result).toBeUndefined();
+
     expect(repositoryMock.delete).toHaveBeenCalledWith(cinemaMock.id);
   });
 });

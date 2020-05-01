@@ -1,23 +1,21 @@
-import { Reducer } from "redux";
-import { ActionType } from "typesafe-actions";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import * as actions from "./actions";
-import { User, UserActions } from "./types";
+import { User } from "./types";
 
-const initialState: User = {
-  username: "",
-  loading: false
-};
+const initialState: User = {};
 
-type Actions = ActionType<typeof actions>;
+const userSlice = createSlice({
+  name: "@@user",
+  initialState,
+  reducers: {
+    loginUser(state, action: PayloadAction<User>) {
+      state = action.payload;
 
-const reducer: Reducer<User, Actions> = (state = initialState, action) => {
-  switch (action.type) {
-    case UserActions.FETCH_USER:
       return state;
-    default:
-      return state;
+    }
   }
-};
+});
 
-export default reducer;
+export const { loginUser } = userSlice.actions;
+
+export default userSlice.reducer;

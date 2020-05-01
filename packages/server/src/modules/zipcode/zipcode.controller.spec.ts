@@ -39,8 +39,11 @@ describe("Zipcode Controller", () => {
     const result = await controller.getAll(page, limit);
 
     expect(zipcodeServiceMock.getAll).toHaveBeenCalled();
+
     expect(zipcodeServiceMock.getAll).toHaveBeenCalledWith(+page, +limit);
+
     expect(result.result).toHaveLength(1);
+
     expect(result.result[0].code).toBe(zipcodeMock.code);
   });
 
@@ -52,8 +55,11 @@ describe("Zipcode Controller", () => {
     const result = await controller.getOne(id);
 
     expect(zipcodeServiceMock.getOne).toHaveBeenCalled();
+
     expect(zipcodeServiceMock.getOne).toHaveBeenCalledWith(id);
+
     expect(result).toBeDefined();
+
     expect(result?.code).toBe(zipcodeMock.code);
   });
 
@@ -66,11 +72,14 @@ describe("Zipcode Controller", () => {
     const result = await controller.getByCodeAndCountry(countryId, code);
 
     expect(zipcodeServiceMock.getByCodeAndCountry).toHaveBeenCalled();
+
     expect(zipcodeServiceMock.getByCodeAndCountry).toHaveBeenCalledWith(
       code,
       countryId
     );
+
     expect(result).toBeDefined();
+
     expect(result?.code).toBe(zipcodeMock.code);
   });
 
@@ -84,11 +93,14 @@ describe("Zipcode Controller", () => {
       await controller.getByCodeAndCountry(countryId, code);
     } catch (e) {
       expect(zipcodeServiceMock.getByCodeAndCountry).toHaveBeenCalled();
+
       expect(zipcodeServiceMock.getByCodeAndCountry).toHaveBeenCalledWith(
         code,
         countryId
       );
+
       expect(e.response).toBeDefined();
+
       expect(e.status).toBe(400);
     }
   });

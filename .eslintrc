@@ -34,6 +34,7 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-no-duplicate-props": [2, { "ignoreCase": false }],
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "arrow-parens": ["error", "always"],
     "react/jsx-one-expression-per-line": "off",
@@ -48,6 +49,7 @@
     "comma-dangle": ["error", "never"],
     "linebreak-style": "off",
     "no-console": "error",
+    "prefer-promise-reject-errors": "off",
     "quotes": ["error", "double", "avoid-escape"],
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -101,6 +103,7 @@
           "class",
           "continue",
           "export",
+          "expression",
           "function",
           "if",
           "return",
@@ -115,6 +118,7 @@
           "class",
           "continue",
           "export",
+          "expression",
           "function",
           "if",
           "return",
@@ -126,8 +130,8 @@
       { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       {
         "blankLine": "never",
-        "prev": ["const"],
-        "next": ["const"]
+        "prev": ["singleline-const"],
+        "next": ["singleline-const"]
       },
       {
         "blankLine": "always",
@@ -141,8 +145,8 @@
       },
       {
         "blankLine": "never",
-        "prev": ["let"],
-        "next": ["let"]
+        "prev": ["singleline-let"],
+        "next": ["singleline-let"]
       }
     ],
     "import/no-extraneous-dependencies": "off",

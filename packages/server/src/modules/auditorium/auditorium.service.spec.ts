@@ -36,8 +36,11 @@ describe("AuditoriumService", () => {
     const result = await service.create(auditoriumDtoMock);
 
     expect(result).toBeDefined();
+
     expect(result.name).toBe(auditoriumMock.name);
+
     expect(repositoryMock.create).toHaveBeenCalledWith(auditoriumDtoMock);
+
     expect(repositoryMock.save).toHaveBeenCalled();
   });
 
@@ -49,7 +52,9 @@ describe("AuditoriumService", () => {
     const result = await service.getOne(id);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(auditoriumMock.name);
+
     expect(repositoryMock.findOne).toHaveBeenCalledWith(id);
   });
 
@@ -57,12 +62,15 @@ describe("AuditoriumService", () => {
     const id = 42;
 
     repositoryMock.update.mockReturnValueOnce({ affected: 1 });
+
     repositoryMock.findOne.mockReturnValueOnce(auditoriumMock);
 
     const result = await service.update({ id, name: auditoriumMock.name });
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(auditoriumMock.name);
+
     expect(repositoryMock.update).toHaveBeenCalled();
   });
 
@@ -70,11 +78,13 @@ describe("AuditoriumService", () => {
     const id = 42;
 
     repositoryMock.update.mockReturnValueOnce({ affected: 0 });
+
     repositoryMock.findOne.mockReturnValueOnce(auditoriumMock);
 
     const result = await service.update({ id, name: auditoriumMock.name });
 
     expect(result).toBeUndefined();
+
     expect(repositoryMock.update).toHaveBeenCalled();
   });
 
@@ -86,6 +96,7 @@ describe("AuditoriumService", () => {
     const result = await service.delete(id);
 
     expect(result).toBeDefined();
+
     expect(repositoryMock.delete).toHaveBeenCalledWith(id);
   });
 
@@ -97,6 +108,7 @@ describe("AuditoriumService", () => {
     const result = await service.delete(id);
 
     expect(result).toBeUndefined();
+
     expect(repositoryMock.delete).toHaveBeenCalledWith(id);
   });
 });
