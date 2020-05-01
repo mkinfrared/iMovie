@@ -30,20 +30,14 @@ export class Zipcode {
   @Column()
   cityId: number;
 
-  @ManyToOne(
-    () => City,
-    (city) => city.id
-  )
+  @ManyToOne(() => City, (city) => city.id)
   @JoinColumn({ name: "cityId" })
   city: City;
 
   @Column()
   countryId: string;
 
-  @ManyToOne(
-    () => Country,
-    (country) => country.alpha2Code
-  )
+  @ManyToOne(() => Country, (country) => country.alpha2Code)
   @JoinColumn({ name: "countryId" })
   country: Country;
 

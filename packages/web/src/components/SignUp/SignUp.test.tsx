@@ -1,7 +1,5 @@
 import { act, fireEvent, render } from "@testing-library/react";
-// eslint-disable-next-line import/order
 import React, { ReactElement } from "react";
-import "mutationobserver-shim";
 
 import api from "utils/api";
 

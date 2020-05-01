@@ -1,4 +1,4 @@
-import { fireEvent, render, waitForElement } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import React, { ReactElement } from "react";
 import { MemoryRouter } from "react-router-dom";
 
@@ -78,12 +78,12 @@ describe("<Header />", () => {
   });
 
   it("should open a Login component", async () => {
-    const { getByLabelText, getByTestId } = render(Component);
+    const { getByLabelText, findByTestId } = render(Component);
     const loginButton = getByLabelText("login");
 
     fireEvent.click(loginButton);
 
-    const login = await waitForElement(() => getByTestId("containers/Login"));
+    const login = await findByTestId("containers/Login");
 
     expect(login).toBeInTheDocument();
   });

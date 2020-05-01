@@ -26,14 +26,8 @@ const passwordValidation = yup
   );
 
 const registerValidation = yup.object().shape({
-  email: yup
-    .string()
-    .required()
-    .email(),
-  username: yup
-    .string()
-    .required()
-    .min(3),
+  email: yup.string().required().email(),
+  username: yup.string().required().min(3),
   password: passwordValidation,
   passwordConfirm: yup
     .string()

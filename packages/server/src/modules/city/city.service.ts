@@ -17,7 +17,9 @@ export class CityService {
       countryId
     });
 
-    const { generatedMaps } = await this.cityRepository
+    const {
+      generatedMaps
+    } = await this.cityRepository
       .createQueryBuilder()
       .insert()
       .into(City)

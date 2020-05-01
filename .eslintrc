@@ -47,7 +47,7 @@
     "no-empty": ["error", { "allowEmptyCatch": true }],
     "no-useless-constructor": "off",
     "comma-dangle": ["error", "never"],
-    "linebreak-style": "off",
+    "linebreak-style": ["error", "unix"],
     "no-console": "error",
     "prefer-promise-reject-errors": "off",
     "quotes": ["error", "double", "avoid-escape"],
