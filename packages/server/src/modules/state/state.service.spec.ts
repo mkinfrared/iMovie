@@ -37,7 +37,9 @@ describe("StateService", () => {
     const result = await service.upsert(name, countryId, abbreviation);
 
     expect(result.name).toBe(name);
+
     expect(result.abbreviation).toBe(abbreviation);
+
     expect(result.countryId).toBe(countryId);
   });
 });

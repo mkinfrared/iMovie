@@ -19,11 +19,13 @@ const repositoryMock = {
   execute: jest.fn((..._: any): Partial<InsertResult> => ({})),
   findAndCount: jest.fn().mockReturnThis()
 };
+
 const queryRunnerMock = {
   manager: {
     transaction: jest.fn()
   }
 };
+
 const connectionMock = {
   createQueryRunner: jest.fn(() => queryRunnerMock)
 };

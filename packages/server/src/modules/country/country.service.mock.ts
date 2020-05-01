@@ -9,6 +9,7 @@ const countryMock = {
   region: "Foo",
   subregion: "Bar"
 };
+
 const countryServiceMock = {
   getAll: jest.fn(),
   getOne: jest.fn()

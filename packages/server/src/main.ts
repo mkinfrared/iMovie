@@ -14,14 +14,18 @@ async function bootstrap() {
   });
 
   app.set("trust proxy", 1);
-  app.enableCors({ origin: CORS });
+
+  app.enableCors({ origin: CORS, credentials: true });
+
   app.use(helmet());
+
   app.use(
     rateLimit({
       windowMs: 1 * 60 * 1000, // 1 minute
       max: 60 // limit each IP to 60 requests per windowMs
     })
   );
+
   app.enableShutdownHooks();
 
   await app.listen(SERVER_PORT);

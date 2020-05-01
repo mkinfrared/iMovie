@@ -34,7 +34,9 @@ describe("Auditorium Controller", () => {
     const result = await controller.create(auditoriumDtoMock);
 
     expect(result).toBeDefined();
+
     expect(result.name).toBe(auditoriumMock.name);
+
     expect(auditoriumServiceMock.create).toHaveBeenCalledWith(
       auditoriumDtoMock
     );
@@ -48,7 +50,9 @@ describe("Auditorium Controller", () => {
     const result = await controller.getOne(id);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(auditoriumMock.name);
+
     expect(auditoriumServiceMock.getOne).toHaveBeenCalledWith(id);
   });
 
@@ -60,7 +64,9 @@ describe("Auditorium Controller", () => {
     const result = await controller.update({ id, name: auditoriumMock.name });
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(auditoriumMock.name);
+
     expect(auditoriumServiceMock.update).toHaveBeenCalled();
   });
 
@@ -78,7 +84,9 @@ describe("Auditorium Controller", () => {
     }
 
     expect(error.message).toBe("Auditorium not found");
+
     expect(error.status).toBe(404);
+
     expect(auditoriumServiceMock.update).toHaveBeenCalled();
   });
 
@@ -90,6 +98,7 @@ describe("Auditorium Controller", () => {
     const result = await controller.delete(id);
 
     expect(result).toBeDefined();
+
     expect(auditoriumServiceMock.delete).toHaveBeenCalledWith(id);
   });
 
@@ -107,7 +116,9 @@ describe("Auditorium Controller", () => {
     }
 
     expect(error.message).toBe("Auditorium not found");
+
     expect(error.status).toBe(404);
+
     expect(auditoriumServiceMock.delete).toHaveBeenCalledWith(id);
   });
 });

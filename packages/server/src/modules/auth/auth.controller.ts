@@ -51,7 +51,9 @@ export class AuthController {
     const [accessToken, refreshToken] = this.tokenService.generateTokens(data);
 
     res.cookie("access-token", accessToken, { httpOnly: true });
+
     res.cookie("refresh-token", refreshToken, { httpOnly: true });
+
     res.status(HttpStatus.OK).send(data);
   }
 
@@ -71,11 +73,13 @@ export class AuthController {
     }
 
     const newData = classToPlain(user) as JwtValue;
+
     const [accessToken, refreshToken] = this.tokenService.generateTokens(
       newData
     );
 
     res.cookie("access-token", accessToken, { httpOnly: true });
+
     res.cookie("refresh-token", refreshToken, { httpOnly: true });
 
     const url = NODE_ENV === "production" ? "/" : CORS[0];

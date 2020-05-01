@@ -71,6 +71,7 @@ describe("AuthService", () => {
     });
 
     expect(result).toBeDefined();
+
     expect(result!.username).toBe("Towelie");
   });
 
@@ -88,9 +89,13 @@ describe("AuthService", () => {
     const result = await service.activateUser(email);
 
     expect(result).toBeDefined();
+
     expect(result!.email).toBe(email);
+
     expect(result!.isActive).toBe(true);
+
     expect(userServiceMock.updateUser).toHaveBeenCalled();
+
     expect(userServiceMock.updateUser).toHaveBeenCalledWith(id, result);
   });
 

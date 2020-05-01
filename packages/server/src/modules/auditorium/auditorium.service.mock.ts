@@ -5,10 +5,12 @@ const auditoriumMock = {
   name: "Cartman",
   cinemaId: cinemaMock.id
 };
+
 const auditoriumDtoMock = {
   name: "Cartman",
   cinemaId: cinemaMock.id
 };
+
 const auditoriumServiceMock = {
   create: jest.fn(),
   getOne: jest.fn(),

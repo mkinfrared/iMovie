@@ -17,6 +17,7 @@ export class StateService {
       abbreviation,
       countryId
     });
+
     const { generatedMaps } = await this.stateRepository
       .createQueryBuilder()
       .insert()
@@ -26,6 +27,7 @@ export class StateService {
       .setParameter("now", new Date())
       .returning("*")
       .execute();
+
     const [result] = generatedMaps;
 
     return result as State;

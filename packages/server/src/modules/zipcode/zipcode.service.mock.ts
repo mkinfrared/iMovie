@@ -8,6 +8,7 @@ const zipcodeServiceMock = {
   getOne: jest.fn(),
   createZipcodesByCity: jest.fn()
 };
+
 const zipcodeMock = {
   id: 47,
   code: "92506",

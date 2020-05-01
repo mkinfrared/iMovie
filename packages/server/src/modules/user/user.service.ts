@@ -18,6 +18,7 @@ export class UserService implements OnApplicationBootstrap {
 
   async create(userDto: UserDto) {
     const hashedPassword = await bcrypt.hash(userDto.password, 12);
+
     const user = this.userRepository.create({
       ...userDto,
       password: hashedPassword

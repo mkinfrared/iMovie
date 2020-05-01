@@ -4,6 +4,7 @@ import { stateMock } from "modules/state/state.service.mock";
 const cityServiceMock = {
   upsert: jest.fn()
 };
+
 const cityMock = {
   id: 47,
   stateId: stateMock.id,

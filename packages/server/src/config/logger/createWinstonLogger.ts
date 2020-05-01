@@ -2,9 +2,11 @@
 import { createLogger, format, transports } from "winston";
 
 const { printf, combine, timestamp } = format;
+
 const getMeta = format((info) => {
   return { ...info, context: info.context };
 });
+
 const myFormat = printf(({ level, message, timestamp, context }) => {
   return `${timestamp} [${context}] ${level}: ${message}`;
 });

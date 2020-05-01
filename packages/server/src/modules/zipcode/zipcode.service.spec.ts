@@ -81,13 +81,17 @@ describe("ZipcodeService", () => {
     );
 
     expect(result).toBeDefined();
+
     expect(result.code).toBe(zipcodeMock.code);
+
     expect(repositoryMock.create).toHaveBeenCalled();
+
     expect(repositoryMock.save).toHaveBeenCalled();
   });
 
   it("should fetch data and create new zipcode entities", async () => {
     const { countryId } = cityMock;
+
     const data = {
       places: [
         {
@@ -99,7 +103,9 @@ describe("ZipcodeService", () => {
     };
 
     repositoryMock.create.mockReturnValueOnce(zipcodeMock);
+
     connectionMock.createQueryRunner.mockReturnValueOnce(queryRunnerMock);
+
     axiosMock.get.mockReturnValueOnce(
       new Promise((resolve) => resolve({ data }))
     );
@@ -111,6 +117,7 @@ describe("ZipcodeService", () => {
     );
 
     expect(queryRunnerMock.manager.transaction).toHaveBeenCalled();
+
     expect(loggerServiceMock.log).not.toHaveBeenCalled();
   });
 
@@ -119,7 +126,9 @@ describe("ZipcodeService", () => {
     const data = {};
 
     repositoryMock.create.mockReturnValueOnce(zipcodeMock);
+
     connectionMock.createQueryRunner.mockReturnValueOnce(queryRunnerMock);
+
     axiosMock.get.mockReturnValueOnce(
       new Promise((resolve) => resolve({ data }))
     );
@@ -131,6 +140,7 @@ describe("ZipcodeService", () => {
     );
 
     expect(queryRunnerMock.manager.transaction).not.toHaveBeenCalled();
+
     expect(loggerServiceMock.log).not.toHaveBeenCalled();
   });
 
@@ -139,7 +149,9 @@ describe("ZipcodeService", () => {
     const error = "TIMMY";
 
     repositoryMock.create.mockReturnValueOnce(zipcodeMock);
+
     connectionMock.createQueryRunner.mockReturnValueOnce(queryRunnerMock);
+
     axiosMock.get.mockRejectedValueOnce(error);
 
     await service.createZipcodesByCity(
@@ -149,7 +161,9 @@ describe("ZipcodeService", () => {
     );
 
     expect(queryRunnerMock.manager.transaction).not.toHaveBeenCalled();
+
     expect(loggerServiceMock.log).toHaveBeenCalled();
+
     expect(loggerServiceMock.log).toHaveBeenCalledWith(error);
   });
 
@@ -161,11 +175,13 @@ describe("ZipcodeService", () => {
     const result = await service.getByCodeAndCountry(code, countryId);
 
     expect(result).toBeDefined();
+
     expect(result?.code).toBe(zipcodeMock.code);
   });
 
   it("should return zipcode with fetching data", async () => {
     const { code, countryId, longitude, latitude } = zipcodeMock;
+
     const data = {
       places: [
         {
@@ -183,31 +199,45 @@ describe("ZipcodeService", () => {
         data
       })
     );
+
     service.createZipcodesByCity = jest.fn();
+
     service.create = jest.fn(() => zipcodeMock) as any;
+
     repositoryMock.findOne.mockReturnValueOnce(undefined);
+
     cityServiceMock.upsert.mockReturnValueOnce(cityMock);
+
     stateServiceMock.upsert.mockReturnValueOnce(stateMock);
 
     const result = await service.getByCodeAndCountry(code, countryId);
 
     expect(result).toBeDefined();
+
     expect(result?.code).toBe(zipcodeMock.code);
+
     expect(result?.cityId).toBe(cityMock.id);
+
     expect(stateServiceMock.upsert).toHaveBeenCalled();
+
     expect(stateServiceMock.upsert).toHaveBeenCalledWith(
       stateMock.name,
       countryId,
       stateMock.abbreviation
     );
+
     expect(cityServiceMock.upsert).toHaveBeenCalled();
+
     expect(cityServiceMock.upsert).toHaveBeenCalledWith(
       cityMock.name,
       cityMock.stateId,
       countryId
     );
+
     expect(service.create).toHaveBeenCalled();
+
     expect(service.createZipcodesByCity).toHaveBeenCalled();
+
     expect(service.createZipcodesByCity).toHaveBeenCalledWith(
       countryId,
       stateMock,
@@ -220,16 +250,22 @@ describe("ZipcodeService", () => {
     const error = "timmy";
 
     repositoryMock.findOne.mockReturnValueOnce(undefined);
+
     stateServiceMock.upsert.mockReturnValueOnce(stateMock);
+
     cityServiceMock.upsert.mockReturnValueOnce(cityMock);
+
     axiosMock.get.mockRejectedValueOnce(error);
 
     try {
       await service.getByCodeAndCountry(code, countryId);
     } catch (e) {
       expect(stateServiceMock.upsert).not.toHaveBeenCalled();
+
       expect(cityServiceMock.upsert).not.toHaveBeenCalled();
+
       expect(service.createZipcodesByCity).not.toHaveBeenCalled();
+
       expect(loggerServiceMock.error).toHaveBeenCalled();
     }
   });
@@ -243,6 +279,7 @@ describe("ZipcodeService", () => {
     const result = await service.getAll();
 
     expect(result.result).toHaveLength(1);
+
     expect(result.total).toBe(total);
   });
 
@@ -252,7 +289,9 @@ describe("ZipcodeService", () => {
     const result = await service.getOne(42);
 
     expect(result).toBeDefined();
+
     expect(result?.code).toBe(zipcodeMock.code);
+
     expect(result?.cityId).toBe(zipcodeMock.cityId);
   });
 });

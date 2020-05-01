@@ -38,6 +38,7 @@ describe("UserService", () => {
     const result = await service.create(userDtoMock);
 
     expect(result).toBeDefined();
+
     expect(repositoryMock.save).not.toHaveBeenCalledWith(userDtoMock);
   });
 
@@ -47,7 +48,9 @@ describe("UserService", () => {
     const result = await service.getAll();
 
     expect(result).toBeDefined();
+
     expect(Array.isArray(result)).toBe(true);
+
     expect(result).toHaveLength(1);
   });
 
@@ -57,7 +60,9 @@ describe("UserService", () => {
     const result = await service.getOne("42");
 
     expect(result).toBeDefined();
+
     expect(result!.email).toBe(userDtoMock.email);
+
     expect(result!.username).toBe(userDtoMock.username);
   });
 
@@ -72,6 +77,7 @@ describe("UserService", () => {
       firstName: "Steven",
       lastName: "McTowelie"
     };
+
     const result = await service.updateUser("42", updatedUser);
 
     expect(result).toBeUndefined();
@@ -79,15 +85,21 @@ describe("UserService", () => {
 
   it("should return an updated user by id", async () => {
     repositoryMock.findOne.mockReturnValueOnce(userDtoMock);
+
     repositoryMock.update.mockReturnValueOnce({ affected: 1 });
 
     const result = await service.updateUser("42", userDtoMock);
 
     expect(result).toBeDefined();
+
     expect(result!.email).toBe(userDtoMock.email);
+
     expect(result!.username).toBe(userDtoMock.username);
+
     expect(result!.firstName).toBe(userDtoMock.firstName);
+
     expect(result!.lastName).toBe(userDtoMock.lastName);
+
     expect(result!.email).toBe(userDtoMock.email);
   });
 
@@ -97,6 +109,7 @@ describe("UserService", () => {
     const result = await service.removeUser("42");
 
     expect(result).toBeDefined();
+
     expect(repositoryMock.delete).toHaveBeenCalled();
   });
 
@@ -106,6 +119,7 @@ describe("UserService", () => {
     const result = await service.removeUser("42");
 
     expect(result).toBeUndefined();
+
     expect(repositoryMock.delete).toHaveBeenCalled();
   });
 
@@ -123,7 +137,9 @@ describe("UserService", () => {
     const result = await service.getByUsername("marklar");
 
     expect(result).toBeDefined();
+
     expect(result?.username).toBe(userDtoMock.username);
+
     expect(result?.email).toBe(userDtoMock.email);
   });
 
@@ -141,7 +157,9 @@ describe("UserService", () => {
     const result = await service.getByEmail("marklar");
 
     expect(result).toBeDefined();
+
     expect(result?.username).toBe(userDtoMock.username);
+
     expect(result?.email).toBe(userDtoMock.email);
   });
 });

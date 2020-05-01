@@ -9,6 +9,7 @@ const userServiceMock = {
   updateUser: jest.fn(),
   removeUser: jest.fn()
 };
+
 const userDtoMock: UserDto = {
   username: "marklar",
   password: "Foobar42@",
@@ -17,6 +18,7 @@ const userDtoMock: UserDto = {
   firstName: "Randy",
   lastName: "Marsh"
 };
+
 const updateUserDtoMock: UpdateUserDto = {
   username: "marklar",
   email: "marklar@foo.bar",

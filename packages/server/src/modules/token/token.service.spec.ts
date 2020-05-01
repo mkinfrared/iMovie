@@ -33,9 +33,11 @@ describe("TokenService", () => {
       isActive: false,
       role: "user" as Role
     };
+
     const result = service.generateTokens(user);
 
     expect(result).toBeDefined();
+
     expect(result).toHaveLength(2);
   });
 
@@ -46,10 +48,12 @@ describe("TokenService", () => {
       isActive: false,
       role: "user" as Role
     };
+
     const [accessToken] = service.generateTokens(user);
     const result = service.verifyAccessToken(accessToken);
 
     expect(result).toBeDefined();
+
     expect(result).toMatchObject(user);
   });
 
@@ -68,10 +72,12 @@ describe("TokenService", () => {
       isActive: false,
       role: "user" as Role
     };
+
     const [, refreshToken] = service.generateTokens(user);
     const result = service.verifyRefreshToken(refreshToken);
 
     expect(result).toBeDefined();
+
     expect(result).toMatchObject(user);
   });
 

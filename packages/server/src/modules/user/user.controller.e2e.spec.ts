@@ -18,10 +18,13 @@ describe("UserController (e2e)", () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+
     connection = getConnection();
 
     await connection.dropDatabase();
+
     await connection.synchronize();
+
     await app.init();
 
     agent = request.agent(app.getHttpServer());
@@ -29,6 +32,7 @@ describe("UserController (e2e)", () => {
 
   afterAll(async () => {
     await connection.dropDatabase();
+
     await app.close();
   });
 
@@ -39,10 +43,15 @@ describe("UserController (e2e)", () => {
       .expect(201)
       .expect((res) => {
         expect(res.body.email).toBe(userDtoMock.email);
+
         expect(res.body.username).toBe(userDtoMock.username);
+
         expect(res.body.isActive).toBe(false);
+
         expect(res.body.role).toBe("user");
+
         expect(res.body.id).toBeDefined();
+
         expect(res.body.password).toBeUndefined();
       });
 
@@ -56,10 +65,15 @@ describe("UserController (e2e)", () => {
       .expect(200)
       .expect((res) => {
         expect(res.body.email).toBe(userDtoMock.email);
+
         expect(res.body.username).toBe(userDtoMock.username);
+
         expect(res.body.isActive).toBe(false);
+
         expect(res.body.role).toBe("user");
+
         expect(res.body.id).toBeDefined();
+
         expect(res.body.password).toBeUndefined();
       });
 
@@ -73,10 +87,15 @@ describe("UserController (e2e)", () => {
       .expect(200)
       .expect((res) => {
         expect(res.body.email).toBe(userDtoMock.email);
+
         expect(res.body.username).toBe(userDtoMock.username);
+
         expect(res.body.isActive).toBe(false);
+
         expect(res.body.role).toBe("user");
+
         expect(res.body.id).toBeDefined();
+
         expect(res.body.password).toBeUndefined();
       });
 
@@ -90,9 +109,13 @@ describe("UserController (e2e)", () => {
       .expect(200)
       .expect((res) => {
         expect(res.body).toBeDefined();
+
         expect(res.body).toHaveLength(1);
+
         expect(res.body[0].id).toBeDefined();
+
         expect(res.body[0].username).toBe(userDtoMock.username);
+
         expect(res.body[0].password).toBeUndefined();
       });
 

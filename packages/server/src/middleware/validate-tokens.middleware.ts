@@ -38,6 +38,7 @@ export class ValidateTokensMiddleware implements NestMiddleware {
 
     try {
       data = this.tokenService.verifyRefreshToken(refreshToken);
+
       const token = await this.redisService.get(refreshToken);
 
       if (token) {
@@ -59,7 +60,9 @@ export class ValidateTokensMiddleware implements NestMiddleware {
     );
 
     req.userData = data;
+
     res.cookie("access-token", newAccessToken, { httpOnly: true });
+
     res.cookie("refresh-token", newRefreshToken, { httpOnly: true });
 
     return next();

@@ -32,7 +32,9 @@ describe("Cinema Controller", () => {
     const result = await controller.create(cinemaDtoMock);
 
     expect(result).toBeDefined();
+
     expect(result.name).toBe(cinemaMock.name);
+
     expect(cinemaServiceMock.create).toHaveBeenCalledWith(cinemaDtoMock);
   });
 
@@ -45,6 +47,7 @@ describe("Cinema Controller", () => {
     const result = await controller.getAll(page, limit);
 
     expect(result).toBeDefined();
+
     expect(cinemaServiceMock.getAll).toHaveBeenCalledWith(+page, +limit);
   });
 
@@ -54,7 +57,9 @@ describe("Cinema Controller", () => {
     const result = await controller.get(cinemaMock.id);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(cinemaMock.name);
+
     expect(cinemaServiceMock.get).toHaveBeenCalledWith(cinemaMock.id);
   });
 
@@ -64,7 +69,9 @@ describe("Cinema Controller", () => {
     const result = await controller.update(cinemaMock);
 
     expect(result).toBeDefined();
+
     expect(result?.name).toBe(cinemaMock.name);
+
     expect(cinemaServiceMock.get).toHaveBeenCalledWith(cinemaMock.id);
   });
 
@@ -80,6 +87,7 @@ describe("Cinema Controller", () => {
     }
 
     expect(error.message).toBe("Cinema not found");
+
     expect(error.status).toBe(404);
   });
 
@@ -89,6 +97,7 @@ describe("Cinema Controller", () => {
     const result = await controller.delete(cinemaMock.id);
 
     expect(result).toBeDefined();
+
     expect(cinemaServiceMock.delete).toHaveBeenCalledWith(cinemaMock.id);
   });
 
@@ -104,6 +113,7 @@ describe("Cinema Controller", () => {
     }
 
     expect(error.message).toBe("Cinema not found");
+
     expect(error.status).toBe(404);
   });
 });

@@ -44,41 +44,51 @@ describe("ValidateTokensMiddleware", () => {
     await middleware.use(request, response, next);
 
     expect(next).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyAccessToken).not.toHaveBeenCalled();
   });
 
   it("should call verifyAccessToken, put data to req object and call next function when access token is provided", async () => {
     const accessToken = "marklar";
+
     const request = {
       cookies: {
         "access-token": accessToken
       }
     } as any;
+
     const response = {} as any;
     const next = jest.fn();
     const data = { foo: "bar" };
 
     tokenServiceMock.verifyAccessToken.mockReturnValueOnce(data);
+
     await middleware.use(request, response, next);
 
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalledWith(
       accessToken
     );
+
     expect(request.userData).toBeDefined();
+
     expect(request.userData).toMatchObject(data);
+
     expect(next).toHaveBeenCalled();
   });
 
   it("should call log, verifyRefreshToken, get, next when access token is outdated", async () => {
     const accessToken = "marklar";
     const refreshToken = "foobar";
+
     const request = {
       cookies: {
         "access-token": accessToken,
         "refresh-token": refreshToken
       }
     } as any;
+
     const response = {} as any;
     const next = jest.fn();
 
@@ -89,32 +99,43 @@ describe("ValidateTokensMiddleware", () => {
     redisServiceMock.get.mockImplementationOnce(() => {
       throw new Error();
     });
+
     await middleware.use(request, response, next);
 
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalledWith(
       accessToken
     );
+
     expect(request.userData).toBeUndefined();
+
     expect(loggerServiceMock.log).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalledWith(
       refreshToken
     );
+
     expect(redisServiceMock.get).toHaveBeenCalled();
+
     expect(redisServiceMock.get).toHaveBeenCalledWith(refreshToken);
+
     expect(next).toHaveBeenCalled();
   });
 
   it("should call verifyRefreshToken, get, warn, next when access token is returned rom redis", async () => {
     const accessToken = "marklar";
     const refreshToken = "foobar";
+
     const request = {
       cookies: {
         "access-token": accessToken,
         "refresh-token": refreshToken
       }
     } as any;
+
     const response = {} as any;
     const next = jest.fn();
     const data = { foo: "bar" };
@@ -122,24 +143,35 @@ describe("ValidateTokensMiddleware", () => {
     tokenServiceMock.verifyAccessToken.mockImplementationOnce(() => {
       throw new Error();
     });
+
     tokenServiceMock.verifyRefreshToken.mockImplementationOnce(() => data);
+
     redisServiceMock.get.mockImplementationOnce(() => data);
 
     await middleware.use(request, response, next);
 
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalledWith(
       accessToken
     );
+
     expect(request.userData).toBeUndefined();
+
     expect(loggerServiceMock.log).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalledWith(
       refreshToken
     );
+
     expect(redisServiceMock.get).toHaveBeenCalled();
+
     expect(redisServiceMock.get).toHaveBeenCalledWith(refreshToken);
+
     expect(loggerServiceMock.warn).toHaveBeenCalled();
+
     expect(next).toHaveBeenCalled();
   });
 
@@ -148,41 +180,57 @@ describe("ValidateTokensMiddleware", () => {
 
     const accessToken = "marklar";
     const refreshToken = "foobar";
+
     const request = {
       cookies: {
         "access-token": accessToken,
         "refresh-token": refreshToken
       }
     } as any;
+
     const response = {
       cookie: jest.fn()
     } as any;
+
     const next = jest.fn();
     const data = ["foo", "bar"];
 
     tokenServiceMock.verifyAccessToken.mockImplementationOnce(() => {
       throw new Error();
     });
+
     tokenServiceMock.verifyRefreshToken.mockReturnValueOnce(data);
+
     redisServiceMock.get.mockReturnValueOnce(null);
+
     tokenServiceMock.generateTokens.mockReturnValueOnce(data);
 
     await middleware.use(request, response, next);
 
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyAccessToken).toHaveBeenCalledWith(
       accessToken
     );
+
     expect(loggerServiceMock.log).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalled();
+
     expect(tokenServiceMock.verifyRefreshToken).toHaveBeenCalledWith(
       refreshToken
     );
+
     expect(redisServiceMock.get).toHaveBeenCalled();
+
     expect(redisServiceMock.get).toHaveBeenCalledWith(refreshToken);
+
     expect(loggerServiceMock.warn).not.toHaveBeenCalled();
+
     expect(tokenServiceMock.generateTokens).toHaveBeenCalled();
+
     expect(request.userData).toBeDefined();
+
     expect(response.cookie).toHaveBeenCalledTimes(2);
   });
 });

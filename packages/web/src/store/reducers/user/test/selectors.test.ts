@@ -1,10 +1,10 @@
-import { initialState } from "./reducer.test";
-import { getUser } from "../selectors";
+import { userStateMock } from "./mocks";
+import { selectUserId } from "../selectors";
 
 describe("selectors", () => {
   it("should return user from store", () => {
-    const result = getUser({ user: initialState });
+    const result = selectUserId({ user: userStateMock });
 
-    expect(result).toMatchObject(initialState);
+    expect(result).toBe(userStateMock.id);
   });
 });

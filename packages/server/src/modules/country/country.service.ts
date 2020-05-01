@@ -36,6 +36,7 @@ export class CountryService implements OnApplicationBootstrap {
     try {
       const response = await axios.get("https://restcountries.eu/rest/v2/all");
       const { data } = response;
+
       const countries: Partial<Country>[] = data.map(
         (element: Record<string, any>) => {
           const { callingCodes } = element;
