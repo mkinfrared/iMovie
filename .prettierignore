@@ -1,2 +1,6 @@
 build
+dist
+logs
+node_modules
+coverage
 !container/build/Dockerfile

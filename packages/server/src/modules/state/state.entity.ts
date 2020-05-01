@@ -26,10 +26,7 @@ export class State {
   @Column()
   countryId: string;
 
-  @ManyToOne(
-    () => Country,
-    (country) => country.alpha2Code
-  )
+  @ManyToOne(() => Country, (country) => country.alpha2Code)
   @JoinColumn({ name: "countryId" })
   country: Country;
 

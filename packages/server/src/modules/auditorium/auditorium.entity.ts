@@ -23,10 +23,7 @@ export class Auditorium {
   @Column()
   cinemaId: number;
 
-  @ManyToOne(
-    () => Cinema,
-    (cinema) => cinema.id
-  )
+  @ManyToOne(() => Cinema, (cinema) => cinema.id)
   @JoinColumn({ name: "cinemaId" })
   cinema: Cinema;
 

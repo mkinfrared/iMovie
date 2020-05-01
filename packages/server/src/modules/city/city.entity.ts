@@ -23,29 +23,20 @@ export class City {
   @Column()
   name: string;
 
-  @OneToMany(
-    () => Zipcode,
-    (zipcode) => zipcode.id
-  )
+  @OneToMany(() => Zipcode, (zipcode) => zipcode.id)
   zipcode: Zipcode[];
 
   @Column()
   stateId: number;
 
-  @ManyToOne(
-    () => State,
-    (state) => state.id
-  )
+  @ManyToOne(() => State, (state) => state.id)
   @JoinColumn({ name: "stateId" })
   state: State;
 
   @Column()
   countryId: string;
 
-  @ManyToOne(
-    () => Country,
-    (country) => country.alpha2Code
-  )
+  @ManyToOne(() => Country, (country) => country.alpha2Code)
   @JoinColumn({ name: "countryId" })
   country: Country;
 

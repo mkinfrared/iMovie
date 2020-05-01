@@ -23,10 +23,7 @@ export class Cinema {
   @Column()
   zipcodeId: number;
 
-  @ManyToOne(
-    () => Zipcode,
-    (zipcode) => zipcode.id
-  )
+  @ManyToOne(() => Zipcode, (zipcode) => zipcode.id)
   @JoinColumn({ name: "zipcodeId" })
   zipcode: Zipcode;
 
