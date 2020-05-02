@@ -1,5 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
@@ -27,6 +28,16 @@ async function bootstrap() {
   );
 
   app.enableShutdownHooks();
+
+  const options = new DocumentBuilder()
+    .setTitle("iMovie Example")
+    .setDescription("The iMovie API description")
+    .setVersion("0.0")
+    .build();
+
+  const document = SwaggerModule.createDocument(app, options);
+
+  SwaggerModule.setup("api", app, document);
 
   await app.listen(SERVER_PORT);
 }
