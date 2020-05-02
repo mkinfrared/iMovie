@@ -9,3 +9,9 @@ export interface User {
   role?: Role;
   isActive?: boolean;
 }
+
+export enum UserActionsTypes {
+  LOGOUT_REQUEST = "@@user/LOGOUT_REQUEST",
+  LOGOUT_SUCCESS = "@@user/LOGOUT_SUCCESS",
+  LOGOUT_FAIL = "@@user/LOGOUT_FAIL"
+}

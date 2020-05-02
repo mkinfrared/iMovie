@@ -51,18 +51,7 @@
     "no-console": "error",
     "prefer-promise-reject-errors": "off",
     "quotes": ["error", "double", "avoid-escape"],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "args": "none"
-      }
-    ],
-    "no-unused-vars": [
-      "error",
-      {
-        "args": "none"
-      }
-    ],
+    "@typescript-eslint/no-unused-vars": "off", // typescript already handles that issue
     "sort-imports": [
       "error",
       {

@@ -2,22 +2,29 @@ import IconButton from "@material-ui/core/IconButton";
 import MaterialMenu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AccountIcon from "@material-ui/icons/AccountCircle";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import css from "components/Header/Header.module.scss";
+import { logoutUserRequest } from "store/reducers/user/actions";
 
 import { MenuProps } from "./Menu.type";
 
-const Menu = ({ className }: MenuProps) => {
+const Menu = ({ className, dispatch }: MenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
+
+  const handleLogoutClick = useCallback(() => {
+    handleClose();
+
+    dispatch(logoutUserRequest());
+  }, [dispatch, handleClose]);
 
   return (
     <div className={className}>
@@ -37,7 +44,7 @@ const Menu = ({ className }: MenuProps) => {
         <MenuItem onClick={handleClose} disabled>
           Username
         </MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </MaterialMenu>
     </div>
   );

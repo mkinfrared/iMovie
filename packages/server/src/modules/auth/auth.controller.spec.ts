@@ -141,4 +141,22 @@ describe("Auth Controller", () => {
       expect(response.redirect).not.toHaveBeenCalled();
     }
   });
+
+  it("should clear tokens", async () => {
+    const response = {
+      clearCookie: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn()
+    } as any;
+
+    await controller.logout(response);
+
+    expect(response.clearCookie).toHaveBeenCalledTimes(2);
+
+    expect(response.clearCookie).toHaveBeenCalledWith("access-token");
+
+    expect(response.clearCookie).toHaveBeenCalledWith("refresh-token");
+
+    expect(response.status).toHaveBeenCalledWith(200);
+  });
 });

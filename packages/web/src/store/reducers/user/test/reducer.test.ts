@@ -1,4 +1,4 @@
-import reducer, { loginUser } from "../reducer";
+import reducer, { loginUser, logoutUser } from "../reducer";
 import { userStateMock } from "./mocks";
 
 describe("reducer", () => {
@@ -19,5 +19,16 @@ describe("reducer", () => {
     const result = reducer(state, action);
 
     expect(result.username).toBe("foobar");
+  });
+
+  it("should return an initial state", () => {
+    const state = { ...userStateMock };
+    const action = {
+      type: logoutUser.type,
+      payload: { username: "foobar" }
+    };
+    const result = reducer(state, action);
+
+    expect(result.username).toBeUndefined();
   });
 });
