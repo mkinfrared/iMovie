@@ -8,7 +8,7 @@ import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 import AdminMenu from "components/AdminMenu";
-import Menu from "components/Menu";
+import Menu from "containers/Menu";
 import Imovie from "icons/imovie";
 import loadableModal from "utils/loadable";
 

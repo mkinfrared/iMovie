@@ -4,10 +4,12 @@ import React, { ReactElement } from "react";
 import Menu from "./Menu";
 
 describe("<Menu />", () => {
+  const dispatch = jest.fn();
+
   let Component: ReactElement;
 
   beforeEach(() => {
-    Component = <Menu />;
+    Component = <Menu dispatch={dispatch} />;
   });
 
   it("should be defined", () => {
@@ -31,5 +33,23 @@ describe("<Menu />", () => {
     const result = await findByText("Username");
 
     expect(result).toBeInTheDocument();
+  });
+
+  it("should close menu and call 'dispatch'", async () => {
+    const { getByTestId, findByText, getByText } = render(Component);
+    const menuButton = getByTestId("menuButton");
+
+    fireEvent.click(menuButton);
+
+    const username = await findByText("Username");
+
+    expect(username).toBeInTheDocument();
+
+    const logoutButton = getByText("Logout");
+
+    fireEvent.click(logoutButton);
+
+    // expect(username).not.toBeInTheDocument();
+    expect(dispatch).toHaveBeenCalled();
   });
 });

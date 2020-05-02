@@ -57,6 +57,15 @@ export class AuthController {
     res.status(HttpStatus.OK).send(data);
   }
 
+  @Get("logout")
+  logout(@Res() res: Response) {
+    res.clearCookie("access-token");
+
+    res.clearCookie("refresh-token");
+
+    res.status(HttpStatus.OK).send();
+  }
+
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(":token")
   async activate(@Param("token") token: string, @Res() res: Response) {

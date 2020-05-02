@@ -22,8 +22,8 @@ jest.mock("components/AdminMenu", () => (props: any) => (
   </div>
 ));
 
-jest.mock("components/Menu", () => (props: any) => (
-  <div data-testid="components/Menu">
+jest.mock("containers/Menu", () => (props: any) => (
+  <div data-testid="containers/Menu">
     <code>{JSON.stringify(props)}</code>
   </div>
 ));
@@ -60,7 +60,7 @@ describe("<Header />", () => {
       </MemoryRouter>
     );
 
-    const menu = getByTestId("components/Menu");
+    const menu = getByTestId("containers/Menu");
 
     expect(menu).toBeInTheDocument();
   });
