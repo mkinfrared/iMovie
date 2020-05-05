@@ -11,6 +11,7 @@ import {
 
 import { City } from "modules/city/city.entity";
 import { Country } from "modules/country/country.entity";
+import { State } from "modules/state/state.entity";
 
 @Entity()
 @Unique(["code", "cityId", "countryId"])
@@ -33,6 +34,13 @@ export class Zipcode {
   @ManyToOne(() => City, (city) => city.id)
   @JoinColumn({ name: "cityId" })
   city: City;
+
+  @Column()
+  stateId: number;
+
+  @ManyToOne(() => State, (state) => state.id)
+  @JoinColumn({ name: "stateId" })
+  state: State;
 
   @Column()
   countryId: string;

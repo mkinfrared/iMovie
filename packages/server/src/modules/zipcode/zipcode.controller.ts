@@ -3,8 +3,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Param,
-  Query
+  Param
 } from "@nestjs/common";
 
 import { ZipcodeService } from "./zipcode.service";
@@ -14,8 +13,8 @@ export class ZipcodeController {
   constructor(private readonly zipcodeService: ZipcodeService) {}
 
   @Get()
-  getAll(@Query("page") page: string, @Query("limit") limit: string) {
-    return this.zipcodeService.getAll(+page, +limit);
+  getAll() {
+    return this.zipcodeService.getAll();
   }
 
   @Get(":id")

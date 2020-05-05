@@ -6,4 +6,5 @@ export interface AdminMenuProps {
 export interface Navigation {
   text: string;
   icon: JSX.Element;
+  path: string;
 }

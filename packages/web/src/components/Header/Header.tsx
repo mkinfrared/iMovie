@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import AdminMenu from "components/AdminMenu";
 import Menu from "containers/Menu";
 import Imovie from "icons/imovie";
-import loadableModal from "utils/loadable";
+import { loadableModal } from "utils/loadable";
 
 import css from "./Header.module.scss";
 import { HeaderProps } from "./Header.type";
@@ -20,7 +20,7 @@ const SignUp = loadableModal(() => import("components/SignUp"));
 
 type ActiveForm = "signin" | "signup" | null;
 
-const Header = ({ isAuth }: HeaderProps) => {
+const Header = ({ isAuth, isAdmin }: HeaderProps) => {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [activeForm, setActiveForm] = useState<ActiveForm>(null);
 
@@ -86,17 +86,19 @@ const Header = ({ isAuth }: HeaderProps) => {
 
   return (
     <>
-      <AppBar position="static" className={css.Header}>
+      <AppBar position="static" className={css.Header} color="secondary">
         <Toolbar className={css.toolbar}>
-          <IconButton
-            edge="start"
-            className={css.menu}
-            color="inherit"
-            aria-label="menu"
-            onClick={openDrawer}
-          >
-            <MenuIcon />
-          </IconButton>
+          {isAdmin && (
+            <IconButton
+              edge="start"
+              className={css.menu}
+              color="inherit"
+              aria-label="menu"
+              onClick={openDrawer}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Link to="/">
             <Imovie />
             <Typography variant="h6">iMovie</Typography>
@@ -104,7 +106,7 @@ const Header = ({ isAuth }: HeaderProps) => {
           {renderButton()}
         </Toolbar>
       </AppBar>
-      <AdminMenu isOpen={isAdminOpen} onClose={closeDrawer} />
+      {isAdmin && <AdminMenu isOpen={isAdminOpen} onClose={closeDrawer} />}
       {renderForm()}
     </>
   );

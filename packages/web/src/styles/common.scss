@@ -1,3 +1,5 @@
+@import "colors";
+
 .form {
 
   .input {
@@ -15,4 +17,8 @@
   margin: 0;
   padding: 0;
   text-decoration: underline;
+}
+
+.dangerButton {
+  color: $danger-main;
 }

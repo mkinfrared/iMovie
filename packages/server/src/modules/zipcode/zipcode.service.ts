@@ -8,7 +8,6 @@ import { City } from "modules/city/city.entity";
 import { CityService } from "modules/city/city.service";
 import { State } from "modules/state/state.entity";
 import { StateService } from "modules/state/state.service";
-import Pagination from "utils/pagination";
 
 import { Zipcode } from "./zipcode.entity";
 
@@ -28,6 +27,7 @@ export class ZipcodeService {
   async create(
     code: string,
     cityId: number,
+    stateId: number,
     countryId: string,
     longitude: string,
     latitude: string
@@ -35,6 +35,7 @@ export class ZipcodeService {
     const zipcode = this.zipcodeRepository.create({
       code,
       cityId,
+      stateId,
       countryId,
       latitude,
       longitude
@@ -48,7 +49,7 @@ export class ZipcodeService {
 
     const zipcode = await this.zipcodeRepository.findOne({
       where: { code, countryId },
-      relations: ["city", "country"]
+      relations: ["city", "state", "country"]
     });
 
     if (zipcode) {
@@ -78,11 +79,15 @@ export class ZipcodeService {
       // Create zipcode
       const zipLong = place.longitude;
       const zipLat = place.latitude;
-      const zip = await this.create(code, city.id, countryId, zipLong, zipLat);
+
+      await this.create(code, city.id, state.id, countryId, zipLong, zipLat);
 
       this.createZipcodesByCity(state.countryId, state, city);
 
-      return zip;
+      return this.zipcodeRepository.findOne({
+        where: { code, countryId },
+        relations: ["city", "state", "country"]
+      });
     } catch (e) {
       this.loggerService.error(e);
 
@@ -90,19 +95,13 @@ export class ZipcodeService {
     }
   }
 
-  async getAll(offset = 1, limit = 20) {
-    const [zipcodes, total] = await this.zipcodeRepository.findAndCount({
-      take: limit,
-      skip: limit * (offset - 1),
-      relations: ["city", "country"]
-    });
-
-    return new Pagination(zipcodes, total, offset);
+  async getAll() {
+    return this.zipcodeRepository.find();
   }
 
   getOne(id: number) {
     return this.zipcodeRepository.findOne(id, {
-      relations: ["city", "country"]
+      relations: ["city", "state", "country"]
     });
   }
 
@@ -124,6 +123,7 @@ export class ZipcodeService {
           latitude: place.latitude,
           longitude: place.longitude,
           cityId: city.id,
+          stateId: state.id,
           countryId
         });
       });

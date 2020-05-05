@@ -1,3 +1,9 @@
-.list {
-  width: 250px;
+@import "src/styles/colors";
+@import "src/styles/animations";
+
+.AdminMenu {
+
+  .list {
+    width: 250px;
+  }
 }

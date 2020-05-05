@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import usePasswordToggle from "hooks/usePasswordToggle";
 import Transition from "ui/Transition";
 import api from "utils/api";
-import loadableModal from "utils/loadable";
+import { loadableModal } from "utils/loadable";
 
 import css from "./SignUp.module.scss";
 import { SignUpProps } from "./SignUp.type";
@@ -128,9 +128,7 @@ const SignUp = ({ onClose, open, openLogin }: SignUpProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
-          Cancel
-        </Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button onClick={onSubmit} color="primary" data-testid="registerButton">
           Register
         </Button>

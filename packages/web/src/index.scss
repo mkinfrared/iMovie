@@ -1,7 +1,32 @@
+@import "styles/reset";
 @import "styles/fonts";
+@import "styles/colors";
 
 body {
   font-family: Roboto, sans-serif;
   margin: 0;
   padding: 0;
+
+  a {
+
+    &:hover {
+      color: $secondary-light;
+    }
+  }
+
+  &,
+  * {
+    box-sizing: border-box;
+    scrollbar-color: $primary-light rgba($secondary-light, 0.5);
+    scrollbar-width: thin; // width is ~8-10px
+
+    &::-webkit-scrollbar {
+      background-color: rgba($primary-main, 0.3);
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $secondary-main;
+    }
+  }
 }

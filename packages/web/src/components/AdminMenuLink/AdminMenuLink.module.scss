@@ -1,0 +1,26 @@
+@import "src/styles/animations";
+@import "src/styles/colors";
+
+.AdminMenuLink {
+  color: $white;
+  text-decoration: none;
+  @extend .colorTransition;
+
+  &:hover {
+    color: $secondary-main;
+  }
+
+  &.active,
+  &.active:hover {
+    background-color: $secondary-main;
+    color: $white;
+  }
+
+  .icon {
+    color: inherit;
+  }
+
+  .list {
+    background-color: inherit !important;
+  }
+}

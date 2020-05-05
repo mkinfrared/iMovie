@@ -1,5 +1,6 @@
 import { cityMock } from "modules/city/city.service.mock";
 import { countryMock } from "modules/country/country.service.mock";
+import { stateMock } from "modules/state/state.service.mock";
 
 const zipcodeServiceMock = {
   create: jest.fn(),
@@ -15,7 +16,8 @@ const zipcodeMock = {
   longitude: "42.99",
   latitude: "99.42",
   countryId: countryMock.alpha2Code,
-  cityId: cityMock.id
+  cityId: cityMock.id,
+  stateId: stateMock.id
 };
 
 export { zipcodeMock, zipcodeServiceMock };

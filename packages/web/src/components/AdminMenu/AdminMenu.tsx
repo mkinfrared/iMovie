@@ -1,41 +1,44 @@
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import CinemaIcon from "@material-ui/icons/Apartment";
+import AuditoriumIcon from "@material-ui/icons/MeetingRoom";
 import React, { useMemo } from "react";
 
-import css from "components/Header/Header.module.scss";
+import AdminMenuLink from "components/AdminMenuLink";
+import { AdminRoutes } from "routes/Routes.type";
 
+import css from "./AdminMenu.module.scss";
 import { AdminMenuProps, Navigation } from "./AdminMenu.type";
 
 const navigation: Navigation[] = [
   {
-    text: "Lorem",
-    icon: <InboxIcon />
+    text: "Cinemas",
+    icon: <CinemaIcon />,
+    path: AdminRoutes.ADMIN_CINEMA
   },
   {
-    text: "Ipsum",
-    icon: <MailIcon />
+    text: "Auditoriums",
+    icon: <AuditoriumIcon />,
+    path: "/auditoriums"
   }
 ];
 
 const AdminMenu = ({ isOpen, onClose }: AdminMenuProps) => {
   const list = useMemo(
     () =>
-      navigation.map(({ icon, text }) => (
-        <ListItem button key={text}>
-          <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
+      navigation.map(({ icon, text, path }) => (
+        <AdminMenuLink key={path} icon={icon} name={text} path={path} />
       )),
     []
   );
 
   return (
-    <Drawer open={isOpen} onClose={onClose}>
+    <Drawer
+      open={isOpen}
+      onClose={onClose}
+      className={css.AdminMenu}
+      onClick={onClose}
+    >
       <List className={css.list}>{list}</List>
     </Drawer>
   );

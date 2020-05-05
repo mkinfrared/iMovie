@@ -3,7 +3,7 @@
 exports[`<Header /> should match a snapshot 1`] = `
 <div>
   <header
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary Header MuiPaper-elevation4"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorSecondary Header MuiPaper-elevation4"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular toolbar MuiToolbar-gutters"
@@ -81,21 +81,13 @@ exports[`<Header /> should match a snapshot 1`] = `
           iMovie
         </h6>
       </a>
-      <button
-        aria-label="login"
-        class="MuiButtonBase-root MuiButton-root MuiButton-text loginButton MuiButton-colorInherit"
-        tabindex="0"
-        type="button"
+      <div
+        data-testid="containers/Menu"
       >
-        <span
-          class="MuiButton-label"
-        >
-          Login
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
+        <code>
+          {"className":"loginButton"}
+        </code>
+      </div>
     </div>
   </header>
   <div

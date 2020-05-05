@@ -10,4 +10,10 @@ const loadableModal: LoadableModal = (loadFn) =>
     fallback: <ModalLoading />
   });
 
-export default loadableModal;
+// Wait a minimum of 250ms before loading home.
+const loadablePage: LoadableModal = (loadFn) =>
+  loadable(loadFn, {
+    fallback: <ModalLoading />
+  });
+
+export { loadableModal, loadablePage };

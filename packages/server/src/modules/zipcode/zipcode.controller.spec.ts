@@ -31,20 +31,15 @@ describe("Zipcode Controller", () => {
   });
 
   it("should call 'getAll' on zipcodeService and return the response", async () => {
-    const page = "42";
-    const limit = "7";
+    zipcodeServiceMock.getAll.mockReturnValueOnce([zipcodeMock]);
 
-    zipcodeServiceMock.getAll.mockReturnValueOnce({ result: [zipcodeMock] });
-
-    const result = await controller.getAll(page, limit);
+    const result = await controller.getAll();
 
     expect(zipcodeServiceMock.getAll).toHaveBeenCalled();
 
-    expect(zipcodeServiceMock.getAll).toHaveBeenCalledWith(+page, +limit);
+    expect(result).toHaveLength(1);
 
-    expect(result.result).toHaveLength(1);
-
-    expect(result.result[0].code).toBe(zipcodeMock.code);
+    expect(result[0].code).toBe(zipcodeMock.code);
   });
 
   it("should call 'getOne' on zipcodeService and return the response", async () => {

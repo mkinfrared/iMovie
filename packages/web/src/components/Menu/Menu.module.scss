@@ -1,0 +1,16 @@
+@import "src/styles/colors";
+
+.Menu {
+}
+
+.menuList {
+  background-color: $primary-main;
+  color: $white;
+
+  > li {
+
+    &:hover {
+      color: $secondary-main;
+    }
+  }
+}

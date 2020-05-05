@@ -1,14 +1,14 @@
 .App {
-  background-color: #F5F5F5;
+  background-color: #000000;
   min-height: 100vh;
 
   > main {
-    height: calc(100vh - 64px); // Header height
     margin: 0 auto;
     max-width: 1200px;
+    min-height: calc(100vh - 64px); // Header height
 
     @media (max-width: 600px) {
-      height: calc(100vh - 56px); // Header height
+      min-height: calc(100vh - 56px); // Header height
     }
   }
 }

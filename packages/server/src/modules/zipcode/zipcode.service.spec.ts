@@ -68,13 +68,21 @@ describe("ZipcodeService", () => {
   });
 
   it("should create zipcode entry", async () => {
-    const { countryId, cityId, code, latitude, longitude } = zipcodeMock;
+    const {
+      countryId,
+      cityId,
+      code,
+      latitude,
+      longitude,
+      stateId
+    } = zipcodeMock;
 
     repositoryMock.save.mockReturnValueOnce(zipcodeMock);
 
     const result = await service.create(
       code,
       cityId,
+      stateId,
       countryId,
       longitude,
       latitude
@@ -200,11 +208,9 @@ describe("ZipcodeService", () => {
       })
     );
 
-    service.createZipcodesByCity = jest.fn();
-
-    service.create = jest.fn(() => zipcodeMock) as any;
-
-    repositoryMock.findOne.mockReturnValueOnce(undefined);
+    repositoryMock.findOne
+      .mockReturnValueOnce(undefined)
+      .mockReturnValueOnce(zipcodeMock);
 
     cityServiceMock.upsert.mockReturnValueOnce(cityMock);
 
@@ -233,16 +239,6 @@ describe("ZipcodeService", () => {
       cityMock.stateId,
       countryId
     );
-
-    expect(service.create).toHaveBeenCalled();
-
-    expect(service.createZipcodesByCity).toHaveBeenCalled();
-
-    expect(service.createZipcodesByCity).toHaveBeenCalledWith(
-      countryId,
-      stateMock,
-      cityMock
-    );
   });
 
   it("should call 'error' on logger service", async () => {
@@ -270,17 +266,16 @@ describe("ZipcodeService", () => {
     }
   });
 
-  it("should return a paginated result", async () => {
-    const total = 42;
+  it("should return an array of zipcodes", async () => {
     const zipcodes = [zipcodeMock];
 
-    repositoryMock.findAndCount.mockReturnValueOnce([zipcodes, total]);
+    repositoryMock.find.mockReturnValueOnce(zipcodes);
 
     const result = await service.getAll();
 
-    expect(result.result).toHaveLength(1);
+    expect(result).toHaveLength(1);
 
-    expect(result.total).toBe(total);
+    expect(result[0]).toBe(zipcodeMock);
   });
 
   it("should a zipcode", async () => {
