@@ -3,7 +3,7 @@
 exports[`<Content /> should match a snapshot 1`] = `
 <div>
   <div
-    class="MuiPaper-root Content MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root Content MuiPaper-elevation1"
   />
 </div>
 `;

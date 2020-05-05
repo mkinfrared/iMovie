@@ -4,9 +4,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import AccountIcon from "@material-ui/icons/AccountCircle";
 import React, { useCallback, useState } from "react";
 
-import css from "components/Header/Header.module.scss";
 import { logoutUserRequest } from "store/reducers/user/actions";
+import classNames from "utils/classNames";
 
+import css from "./Menu.module.scss";
 import { MenuProps } from "./Menu.type";
 
 const Menu = ({ className, dispatch }: MenuProps) => {
@@ -27,7 +28,7 @@ const Menu = ({ className, dispatch }: MenuProps) => {
   }, [dispatch, handleClose]);
 
   return (
-    <div className={className}>
+    <div className={classNames([className, css.Menu])}>
       <IconButton
         className={css.loginButton}
         color="inherit"
@@ -40,6 +41,7 @@ const Menu = ({ className, dispatch }: MenuProps) => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        classes={{ list: css.menuList }}
       >
         <MenuItem onClick={handleClose} disabled>
           Username

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminMenuLink /> should match a snapshot 1`] = `
+<div>
+  <div>
+    <div
+      aria-disabled="false"
+      class="MuiButtonBase-root MuiListItem-root list MuiListItem-gutters MuiListItem-button"
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="MuiListItemIcon-root icon"
+      >
+        <div>
+          icon
+        </div>
+      </div>
+      <div
+        class="MuiListItemText-root"
+      >
+        <span
+          class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+        >
+          Mr. Hankey
+        </span>
+      </div>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </div>
+  </div>
+</div>
+`;

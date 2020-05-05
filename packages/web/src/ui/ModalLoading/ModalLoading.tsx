@@ -18,7 +18,7 @@ const ModalLoading = () => {
 
   return (
     <div className={css.ModalLoading}>
-      <CircularProgress />
+      <CircularProgress color="secondary" />
     </div>
   );
 };

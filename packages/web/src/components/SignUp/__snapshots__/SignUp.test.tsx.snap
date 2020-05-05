@@ -258,7 +258,7 @@ exports[`<SignUp /> should match a snapshot 1`] = `
           class="MuiDialogActions-root MuiDialogActions-spacing"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text"
             tabindex="0"
             type="button"
           >

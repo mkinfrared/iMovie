@@ -31,12 +31,13 @@ jest.mock("containers/Menu", () => (props: any) => (
 describe("<Header />", () => {
   let Component: ReactElement;
 
-  const isAuth = false;
+  const isAuth = true;
+  const isAdmin = true;
 
   beforeEach(() => {
     Component = (
       <MemoryRouter>
-        <Header isAuth={isAuth} />
+        <Header isAuth={isAuth} isAdmin={isAdmin} />
       </MemoryRouter>
     );
   });
@@ -56,7 +57,7 @@ describe("<Header />", () => {
   it("should render Menu when user is authenticated", () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <Header isAuth />
+        <Header isAuth isAdmin={false} />
       </MemoryRouter>
     );
 
@@ -78,6 +79,12 @@ describe("<Header />", () => {
   });
 
   it("should open a Login component", async () => {
+    Component = (
+      <MemoryRouter>
+        <Header isAdmin={false} isAuth={false} />
+      </MemoryRouter>
+    );
+
     const { getByLabelText, findByTestId } = render(Component);
     const loginButton = getByLabelText("login");
 

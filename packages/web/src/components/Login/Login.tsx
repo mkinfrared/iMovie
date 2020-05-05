@@ -98,9 +98,7 @@ const Login = ({ onClose, open, openSingUp, dispatch }: LoginProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
-          Cancel
-        </Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button
           data-testid="loginButton"
           onClick={onSubmit}

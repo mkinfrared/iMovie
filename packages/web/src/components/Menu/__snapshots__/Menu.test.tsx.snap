@@ -2,7 +2,9 @@
 
 exports[`<Menu /> should match a snapshot 1`] = `
 <div>
-  <div>
+  <div
+    class="Menu"
+  >
     <button
       class="MuiButtonBase-root MuiIconButton-root loginButton MuiIconButton-colorInherit"
       data-testid="menuButton"

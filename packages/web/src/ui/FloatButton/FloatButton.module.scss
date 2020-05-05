@@ -1,0 +1,11 @@
+.FloatButton {
+  background-color: lemonchiffon;
+  position: sticky;
+  top: calc(100vh - 80px);
+
+  .button {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+  }
+}

@@ -1,8 +1,13 @@
+@import "src/styles/colors";
+@import "src/styles/animations";
+
 .Header {
+  color: #000000;
 
   .menu {
     margin-right: 12px;
     padding: 12px;
+    @extend .colorTransition;
   }
 
   .toolbar {
@@ -15,6 +20,7 @@
       display: flex;
       height: 1.6em;
       text-decoration: none;
+      @extend .colorTransition;
 
       > svg {
         height: 100%;
@@ -27,6 +33,7 @@
 
     .loginButton {
       margin-left: auto;
+      @extend .colorTransition;
     }
   }
 }

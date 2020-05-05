@@ -3,6 +3,12 @@ import React, { ReactElement } from "react";
 
 import AdminMenu from "./AdminMenu";
 
+jest.mock("components/AdminMenuLink", () => (props: any) => (
+  <div data-testid="components/AdminMenuLink">
+    <code>{JSON.stringify(props)}</code>
+  </div>
+));
+
 describe("<AdminMenu />", () => {
   let Component: ReactElement;
 
