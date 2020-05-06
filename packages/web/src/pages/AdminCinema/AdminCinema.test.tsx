@@ -3,8 +3,14 @@ import React, { ReactElement } from "react";
 
 import AdminCinema from "./AdminCinema";
 
-jest.mock("components/AddCinemaForm", () => (props: any) => (
-  <div data-testid="components/AddCinemaForm">
+jest.mock("containers/AddCinemaForm", () => (props: any) => (
+  <div data-testid="containers/AddCinemaForm">
+    <code>{JSON.stringify(props)}</code>
+  </div>
+));
+
+jest.mock("containers/AdminCinemaList", () => (props: any) => (
+  <div data-testid="containers/AdminCinemaList">
     <code>{JSON.stringify(props)}</code>
   </div>
 ));

@@ -20,7 +20,11 @@ describe("User saga", () => {
   it("should yield takeLatest and call 'logoutUserSaga'", () => {
     const saga = testSaga(watchLogoutUser);
 
-    saga.next().takeLatest(UserActionsTypes.LOGOUT_REQUEST, logoutUserSaga);
+    saga
+      .next()
+      .takeLatest(UserActionsTypes.LOGOUT_REQUEST, logoutUserSaga)
+      .next()
+      .isDone();
   });
 
   it("should yield '/auth/logout' request and put", () => {

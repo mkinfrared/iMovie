@@ -8,13 +8,15 @@ import TextField from "@material-ui/core/TextField";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { fetchCinemas } from "store/reducers/cinemas/actions";
+import { Country, Zipcode } from "store/reducers/cinemas/types";
 import SearchField from "ui/SearchField";
 import Transition from "ui/Transition/Transition";
 import api from "utils/api";
 import { addCinemaFormValidation } from "utils/validation";
 
 import css from "./AddCinemaForm.module.scss";
-import { AddCinemaFormProps, Country, Zipcode } from "./AddCinemaForm.type";
+import { AddCinemaFormProps } from "./AddCinemaForm.type";
 
 type FormData = {
   cinemaName: string;
@@ -22,7 +24,7 @@ type FormData = {
   zipcode: string;
 };
 
-const AddCinemaForm = ({ open, onClose }: AddCinemaFormProps) => {
+const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [countriesLoading, setCountriesLoading] = useState(false);
   const [zip, setZip] = useState<Zipcode | null>(null);
@@ -83,6 +85,8 @@ const AddCinemaForm = ({ open, onClose }: AddCinemaFormProps) => {
       };
 
       await api.post("/cinema", data);
+
+      dispatch(fetchCinemas());
 
       onClose();
     } catch (e) {}

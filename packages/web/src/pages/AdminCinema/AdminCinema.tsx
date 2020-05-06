@@ -1,7 +1,8 @@
 import Typography from "@material-ui/core/Typography";
 import React, { useCallback, useState } from "react";
 
-import AddCinemaForm from "components/AddCinemaForm";
+import AddCinemaForm from "containers/AddCinemaForm";
+import AdminCinemaList from "containers/AdminCinemaList";
 import FloatButton from "ui/FloatButton";
 
 import css from "./AdminCinema.module.scss";
@@ -23,6 +24,7 @@ const AdminCinema = () => {
         <Typography variant="h3" align="center">
           Cinemas
         </Typography>
+        <AdminCinemaList />
         <AddCinemaForm open={formOpen} onClose={closeForm} />
       </div>
       <FloatButton onClick={openForm} data-testid="floatButton">

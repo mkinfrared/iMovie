@@ -2,8 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 
 import { AppState } from "store/store.type";
 
-const selectUser = (state: AppState) => state.user;
-const selectUserId = createSelector(selectUser, ({ id }) => id);
-const selectUserRole = createSelector(selectUser, ({ role }) => role);
+const getUser = (state: AppState) => state.user;
+const selectUserId = createSelector(getUser, ({ id }) => id);
+const selectUserRole = createSelector(getUser, ({ role }) => role);
 
 export { selectUserId, selectUserRole };
