@@ -27,7 +27,16 @@ export class CinemaService {
   async getAll(offset = 1, limit = 20) {
     const [cinemas, total] = await this.cinemaRepository.findAndCount({
       take: limit,
-      skip: limit * (offset - 1)
+      skip: limit * (offset - 1),
+      join: {
+        alias: "cinema",
+        leftJoinAndSelect: {
+          zipcode: "cinema.zipcode",
+          city: "zipcode.city",
+          state: "zipcode.state",
+          country: "zipcode.country"
+        }
+      }
     });
 
     return new Pagination(cinemas, total, offset);

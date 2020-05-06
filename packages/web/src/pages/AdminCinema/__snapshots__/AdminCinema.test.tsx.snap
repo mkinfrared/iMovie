@@ -11,7 +11,14 @@ exports[`<AdminCinema /> should match a snapshot 1`] = `
       Cinemas
     </h3>
     <div
-      data-testid="components/AddCinemaForm"
+      data-testid="containers/AdminCinemaList"
+    >
+      <code>
+        {}
+      </code>
+    </div>
+    <div
+      data-testid="containers/AddCinemaForm"
     >
       <code>
         {"open":false}

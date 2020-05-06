@@ -1,10 +1,16 @@
 import { userStateMock } from "./mocks";
-import { selectUserId } from "../selectors";
+import { selectUserId, selectUserRole } from "../selectors";
 
 describe("selectors", () => {
-  it("should return user from store", () => {
-    const result = selectUserId({ user: userStateMock });
+  it("should return userId from store", () => {
+    const result = selectUserId({ user: userStateMock } as any);
 
     expect(result).toBe(userStateMock.id);
+  });
+
+  it("should return userId from store", () => {
+    const result = selectUserRole({ user: userStateMock } as any);
+
+    expect(result).toBe(userStateMock.role);
   });
 });

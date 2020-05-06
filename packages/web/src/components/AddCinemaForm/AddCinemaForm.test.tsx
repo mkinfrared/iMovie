@@ -17,11 +17,14 @@ describe("<AddCinemaForm />", () => {
   const apiMock = api as jest.Mocked<typeof api>;
   const open = true;
   const onClose = jest.fn();
+  const dispatch = jest.fn();
 
   let Component: ReactElement;
 
   beforeEach(() => {
-    Component = <AddCinemaForm onClose={onClose} open={open} />;
+    Component = (
+      <AddCinemaForm onClose={onClose} open={open} dispatch={dispatch} />
+    );
   });
 
   it("should be defined", async () => {
