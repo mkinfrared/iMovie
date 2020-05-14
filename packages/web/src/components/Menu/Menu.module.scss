@@ -4,13 +4,13 @@
 }
 
 .menuList {
-  background-color: $primary-main;
+  background-color: $secondary-main;
   color: $white;
 
   > li {
 
     &:hover {
-      color: $secondary-main;
+      color: $primary-main;
     }
   }
 }

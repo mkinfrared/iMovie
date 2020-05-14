@@ -10,23 +10,23 @@ body {
   a {
 
     &:hover {
-      color: $secondary-light;
+      color: $primary-light;
     }
   }
 
   &,
   * {
     box-sizing: border-box;
-    scrollbar-color: $primary-light rgba($secondary-light, 0.5);
+    scrollbar-color: $secondary-light rgba($primary-light, 0.5);
     scrollbar-width: thin; // width is ~8-10px
 
     &::-webkit-scrollbar {
-      background-color: rgba($primary-main, 0.3);
+      background-color: rgba($secondary-main, 0.3);
       width: 8px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: $secondary-main;
+      background-color: $primary-main;
     }
   }
 }

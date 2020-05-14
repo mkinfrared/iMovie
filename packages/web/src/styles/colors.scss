@@ -1,19 +1,42 @@
 // PRIMARY
-$primary-main: #212121;
-$primary-light: #616161;
-$primary-main-rgb: rgb(33, 33, 33);
-$primary-light-rgb: rgb(97, 97, 97);
+$secondary-main: #212121;
+$secondary-light: #616161;
+$secondary-main-rgb: rgb(33, 33, 33);
+$secondary-light-rgb: rgb(97, 97, 97);
+$secondary-text: #FFFFFF;
 
 // SECONDARY
-$secondary-main: #FF9800;
-$secondary-dark: #F57C00;
-$secondary-light: #FFB74D;
-$secondary-main-rgb: rgb(255, 152, 0);
-$secondary-light-rgb: rgb(255, 183, 77);
-$secondary-dark-rgb: rgb(245, 124, 0);
+$primary-main: #FF9800;
+$primary-dark: #F57C00;
+$primary-light: #FFB74D;
+$primary-main-rgb: rgb(255, 152, 0);
+$primary-light-rgb: rgb(255, 183, 77);
+$primary-dark-rgb: rgb(245, 124, 0);
+$primary-text: rgba(0, 0, 0, 0.87);
 
-// DANGER
-$danger-main: #F44336;
+// ERROR
+$error-main: #F44336;
+$error-dark: #D32F2F;
+$error-light: #E57373;
+$error-text: #FFFFFF;
+
+// WARNING
+$warning-main: #FF9800;
+$warning-dark: #F57C00;
+$warning-light: #FFB74D;
+$warning-text: rgba(0, 0, 0, 0.87);
+
+// INFO
+$info-main: #2196F3;
+$info-dark: #1976D2;
+$info-light: #64B5F6;
+$info-text: #FFFFFF;
+
+// SUCCESS
+$success-main: #4CAF50;
+$success-dark: #388E3C;
+$success-light: #81C784;
+$success-text: rgba(0, 0, 0, 0.87);
 
 // REST
 $white: #FFFFFF;

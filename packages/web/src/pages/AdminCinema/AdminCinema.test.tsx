@@ -35,8 +35,8 @@ describe("<AdminCinema />", () => {
   });
 
   it("should open <AddCinemaForm />", async () => {
-    const { container } = render(Component);
-    const floatButton = await findByText(container, "+");
+    const { container, getByTestId } = render(Component);
+    const floatButton = await getByTestId("floatButton");
 
     await act(async () => {
       await fireEvent.click(floatButton);

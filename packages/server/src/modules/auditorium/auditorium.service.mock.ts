@@ -8,7 +8,8 @@ const auditoriumMock = {
 
 const auditoriumDtoMock = {
   name: "Cartman",
-  cinemaId: cinemaMock.id
+  cinemaId: cinemaMock.id,
+  A: 12
 };
 
 const auditoriumServiceMock = {

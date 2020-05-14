@@ -69,20 +69,24 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
       <div
         class="MuiCardActions-root MuiCardActions-spacing"
       >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
-          tabindex="0"
-          type="button"
+        <a
+          href="/admin/cinema/42"
         >
-          <span
-            class="MuiButton-label"
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+            tabindex="0"
+            type="button"
           >
-            More
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
-        </button>
+            <span
+              class="MuiButton-label"
+            >
+              More
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </a>
       </div>
     </div>
   </div>

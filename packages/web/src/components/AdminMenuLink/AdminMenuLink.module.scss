@@ -7,12 +7,12 @@
   @extend .colorTransition;
 
   &:hover {
-    color: $secondary-main;
+    color: $primary-main;
   }
 
   &.active,
   &.active:hover {
-    background-color: $secondary-main;
+    background-color: $primary-main;
     color: $white;
   }
 

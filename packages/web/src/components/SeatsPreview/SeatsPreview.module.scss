@@ -1,0 +1,37 @@
+@import "src/styles/colors";
+
+.Seats {
+  overflow: auto;
+
+  .screen {
+    height: 60px;
+    margin-bottom: 20px;
+
+    path {
+      fill: $primary-main;
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+
+    > p {
+      margin-right: 10px;
+    }
+
+    > div {
+      display: inline-flex;
+      flex-grow: 1;
+      justify-content: center;
+
+      > button {
+        flex-basis: 25px;
+        height: 25px;
+        margin: 0 5px;
+        width: 25px;
+      }
+    }
+  }
+}

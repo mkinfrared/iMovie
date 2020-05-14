@@ -4,11 +4,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { AdminRoutes } from "routes/Routes.type";
 
 import css from "./CinemaCard.module.scss";
 import { CinemaCardProps } from "./CinemaCard.type";
 
 const CinemaCard = ({
+  cinemaId,
   cinemaName,
   cityName,
   countryName,
@@ -56,9 +60,11 @@ const CinemaCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
-          More
-        </Button>
+        <Link to={`${AdminRoutes.ADMIN_CINEMA}/${cinemaId}`}>
+          <Button size="small" color="primary">
+            More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

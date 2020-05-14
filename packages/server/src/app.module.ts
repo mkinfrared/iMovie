@@ -16,6 +16,7 @@ import { AuditoriumModule } from "./modules/auditorium/auditorium.module";
 import { CinemaModule } from "./modules/cinema/cinema.module";
 import { CityModule } from "./modules/city/city.module";
 import { CountryModule } from "./modules/country/country.module";
+import { SeatModule } from "./modules/seat/seat.module";
 import { StateModule } from "./modules/state/state.module";
 import { ZipcodeModule } from "./modules/zipcode/zipcode.module";
 import { MailerModule } from "./utils/mailer/mailer.module";
@@ -35,7 +36,8 @@ import { MailerModule } from "./utils/mailer/mailer.module";
     CityModule,
     ZipcodeModule,
     CinemaModule,
-    AuditoriumModule
+    AuditoriumModule,
+    SeatModule
   ],
   controllers: [AppController],
   providers: [AppService]
