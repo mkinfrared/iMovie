@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminAuditoriums /> should match a snapshot 1`] = `
+<div>
+  <div
+    class="AdminAuditoriums"
+  >
+    <h3
+      class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter"
+    >
+      Cinemas Auditoriums
+    </h3>
+    <div>
+      AdminAuditoriumsList
+    </div>
+  </div>
+  <div
+    class="FloatButton"
+  >
+    <button
+      class="MuiButtonBase-root MuiFab-root button MuiFab-primary"
+      data-testid="floatButton"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiFab-label"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+          />
+        </svg>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;

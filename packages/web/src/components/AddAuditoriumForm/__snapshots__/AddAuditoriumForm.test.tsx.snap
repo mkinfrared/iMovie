@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddAuditoriumForm /> should match a snapshot 1`] = `
+<div>
+  <div
+    class="AddAuditoriumForm"
+  >
+    <h5
+      class="MuiTypography-root MuiTypography-h5"
+    >
+      Add Auditorium
+    </h5>
+    <div
+      class="container"
+    >
+      <form
+        class="form"
+        data-testid="form"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root input MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+            data-shrink="false"
+          >
+            Auditorium Name
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiOutlinedInput-input"
+              data-testid="auditoriumName"
+              name="auditoriumName"
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden="true"
+              class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="PrivateNotchedOutline-legendLabelled-257"
+              >
+                <span>
+                  Auditorium Name
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div>
+          <div
+            class="inputField"
+          >
+            <div>
+              <div
+                class="MuiFormControl-root select MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+                  data-shrink="false"
+                  id="select"
+                >
+                  Row A
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+                >
+                  <div
+                    aria-haspopup="listbox"
+                    aria-labelledby="select"
+                    class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <span>
+                      ​
+                    </span>
+                  </div>
+                  <input
+                    type="hidden"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-257"
+                    >
+                      <span>
+                        Row A
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root addRemoveButton MuiIconButton-colorPrimary"
+              data-testid="addRowButton"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiIconButton-root addRemoveButton MuiIconButton-colorPrimary"
+              data-testid="removeRowButton"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Cancel
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+          data-testid="submitButton"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Add
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </form>
+      <div
+        class="preview"
+      >
+        <div
+          class="Seats"
+        >
+          <svg
+            class="screen"
+            style="width: 0px;"
+            viewBox="0 0 830 69.59"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.5.5h829V69Q415,.5.5,69Z"
+              stroke-miterlimit="10"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

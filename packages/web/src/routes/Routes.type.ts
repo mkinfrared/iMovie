@@ -8,5 +8,7 @@ export interface RoutesProps {
 export enum MainRoutes {}
 
 export enum AdminRoutes {
-  ADMIN_CINEMA = "/admin/cinema"
+  ADMIN_CINEMA = "/admin/cinema",
+  ADMIN_ADD_AUDITORIUM = "/admin/auditoriums/add",
+  NOT_FOUND = "/404"
 }

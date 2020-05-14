@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import React, { ReactElement } from "react";
+import { MemoryRouter } from "react-router-dom";
 
 import AdminCinemaList from "./AdminCinemaList";
 
@@ -32,7 +33,11 @@ describe("<AdminCinemaList />", () => {
   let Component: ReactElement;
 
   beforeEach(() => {
-    Component = <AdminCinemaList dispatch={dispatch} cinemas={[cinema]} />;
+    Component = (
+      <MemoryRouter>
+        <AdminCinemaList dispatch={dispatch} cinemas={[cinema]} />
+      </MemoryRouter>
+    );
   });
 
   it("should be defined", () => {

@@ -7,7 +7,12 @@ import { FloatButtonProps } from "./FloatButton.type";
 const FloatButton = ({ onClick, children }: FloatButtonProps) => {
   return (
     <div className={css.FloatButton}>
-      <Fab className={css.button} color="primary" onClick={onClick}>
+      <Fab
+        className={css.button}
+        color="primary"
+        onClick={onClick}
+        data-testid="floatButton"
+      >
         {children}
       </Fab>
     </div>

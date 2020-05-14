@@ -1,3 +1,4 @@
+import mapValues from "lodash/mapValues";
 import * as yup from "yup";
 
 const passwordRegex = {
@@ -40,4 +41,21 @@ const loginValidation = yup.object().shape({
   password: yup.string().required()
 });
 
-export { loginValidation, passwordValidation, registerValidation };
+const addAuditoriumValidation = yup.lazy((obj: object) =>
+  yup.object(
+    mapValues(obj, (_: any, key: string) => {
+      if (key.includes("auditoriumName")) {
+        return yup.string().required();
+      }
+
+      return yup.number().required();
+    })
+  )
+);
+
+export {
+  loginValidation,
+  passwordValidation,
+  registerValidation,
+  addAuditoriumValidation
+};

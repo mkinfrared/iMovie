@@ -17,6 +17,7 @@ const AdminCinemaList = ({ dispatch, cinemas }: AdminCinemaListProps) => {
         <CinemaCard
           key={id}
           zipcode={zipcode.code}
+          cinemaId={id}
           cinemaName={name}
           cityName={zipcode.city.name}
           countryName={zipcode.country.name}

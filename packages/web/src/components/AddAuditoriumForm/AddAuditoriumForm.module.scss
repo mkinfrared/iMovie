@@ -1,0 +1,41 @@
+@import "src/styles/common";
+@import "src/styles/colors";
+
+.AddAuditoriumForm {
+
+  .container {
+    display: flex;
+
+    form,
+    .preview {
+      padding: 20px;
+      width: 50%;
+    }
+
+    .inputField {
+      @extend .input;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      &:not(:last-child) {
+
+        .addRemoveButton {
+          visibility: hidden;
+        }
+      }
+
+      > div {
+        width: 75%;
+      }
+
+      .addRemoveButton {
+        height: 55px;
+        width: 55px;
+      }
+
+      .select {
+      }
+    }
+  }
+}

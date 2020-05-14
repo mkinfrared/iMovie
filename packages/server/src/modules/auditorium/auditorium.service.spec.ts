@@ -2,6 +2,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 
 import { repositoryMock } from "config/db/database.service.mock";
+import { SeatService } from "modules/seat/seat.service";
+import { seatServiceMock } from "modules/seat/seat.service.mock";
 
 import { Auditorium } from "./auditorium.entity";
 import { AuditoriumService } from "./auditorium.service";
@@ -9,6 +11,7 @@ import { auditoriumDtoMock, auditoriumMock } from "./auditorium.service.mock";
 
 describe("AuditoriumService", () => {
   const mockAuditoriumRepository = jest.fn(() => ({ ...repositoryMock }));
+  const mockSeatService = jest.fn(() => ({ ...seatServiceMock }));
 
   let service: AuditoriumService;
 
@@ -19,6 +22,10 @@ describe("AuditoriumService", () => {
         {
           provide: getRepositoryToken(Auditorium),
           useClass: mockAuditoriumRepository
+        },
+        {
+          provide: SeatService,
+          useClass: mockSeatService
         }
       ]
     }).compile();

@@ -1,4 +1,5 @@
 import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
 import React, { useCallback, useState } from "react";
 
 import AddCinemaForm from "containers/AddCinemaForm";
@@ -27,8 +28,8 @@ const AdminCinema = () => {
         <AdminCinemaList />
         <AddCinemaForm open={formOpen} onClose={closeForm} />
       </div>
-      <FloatButton onClick={openForm} data-testid="floatButton">
-        +
+      <FloatButton onClick={openForm}>
+        <AddIcon />
       </FloatButton>
     </>
   );

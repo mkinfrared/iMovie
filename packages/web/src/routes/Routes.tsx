@@ -6,6 +6,11 @@ import { loadablePage } from "utils/loadable";
 import { AdminRoutes, RoutesProps } from "./Routes.type";
 
 const AdminCinema = loadablePage(() => import("pages/AdminCinema"));
+const AdminAuditoriums = loadablePage(() => import("pages/AdminAuditoriums"));
+
+const AdminAddAuditorium = loadablePage(() =>
+  import("pages/AdminAddAuditorium")
+);
 
 const Routes = ({ history, isAdmin }: RoutesProps) => {
   useEffect(() => {
@@ -18,8 +23,21 @@ const Routes = ({ history, isAdmin }: RoutesProps) => {
     if (isAdmin) {
       return (
         <>
-          <Route path={AdminRoutes.ADMIN_CINEMA} component={AdminCinema} />
-          <Redirect to="/404" push />
+          <Route
+            exact
+            path={AdminRoutes.ADMIN_CINEMA}
+            component={AdminCinema}
+          />
+          <Route
+            exact
+            path={`${AdminRoutes.ADMIN_CINEMA}/:cinemaId`}
+            component={AdminAuditoriums}
+          />
+          <Route
+            path={`${AdminRoutes.ADMIN_CINEMA}/:cinemaId/add`}
+            component={AdminAddAuditorium}
+          />
+          <Redirect to={AdminRoutes.NOT_FOUND} push />
         </>
       );
     }
