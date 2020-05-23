@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { Cinemas } from "./types";
+import { Cinema, Cinemas } from "./types";
 
 const initialState: Cinemas = {
   data: [],
@@ -12,15 +12,30 @@ const cinemasSlice = createSlice({
   initialState,
   reducers: {
     fetchCinemasSuccess: (state, action: PayloadAction<Cinemas>) => {
-      state = action.payload;
+      const { data, page, total } = action.payload;
 
-      return state;
+      state.data = data;
+
+      state.page = page;
+
+      state.total = total;
+    },
+    fetchCinemaAuditoriumsSuccess: (state, action: PayloadAction<Cinema>) => {
+      const { auditoriums } = action.payload;
+      const cinema = state.data.find(({ id }) => id === action.payload.id);
+
+      if (cinema) {
+        cinema.auditoriums = auditoriums;
+      }
     }
   }
 });
 
-const { fetchCinemasSuccess } = cinemasSlice.actions;
+const {
+  fetchCinemasSuccess,
+  fetchCinemaAuditoriumsSuccess
+} = cinemasSlice.actions;
 
-export { initialState, fetchCinemasSuccess };
+export { initialState, fetchCinemasSuccess, fetchCinemaAuditoriumsSuccess };
 
 export default cinemasSlice.reducer;

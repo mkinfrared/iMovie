@@ -4,12 +4,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn
 } from "typeorm";
 
 import { Cinema } from "modules/cinema/cinema.entity";
+import { Seat } from "modules/seat/seat.entity";
 
 @Entity()
 @Unique(["name", "cinemaId"])
@@ -22,6 +24,9 @@ export class Auditorium {
 
   @Column()
   cinemaId: number;
+
+  @OneToMany(() => Seat, (seat) => seat.auditorium, { eager: true })
+  seats: Seat[];
 
   @ManyToOne(() => Cinema, (cinema) => cinema.id)
   @JoinColumn({ name: "cinemaId" })

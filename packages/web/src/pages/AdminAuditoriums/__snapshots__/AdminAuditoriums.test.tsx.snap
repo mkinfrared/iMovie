@@ -8,10 +8,14 @@ exports[`<AdminAuditoriums /> should match a snapshot 1`] = `
     <h3
       class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter"
     >
-      Cinemas Auditoriums
+       Auditoriums
     </h3>
-    <div>
-      AdminAuditoriumsList
+    <div
+      data-testid="containers/AdminAuditoriumsList"
+    >
+      <code>
+        {"cinemaId":null}
+      </code>
     </div>
   </div>
   <div

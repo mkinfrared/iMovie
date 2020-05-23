@@ -7,6 +7,7 @@ export interface Cinemas {
 export interface Cinema {
   id: number;
   name: string;
+  auditoriums?: Auditorium[];
   createdAt: string;
   updatedAt: string;
   zipcode: Zipcode;
@@ -60,7 +61,24 @@ export interface Zipcode {
   updatedAt: string;
 }
 
+export interface Auditorium {
+  id: number;
+  name: string;
+  cinemaId: number;
+  seats: Seat[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Seat {
+  id: number;
+  number: number;
+  row: string;
+  auditoriumId: number;
+}
+
 export enum CinemaActionTypes {
   FETCH_CINEMAS_REQUEST = "@@cinema/FETCH_CINEMAS_REQUEST",
-  FETCH_CINEMAS_FAIL = "@@cinema/FETCH_CINEMAS_FAIL"
+  FETCH_CINEMAS_FAIL = "@@cinema/FETCH_CINEMAS_FAIL",
+  FETCH_CINEMA_AUDITORIUMS_REQUEST = "@@cinema/FETCH_CINEMA_AUDITORIUMS_REQUEST"
 }

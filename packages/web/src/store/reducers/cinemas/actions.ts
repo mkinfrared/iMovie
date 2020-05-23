@@ -4,4 +4,7 @@ import { CinemaActionTypes } from "store/reducers/cinemas/types";
 
 const fetchCinemas = () => action(CinemaActionTypes.FETCH_CINEMAS_REQUEST);
 
-export { fetchCinemas };
+const fetchCinemaAuditoriums = (cinemaId: number) =>
+  action(CinemaActionTypes.FETCH_CINEMA_AUDITORIUMS_REQUEST, cinemaId);
+
+export { fetchCinemas, fetchCinemaAuditoriums };

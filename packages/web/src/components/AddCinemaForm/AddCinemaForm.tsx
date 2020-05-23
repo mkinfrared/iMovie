@@ -111,8 +111,10 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
   );
 
   useEffect(() => {
-    fetchCountries();
-  }, []);
+    if (open) {
+      fetchCountries();
+    }
+  }, [open]);
 
   useEffect(() => {
     register({ name: "country" });

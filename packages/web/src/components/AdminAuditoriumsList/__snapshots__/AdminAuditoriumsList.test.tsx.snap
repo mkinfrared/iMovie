@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminAuditoriumsList /> should match a snapshot 1`] = `
+<div>
+  <div
+    class="AdminAuditoriumsList"
+  >
+    <div
+      class="MuiPaper-root MuiCard-root AuditoriumCard MuiPaper-outlined MuiPaper-rounded"
+    >
+      <div
+        class="MuiCardContent-root"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h5 MuiTypography-colorPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"
+        >
+          Mercury
+        </h2>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+        >
+          Details
+        </p>
+        <p
+          class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+        >
+          Seats:
+           
+          <span
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+          >
+            1
+          </span>
+        </p>
+      </div>
+      <div
+        class="MuiCardActions-root MuiCardActions-spacing"
+      >
+        <a
+          href="/admin/cinema/42/1/edit"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              More
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

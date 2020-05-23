@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn
 } from "typeorm";
 
+import { Auditorium } from "modules/auditorium/auditorium.entity";
 import { Zipcode } from "modules/zipcode/zipcode.entity";
 
 @Entity()
@@ -19,6 +21,9 @@ export class Cinema {
 
   @Column()
   name: string;
+
+  @OneToMany(() => Auditorium, (auditorium) => auditorium.cinema)
+  auditoriums: Auditorium[];
 
   @Column()
   zipcodeId: number;
