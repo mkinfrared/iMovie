@@ -48,9 +48,37 @@ const cinemaMock: Cinema = {
   }
 };
 
+const auditoriumsMock = [
+  {
+    id: 1,
+    name: "Mercury",
+    cinemaId: 1,
+    createdAt: "2020-05-17T08:16:44.603Z",
+    updatedAt: "2020-05-17T08:16:44.603Z",
+    seats: [
+      {
+        id: 1,
+        row: "A",
+        number: 1,
+        auditoriumId: 1
+      }
+    ]
+  }
+];
+
+const fetchCinemaAuditoriumsPayloadMock = {
+  ...cinemaMock,
+  auditoriums: auditoriumsMock
+};
+
 const cinemaStateMock = {
   data: [cinemaMock],
   page: 42
 };
 
-export { cinemaMock, cinemaStateMock };
+export {
+  cinemaMock,
+  cinemaStateMock,
+  auditoriumsMock,
+  fetchCinemaAuditoriumsPayloadMock
+};

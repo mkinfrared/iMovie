@@ -1,10 +1,11 @@
 import { put } from "redux-saga-test-plan/matchers";
 import { all, fork, takeEvery } from "redux-saga/effects";
 
-import { CinemaActionTypes, Cinemas } from "store/reducers/cinemas/types";
+import { fetchCinemaAuditoriums } from "store/reducers/cinemas/actions";
 import api from "utils/api";
 
-import { fetchCinemasSuccess } from "./reducer";
+import { fetchCinemaAuditoriumsSuccess, fetchCinemasSuccess } from "./reducer";
+import { Cinema, CinemaActionTypes, Cinemas } from "./types";
 
 function* fetchCinemasSaga() {
   try {
@@ -25,10 +26,35 @@ function* watchCinemasRequest() {
   yield takeEvery(CinemaActionTypes.FETCH_CINEMAS_REQUEST, fetchCinemasSaga);
 }
 
-function* cinemaSaga() {
-  yield all([fork(watchCinemasRequest)]);
+function* fetchCinemaAuditoriumsSaga(
+  action: ReturnType<typeof fetchCinemaAuditoriums>
+) {
+  const { payload } = action;
+
+  try {
+    const { data } = yield api.get(`/cinema/${payload}`);
+    const cinema: Cinema = data;
+
+    yield put(fetchCinemaAuditoriumsSuccess(cinema));
+  } catch (e) {}
 }
 
-export { watchCinemasRequest, fetchCinemasSaga };
+function* watchFetchCinemaAuditoriums() {
+  yield takeEvery(
+    CinemaActionTypes.FETCH_CINEMA_AUDITORIUMS_REQUEST,
+    fetchCinemaAuditoriumsSaga
+  );
+}
+
+function* cinemaSaga() {
+  yield all([fork(watchCinemasRequest), fork(watchFetchCinemaAuditoriums)]);
+}
+
+export {
+  watchCinemasRequest,
+  fetchCinemasSaga,
+  watchFetchCinemaAuditoriums,
+  fetchCinemaAuditoriumsSaga
+};
 
 export default cinemaSaga;
