@@ -43,17 +43,19 @@ const SignUp = ({ onClose, open, openLogin }: SignUpProps) => {
 
       setRegisterSuccess(true);
     } catch (e) {
-      const responseErrors = Object.entries(e.response.data).map((entry) => {
-        const [key, value] = entry as [keyof FormData, string[]];
+      if (e.status === 400) {
+        const responseErrors = Object.entries(e.response.data).map((entry) => {
+          const [key, value] = entry as [keyof FormData, string[]];
 
-        return {
-          type: "required",
-          name: key,
-          message: value[0]
-        };
-      });
+          return {
+            type: "required",
+            name: key,
+            message: value[0]
+          };
+        });
 
-      setError(responseErrors);
+        setError(responseErrors);
+      }
     }
   });
 

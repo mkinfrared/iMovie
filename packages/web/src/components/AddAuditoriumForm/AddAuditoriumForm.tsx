@@ -13,15 +13,16 @@ import Seats from "components/SeatsPreview";
 import Select from "ui/Select";
 import { Option } from "ui/Select/Select.type";
 import api from "utils/api";
+import getFormErrors from "utils/getFormErrors";
 
 import css from "./AddAuditoriumForm.module.scss";
 import { AddAuditoriumFormProps } from "./AddAuditoriumForm.type";
 
 type FormData = Record<string, number> & {
-  auditoriumName: string;
+  name: string;
 };
 
-const AddAuditoriumForm = ({ cinemaId }: AddAuditoriumFormProps) => {
+const AddAuditoriumForm = ({ cinemaId, onCancel }: AddAuditoriumFormProps) => {
   const [rowsAmount, setRowsAmount] = useState(1);
 
   const {
@@ -31,6 +32,7 @@ const AddAuditoriumForm = ({ cinemaId }: AddAuditoriumFormProps) => {
     errors,
     getValues,
     triggerValidation,
+    setError,
     formState
   } = useForm<FormData>({
     validationSchema: addAuditoriumValidation,
@@ -47,12 +49,18 @@ const AddAuditoriumForm = ({ cinemaId }: AddAuditoriumFormProps) => {
     return result;
   }, []);
 
-  const onSubmit = handleSubmit(async ({ auditoriumName, ...rows }) => {
-    const data = { name: auditoriumName, cinemaId, ...rows };
+  const onSubmit = handleSubmit(async ({ name, ...rows }) => {
+    const data = { name, cinemaId, ...rows };
 
     try {
       await api.post("/auditorium", data);
-    } catch (e) {}
+    } catch (e) {
+      if (e.response?.status === 409) {
+        const responseErrors = getFormErrors(e.response?.data);
+
+        setError(responseErrors);
+      }
+    }
   });
 
   const handleSelectChange = ([event]: any[]) => {
@@ -143,7 +151,7 @@ const AddAuditoriumForm = ({ cinemaId }: AddAuditoriumFormProps) => {
     return selects;
   };
 
-  const rows = omit(getValues(), "auditoriumName");
+  const rows = omit(getValues(), "name");
 
   return (
     <div className={css.AddAuditoriumForm}>
@@ -152,17 +160,17 @@ const AddAuditoriumForm = ({ cinemaId }: AddAuditoriumFormProps) => {
         <form onSubmit={onSubmit} className={css.form} data-testid="form">
           <TextField
             fullWidth
-            name="auditoriumName"
+            name="name"
             className={css.input}
             label="Auditorium Name"
             variant="outlined"
-            helperText={errors.auditoriumName?.message || null}
-            error={!!errors.auditoriumName}
+            helperText={errors.name?.message || null}
+            error={!!errors.name}
             inputRef={register}
             inputProps={{ "data-testid": "auditoriumName" }}
           />
           <div>{renderSelects()}</div>
-          <Button>Cancel</Button>
+          <Button onClick={onCancel}>Cancel</Button>
           <Button
             data-testid="submitButton"
             onClick={onSubmit}

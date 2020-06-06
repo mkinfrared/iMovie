@@ -13,14 +13,15 @@ import usePasswordToggle from "hooks/usePasswordToggle";
 import { loginUser } from "store/reducers/user/reducer";
 import Transition from "ui/Transition";
 import api from "utils/api";
+import getFormErrors from "utils/getFormErrors";
 
 import css from "./Login.module.scss";
 import { LoginProps } from "./Login.type";
 
-interface FormData {
+type FormData = Record<string, string> & {
   username: string;
   password: string;
-}
+};
 
 const Login = ({ onClose, open, openSingUp, dispatch }: LoginProps) => {
   const { passwordVisible, renderAdornment } = usePasswordToggle();
@@ -41,17 +42,11 @@ const Login = ({ onClose, open, openSingUp, dispatch }: LoginProps) => {
 
       dispatch(loginUser(user));
     } catch (e) {
-      const responseErrors = Object.entries(e.response.data).map((entry) => {
-        const [key, value] = entry as [keyof FormData, string[]];
+      if (e.status) {
+        const responseErrors = getFormErrors(e.response?.data);
 
-        return {
-          type: "required",
-          name: key,
-          message: value[0]
-        };
-      });
-
-      setError(responseErrors);
+        setError(responseErrors);
+      }
     }
   });
 
@@ -67,6 +62,7 @@ const Login = ({ onClose, open, openSingUp, dispatch }: LoginProps) => {
         <form onSubmit={onSubmit} className={css.form} data-testid="form">
           <TextField
             name="username"
+            autoComplete="new-user"
             className={css.input}
             label="Username"
             variant="outlined"

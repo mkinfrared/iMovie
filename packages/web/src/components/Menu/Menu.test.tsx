@@ -49,7 +49,6 @@ describe("<Menu />", () => {
 
     fireEvent.click(logoutButton);
 
-    // expect(username).not.toBeInTheDocument();
     expect(dispatch).toHaveBeenCalled();
   });
 });

@@ -14,12 +14,17 @@ export class DatabaseException implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
 
     if (exception.code === "23505") {
-      const regex = /(?<=\()[a-z]+(?=\))/;
-      const column = exception.detail.match(regex);
+      const regex = /(?<=\().+(?=\)=)/;
+      const [columns] = exception.detail.match(regex) as string[];
+      const result: Record<string, string[]> = {};
 
-      response
-        .status(HttpStatus.CONFLICT)
-        .json({ [column]: [`${column} is already taken`] });
+      columns.split(", ").forEach((column) => {
+        const [name] = column.match(/[a-z]+/) as string[];
+
+        result[name] = [`${name} is already taken`];
+      });
+
+      response.status(HttpStatus.CONFLICT).json(result);
 
       return;
     }

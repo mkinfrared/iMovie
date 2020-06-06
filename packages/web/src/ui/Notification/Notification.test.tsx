@@ -1,20 +1,25 @@
 import { render } from "@testing-library/react";
 import React, { ReactElement } from "react";
 
-import AdminAddAuditorium from "./AdminAddAuditorium";
+import Notification from "./Notification";
 
-jest.mock("react-router-dom", () => ({
-  useParams: jest.fn(() => "42"),
-  useHistory: jest.fn(() => ({
-    goBack: jest.fn()
-  }))
-}));
+describe("<Notification />", () => {
+  const onClose = jest.fn();
+  const open = true;
+  const className = "foobar";
+  const message = "they took'er jobs!!";
 
-describe("<AdminAddAuditorium />", () => {
   let Component: ReactElement;
 
   beforeEach(() => {
-    Component = <AdminAddAuditorium />;
+    Component = (
+      <Notification
+        onClose={onClose}
+        open={open}
+        className={className}
+        message={message}
+      />
+    );
   });
 
   it("should be defined", () => {

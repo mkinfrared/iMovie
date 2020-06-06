@@ -71,7 +71,7 @@ describe("<Login />", () => {
   });
 
   it("should set errors on form fields", async () => {
-    const data = { username: ["foobar"] };
+    const data = { username: ["they took'er jobs!!"] };
 
     const fieldValues = {
       username: "marklar",
@@ -79,10 +79,11 @@ describe("<Login />", () => {
     };
 
     apiMock.post.mockRejectedValueOnce({
-      response: { data }
+      response: { data },
+      status: 400
     });
 
-    const { getByTestId, findByText } = render(Component);
+    const { getByTestId, findByText, queryByText } = render(Component);
     const username = getByTestId("username") as HTMLInputElement;
     const password = getByTestId("password") as HTMLInputElement;
     const loginButton = getByTestId("loginButton");
@@ -114,5 +115,51 @@ describe("<Login />", () => {
     const result = await findByText(data.username[0]);
 
     expect(result).toBeInTheDocument();
+
+    expect(queryByText(data.username[0])).toBeInTheDocument();
+  });
+
+  it("should not set errors on form fields when status is not 400", async () => {
+    const data = { username: ["they took'er jobs!!"] };
+
+    const fieldValues = {
+      username: "marklar",
+      password: "foobar"
+    };
+
+    apiMock.post.mockRejectedValueOnce({
+      response: { data }
+    });
+
+    const { getByTestId, queryByText } = render(Component);
+    const username = getByTestId("username") as HTMLInputElement;
+    const password = getByTestId("password") as HTMLInputElement;
+    const loginButton = getByTestId("loginButton");
+
+    await act(async () => {
+      await fireEvent.input(username, {
+        target: { value: fieldValues.username }
+      });
+
+      await fireEvent.input(password, {
+        target: { value: fieldValues.password }
+      });
+    });
+
+    expect(username.value).toBe(fieldValues.username);
+
+    expect(password.value).toBe(fieldValues.password);
+
+    await act(async () => {
+      await fireEvent.click(loginButton);
+    });
+
+    expect(apiMock.post).toHaveBeenCalled();
+
+    expect(onClose).not.toHaveBeenCalled();
+
+    expect(dispatch).not.toHaveBeenCalled();
+
+    expect(queryByText(data.username[0])).not.toBeInTheDocument();
   });
 });
