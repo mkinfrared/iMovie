@@ -102,10 +102,11 @@ describe("<SignUp />", () => {
     };
 
     apiMock.post.mockRejectedValueOnce({
-      response: { data }
+      response: { data },
+      status: 400
     });
 
-    const { getByTestId, findByText } = render(Component);
+    const { getByTestId, queryByText } = render(Component);
     const username = getByTestId("username") as HTMLInputElement;
     const password = getByTestId("password") as HTMLInputElement;
     const email = getByTestId("email") as HTMLInputElement;
@@ -142,8 +143,59 @@ describe("<SignUp />", () => {
 
     expect(apiMock.post).toHaveBeenCalled();
 
-    const result = await findByText(data.username[0]);
+    expect(queryByText(data.username[0])).toBeInTheDocument();
+  });
 
-    expect(result).toBeInTheDocument();
+  it("should not set errors on form fields when status is undefined", async () => {
+    const data = { username: ["foobar"] };
+
+    const fieldValues = {
+      username: "marklar",
+      password: "Foobar2@",
+      email: "foo@bar.com"
+    };
+
+    apiMock.post.mockRejectedValueOnce({
+      response: { data }
+    });
+
+    const { getByTestId, queryByText } = render(Component);
+    const username = getByTestId("username") as HTMLInputElement;
+    const password = getByTestId("password") as HTMLInputElement;
+    const email = getByTestId("email") as HTMLInputElement;
+    const confirm = getByTestId("confirm") as HTMLInputElement;
+    const registerButton = getByTestId("registerButton");
+
+    await act(async () => {
+      await fireEvent.input(username, {
+        target: { value: fieldValues.username }
+      });
+
+      await fireEvent.input(password, {
+        target: { value: fieldValues.password }
+      });
+
+      await fireEvent.input(email, { target: { value: fieldValues.email } });
+
+      await fireEvent.input(confirm, {
+        target: { value: fieldValues.password }
+      });
+    });
+
+    expect(username.value).toBe(fieldValues.username);
+
+    expect(password.value).toBe(fieldValues.password);
+
+    expect(email.value).toBe(fieldValues.email);
+
+    expect(confirm.value).toBe(fieldValues.password);
+
+    await act(async () => {
+      await fireEvent.click(registerButton);
+    });
+
+    expect(apiMock.post).toHaveBeenCalled();
+
+    expect(queryByText(data.username[0])).not.toBeInTheDocument();
   });
 });

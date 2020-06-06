@@ -33,7 +33,7 @@ exports[`<AddAuditoriumForm /> should match a snapshot 1`] = `
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input"
               data-testid="auditoriumName"
-              name="auditoriumName"
+              name="name"
               type="text"
               value=""
             />

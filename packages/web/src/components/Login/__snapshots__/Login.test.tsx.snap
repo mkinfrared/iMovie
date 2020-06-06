@@ -61,6 +61,7 @@ exports[`<Login /> should match a snapshot 1`] = `
               >
                 <input
                   aria-invalid="false"
+                  autocomplete="new-user"
                   class="MuiInputBase-input MuiOutlinedInput-input"
                   data-testid="username"
                   name="username"

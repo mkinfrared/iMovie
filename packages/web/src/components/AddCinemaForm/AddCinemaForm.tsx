@@ -13,6 +13,7 @@ import { Country, Zipcode } from "store/reducers/cinemas/types";
 import SearchField from "ui/SearchField";
 import Transition from "ui/Transition/Transition";
 import api from "utils/api";
+import getFormErrors from "utils/getFormErrors";
 import { addCinemaFormValidation } from "utils/validation";
 
 import css from "./AddCinemaForm.module.scss";
@@ -36,7 +37,9 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
     errors,
     triggerValidation,
     handleSubmit,
-    formState
+    formState,
+    setError,
+    watch
   } = useForm<FormData>({
     validationSchema: addCinemaFormValidation,
     mode: "onBlur"
@@ -89,7 +92,13 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
       dispatch(fetchCinemas());
 
       onClose();
-    } catch (e) {}
+    } catch (e) {
+      if (e.response?.status === 409) {
+        const responseErrors = getFormErrors(e.response?.data);
+
+        setError(responseErrors);
+      }
+    }
   });
 
   const handleCountryChange = useCallback(
@@ -134,7 +143,12 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
     >
       <DialogTitle>Add Cinema</DialogTitle>
       <DialogContent>
-        <form onSubmit={onSubmit} className={css.form} data-testid="form">
+        <form
+          onSubmit={onSubmit}
+          className={css.form}
+          data-testid="form"
+          noValidate
+        >
           <SearchField
             options={countries}
             onChange={handleCountryChange}
@@ -150,6 +164,7 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
           />
           <TextField
             fullWidth
+            autoComplete="new-zipcode"
             disabled={zipcodeDisabled}
             name="zipcode"
             className={css.input}
@@ -159,11 +174,12 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
             helperText={errors.zipcode?.message || null}
             error={!!errors.zipcode}
             inputRef={register}
-            inputProps={{ "data-testid": "zipcode" }}
+            inputProps={{ "data-testid": "zipcodeInput" }}
           />
           <TextField
             fullWidth
             name="cinemaName"
+            autoComplete="new-cinema"
             className={css.input}
             label="Cinema Name"
             variant="outlined"
@@ -185,13 +201,13 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
           City: {zip?.city.name}
         </DialogContentText>
         <DialogContentText variant="body1">
-          Cinema: {getValues().cinemaName}
+          Cinema: {watch().cinemaName}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
         <Button
-          data-testid="loginButton"
+          data-testid="submitButton"
           onClick={onSubmit}
           color="primary"
           disabled={formState.isSubmitting}

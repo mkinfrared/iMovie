@@ -1,20 +1,13 @@
 import { render } from "@testing-library/react";
 import React, { ReactElement } from "react";
 
-import AdminAddAuditorium from "./AdminAddAuditorium";
+import AdminEditAuditorium from "./AdminEditAuditorium";
 
-jest.mock("react-router-dom", () => ({
-  useParams: jest.fn(() => "42"),
-  useHistory: jest.fn(() => ({
-    goBack: jest.fn()
-  }))
-}));
-
-describe("<AdminAddAuditorium />", () => {
+describe("<AdminEditAuditorium />", () => {
   let Component: ReactElement;
 
   beforeEach(() => {
-    Component = <AdminAddAuditorium />;
+    Component = <AdminEditAuditorium />;
   });
 
   it("should be defined", () => {

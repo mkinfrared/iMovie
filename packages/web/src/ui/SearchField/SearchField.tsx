@@ -31,6 +31,7 @@ const SearchField = <T,>({
         <TextField
           {...params}
           fullWidth
+          autoComplete="off"
           name={name}
           label={label}
           variant="outlined"

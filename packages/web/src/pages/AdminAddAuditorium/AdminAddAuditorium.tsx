@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import AddAuditoriumForm from "components/AddAuditoriumForm";
 
@@ -9,8 +9,11 @@ interface RouteParams {
 
 const AdminAddAuditorium = () => {
   const { cinemaId } = useParams<RouteParams>();
+  const { goBack } = useHistory();
 
-  return <AddAuditoriumForm cinemaId={parseInt(cinemaId, 0)} />;
+  return (
+    <AddAuditoriumForm cinemaId={parseInt(cinemaId, 0)} onCancel={goBack} />
+  );
 };
 
 export default React.memo(AdminAddAuditorium);

@@ -4,7 +4,7 @@ import React, { ReactElement } from "react";
 import AdminMenuLink from "./AdminMenuLink";
 
 jest.mock("react-router-dom", () => ({
-  useRouteMatch: jest.fn(),
+  useRouteMatch: jest.fn(() => true),
   Link: jest.fn(({ children }) => <div>{children}</div>)
 }));
 

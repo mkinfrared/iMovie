@@ -7,9 +7,11 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put
+  Put,
+  UseFilters
 } from "@nestjs/common";
 
+import { DatabaseException } from "exceptions/database.exception";
 import { AuditoriumService } from "modules/auditorium/auditorium.service";
 import {
   AuditoriumDto,
@@ -21,6 +23,7 @@ export class AuditoriumController {
   constructor(private readonly auditoriumService: AuditoriumService) {}
 
   @Post()
+  @UseFilters(DatabaseException)
   create(@Body() auditoriumDto: AuditoriumDto) {
     return this.auditoriumService.create(auditoriumDto);
   }
