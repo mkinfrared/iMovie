@@ -1,34 +1,21 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitForElement } from "@testing-library/react";
 import React, { ReactElement } from "react";
 import { MemoryRouter } from "react-router-dom";
 
+import { cinemaMock } from "store/reducers/cinemas/test/mocks";
+
 import AdminCinemaList from "./AdminCinemaList";
 
-jest.mock("containers/AddCinemaForm", () => (props: any) => (
-  <div data-testid="containers/AddCinemaForm">
+jest.mock("containers/EditCinemaForm", () => (props: any) => (
+  <div>
+    <code>containers/EditCinemaForm</code>
     <code>{JSON.stringify(props)}</code>
   </div>
 ));
 
 describe("<AdminCinemaList />", () => {
   const dispatch = jest.fn();
-
-  const cinema = {
-    id: 42,
-    name: "marklar",
-    zipcode: {
-      code: 92506,
-      city: {
-        name: "South Park"
-      },
-      state: {
-        name: "Colorado"
-      },
-      country: {
-        name: "USA"
-      }
-    }
-  } as any;
+  const cinema = cinemaMock;
 
   let Component: ReactElement;
 
@@ -50,5 +37,22 @@ describe("<AdminCinemaList />", () => {
     const { container } = render(Component);
 
     expect(container).toMatchSnapshot();
+  });
+
+  it("should open 'EditCinemaForm'", async () => {
+    const { queryByText, getByTestId } = render(Component);
+    const editButton = getByTestId("editButton");
+
+    let editCinemaForm = await queryByText("containers/EditCinemaForm");
+
+    expect(editCinemaForm).not.toBeInTheDocument();
+
+    fireEvent.click(editButton);
+
+    await waitForElement(() => "containers/EditCinemaForm");
+
+    editCinemaForm = await queryByText("containers/EditCinemaForm");
+
+    expect(editCinemaForm).toBeInTheDocument();
   });
 });
