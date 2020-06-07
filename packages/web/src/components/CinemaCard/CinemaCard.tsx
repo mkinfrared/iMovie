@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import { AdminRoutes } from "routes/Routes.type";
@@ -17,8 +17,13 @@ const CinemaCard = ({
   cityName,
   countryName,
   stateName,
-  zipcode
+  zipcode,
+  onEdit
 }: CinemaCardProps) => {
+  const handleEditClick = useCallback(() => {
+    onEdit(cinemaId);
+  }, [cinemaId, onEdit]);
+
   return (
     <Card className={css.CinemaCard} variant="outlined">
       <CardContent>
@@ -60,6 +65,9 @@ const CinemaCard = ({
         </Typography>
       </CardContent>
       <CardActions>
+        <Button onClick={handleEditClick} data-testid="editButton">
+          Edit
+        </Button>
         <Link to={`${AdminRoutes.ADMIN_CINEMA}/${cinemaId}`}>
           <Button size="small" color="primary">
             More

@@ -14,7 +14,7 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
         <h2
           class="MuiTypography-root MuiTypography-h5 MuiTypography-colorPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"
         >
-          marklar
+          Terrence
         </h2>
         <p
           class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
@@ -29,7 +29,7 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
           >
-            South Park
+            Riverside
           </span>
         </p>
         <p
@@ -40,7 +40,7 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
           >
-            Colorado
+            California
           </span>
         </p>
         <p
@@ -51,7 +51,7 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
           >
-            USA
+            United States of America
           </span>
         </p>
         <p
@@ -69,8 +69,23 @@ exports[`<AdminCinemaList /> should match a snapshot 1`] = `
       <div
         class="MuiCardActions-root MuiCardActions-spacing"
       >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          data-testid="editButton"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Edit
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
         <a
-          href="/admin/cinema/42"
+          href="/admin/cinema/1"
         >
           <button
             class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"

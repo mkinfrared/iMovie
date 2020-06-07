@@ -15,6 +15,7 @@ const SearchField = <T,>({
   className,
   name,
   label,
+  value,
   loading = false,
   error = false
 }: SearchFieldProps<T>) => {
@@ -27,6 +28,7 @@ const SearchField = <T,>({
       getOptionLabel={getOptionLabel}
       options={options}
       loading={loading}
+      value={value}
       renderInput={(params) => (
         <TextField
           {...params}

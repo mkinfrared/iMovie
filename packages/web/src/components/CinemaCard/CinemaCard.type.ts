@@ -5,4 +5,5 @@ export interface CinemaCardProps {
   stateName: string;
   countryName: string;
   zipcode: string;
+  onEdit: (id: number) => void;
 }

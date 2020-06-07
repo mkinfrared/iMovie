@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CinemaCard /> should match a snapshot 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiCard-root CinemaCard MuiPaper-outlined MuiPaper-rounded"
+  >
+    <div
+      class="MuiCardContent-root"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-colorPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"
+      >
+        marklar
+      </h2>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+      >
+        Details
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+      >
+        City:
+         
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+        >
+          foobar
+        </span>
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+      >
+        State:
+         
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+        >
+          Colorado
+        </span>
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+      >
+        Country:
+         
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+        >
+          USA
+        </span>
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom"
+      >
+        Zipcode:
+         
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary"
+        >
+          424242
+        </span>
+      </p>
+    </div>
+    <div
+      class="MuiCardActions-root MuiCardActions-spacing"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text"
+        data-testid="editButton"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Edit
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <a
+        href="/admin/cinema/42"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-textSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            More
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+`;
