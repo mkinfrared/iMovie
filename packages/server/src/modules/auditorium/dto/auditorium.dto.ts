@@ -1,13 +1,11 @@
-type AuditoriumDto = Record<string, string | number> & {
+type AuditoriumDto = Record<string, number | string> & {
   name: string;
 
   cinemaId: number;
 };
 
-class UpdateAuditoriumDto {
+type UpdateAuditoriumDto = Omit<AuditoriumDto, "cinemaId"> & {
   id: number;
-
-  name: string;
-}
+};
 
 export { AuditoriumDto, UpdateAuditoriumDto };

@@ -2,8 +2,12 @@
 
 exports[`<AdminEditAuditorium /> should match a snapshot 1`] = `
 <div>
-  <div>
-    AdminEditAuditorium
+  <div
+    data-testid="containers/EditAuditoriumForm"
+  >
+    <code>
+      {"cinemaId":null,"auditoriumId":null}
+    </code>
   </div>
 </div>
 `;

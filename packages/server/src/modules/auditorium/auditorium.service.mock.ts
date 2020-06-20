@@ -1,14 +1,28 @@
-import { cinemaMock } from "modules/cinema/cinema.service.mock";
-
-const auditoriumMock = {
+const auditoriumMock: any = {
   id: 66,
   name: "Cartman",
-  cinemaId: cinemaMock.id
+  cinemaId: 33,
+  seats: [
+    {
+      id: 21,
+      row: "A",
+      number: 3,
+      auditoriumId: 66,
+      deletedAt: null
+    },
+    {
+      id: 24,
+      row: "B",
+      number: 6,
+      auditoriumId: 66,
+      deletedAt: "foobar"
+    }
+  ]
 };
 
 const auditoriumDtoMock = {
   name: "Cartman",
-  cinemaId: cinemaMock.id,
+  cinemaId: 33,
   A: 12
 };
 

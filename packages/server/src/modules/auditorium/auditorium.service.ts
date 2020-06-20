@@ -30,7 +30,11 @@ export class AuditoriumService {
   }
 
   async update(auditoriumDto: UpdateAuditoriumDto) {
-    const { id, name } = auditoriumDto;
+    const { id, name: auditoriumName, ...seats } = auditoriumDto;
+    const name = auditoriumName as string;
+
+    await this.seatService.updateMany(seats as Record<string, number>, id);
+
     const result = await this.auditoriumRepository.update(id, { name });
 
     if (!result.affected) {

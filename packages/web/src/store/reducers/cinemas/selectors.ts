@@ -13,4 +13,14 @@ const selectCinema = (cinemaId: number) =>
 const selectCinemaAuditoriums = (cinemaId: number) =>
   createSelector(selectCinema(cinemaId), (cinema) => cinema?.auditoriums);
 
-export { selectCinemas, selectCinema, selectCinemaAuditoriums };
+const selectCinemaAuditorium = (cinemaId: number, auditoriumId: number) =>
+  createSelector(selectCinemaAuditoriums(cinemaId), (auditoriums) =>
+    auditoriums?.find(({ id }) => id === auditoriumId)
+  );
+
+export {
+  selectCinemas,
+  selectCinema,
+  selectCinemaAuditoriums,
+  selectCinemaAuditorium
+};

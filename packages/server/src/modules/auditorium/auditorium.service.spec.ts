@@ -68,11 +68,15 @@ describe("AuditoriumService", () => {
   it("should update an auditorium record and return it", async () => {
     const id = 42;
 
-    repositoryMock.update.mockReturnValueOnce({ affected: 1 });
-
     repositoryMock.findOne.mockReturnValueOnce(auditoriumMock);
 
-    const result = await service.update({ id, name: auditoriumMock.name });
+    repositoryMock.update.mockReturnValueOnce({ affected: 1 });
+
+    const result = await service.update({
+      id,
+      name: auditoriumMock.name,
+      A: 42
+    });
 
     expect(result).toBeDefined();
 

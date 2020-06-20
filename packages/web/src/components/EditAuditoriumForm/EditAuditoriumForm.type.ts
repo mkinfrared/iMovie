@@ -1,3 +1,8 @@
+import { Auditorium } from "store/reducers/cinemas/types";
+
 export interface EditAuditoriumFormProps {
-  id: number;
+  auditoriumId: number;
+  auditorium: Auditorium;
+  cinemaId: number;
+  onCancel: () => void;
 }

@@ -60,7 +60,15 @@ const auditoriumsMock = [
         id: 1,
         row: "A",
         number: 1,
-        auditoriumId: 1
+        auditoriumId: 1,
+        deletedAt: null
+      },
+      {
+        id: 2,
+        row: "B",
+        number: 1,
+        auditoriumId: 1,
+        deletedAt: null
       }
     ]
   }

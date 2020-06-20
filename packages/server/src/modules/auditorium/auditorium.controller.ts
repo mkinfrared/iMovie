@@ -34,7 +34,7 @@ export class AuditoriumController {
   }
 
   @Put()
-  async update(auditoriumDto: UpdateAuditoriumDto) {
+  async update(@Body() auditoriumDto: UpdateAuditoriumDto) {
     const result = await this.auditoriumService.update(auditoriumDto);
 
     if (!result) {

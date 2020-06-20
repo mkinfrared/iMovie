@@ -46,6 +46,7 @@
     "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-unused-expressions": "off",
     "no-useless-constructor": "off",
     "comma-dangle": ["error", "never"],
     "linebreak-style": ["error", "unix"],

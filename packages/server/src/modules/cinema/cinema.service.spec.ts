@@ -50,6 +50,8 @@ describe("CinemaService", () => {
 
     expect(result?.name).toBe(cinemaMock.name);
 
+    expect(result?.auditoriums[0].seats).toHaveLength(1);
+
     expect(repositoryMock.findOne).toHaveBeenCalled();
   });
 
