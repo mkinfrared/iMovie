@@ -11,9 +11,10 @@ export class SeatService {
   ) {}
 
   createMany(rows: Record<string, number>, auditoriumId: number) {
-    Object.entries(rows).forEach((entry) => {
+    const seats: Seat[] = [];
+
+    Object.entries(rows).forEach(async (entry) => {
       const [row, seatQuantity] = entry;
-      const seats: Seat[] = [];
 
       for (let i = 0; i < seatQuantity; i++) {
         const seat = this.seatRepository.create({
@@ -24,8 +25,14 @@ export class SeatService {
 
         seats.push(seat);
       }
-
-      this.seatRepository.save(seats);
     });
+
+    return this.seatRepository.save(seats);
+  }
+
+  async updateMany(rows: Record<string, number>, auditoriumId: number) {
+    await this.seatRepository.softDelete({ auditoriumId });
+
+    return this.createMany(rows, auditoriumId);
   }
 }

@@ -20,8 +20,18 @@ export class CinemaService {
     return this.cinemaRepository.save(cinema);
   }
 
-  get(id: number) {
-    return this.cinemaRepository.findOne(id, { relations: ["auditoriums"] });
+  async get(id: number) {
+    const cinema = await this.cinemaRepository.findOne(id, {
+      relations: ["auditoriums"]
+    });
+
+    cinema?.auditoriums.forEach(({ seats }, index) => {
+      cinema.auditoriums[index].seats = seats.filter(
+        ({ deletedAt }) => !deletedAt
+      );
+    });
+
+    return cinema;
   }
 
   async getAll(offset = 1, limit = 20) {

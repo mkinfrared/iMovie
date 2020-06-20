@@ -11,4 +11,5 @@ export interface SelectProps<T> {
   ref?: React.Ref<T>;
   error?: boolean;
   helperText?: React.ReactNode;
+  defaultValue?: T;
 }

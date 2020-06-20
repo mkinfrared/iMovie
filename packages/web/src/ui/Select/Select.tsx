@@ -14,6 +14,7 @@ const Select = <T,>({
   options,
   onChange,
   helperText,
+  defaultValue,
   error = false
 }: SelectProps<T>) => {
   const menuItems = options.map(({ label: name, value }) => (
@@ -35,7 +36,7 @@ const Select = <T,>({
         labelId="select"
         label={label}
         onChange={onChange as any}
-        defaultValue=""
+        defaultValue={defaultValue}
       >
         {menuItems}
       </MaterialSelect>

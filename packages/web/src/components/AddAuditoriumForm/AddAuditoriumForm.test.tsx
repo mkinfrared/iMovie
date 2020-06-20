@@ -127,4 +127,62 @@ describe("<AddAuditoriumForm />", () => {
 
     expect(getByText(data.name[0])).toBeInTheDocument();
   });
+
+  it("should not set errors on form", async () => {
+    const { container, findByRole, getByTestId, queryByText } = render(
+      Component
+    );
+
+    const selectButton = container.parentNode?.querySelector(
+      "[role=button]"
+    ) as HTMLElement;
+
+    const addButton = getByTestId("addRowButton");
+    const removeButton = getByTestId("removeRowButton");
+    const submitButton = getByTestId("submitButton");
+    const auditoriumName = getByTestId("auditoriumName") as HTMLInputElement;
+
+    fireEvent.change(auditoriumName, { target: { value: "marklar" } });
+
+    expect(auditoriumName.value).toBe("marklar");
+
+    fireEvent.click(addButton);
+
+    let selects = container.querySelectorAll(".select");
+
+    expect(selects).toHaveLength(1);
+
+    fireEvent.click(removeButton);
+
+    selects = container.querySelectorAll(".select");
+
+    expect(selects).toHaveLength(1);
+
+    fireEvent.mouseDown(selectButton);
+
+    const listbox = await findByRole("listbox");
+    const listItem = await within(listbox).findByText("7");
+
+    fireEvent.click(listItem);
+
+    await within(container).findByText("7");
+
+    const data = {
+      name: ["they took'er jobs!!"]
+    };
+
+    apiMock.post.mockReturnValueOnce(
+      Promise.reject({ response: { data, status: 500 } })
+    );
+
+    await act(async () => {
+      await fireEvent.click(submitButton);
+    });
+
+    expect(apiMock.post).toHaveBeenCalled();
+
+    const error = queryByText(data.name[0]);
+
+    expect(error).toBeNull();
+  });
 });

@@ -1,5 +1,6 @@
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -25,4 +26,7 @@ export class Seat {
   @ManyToOne(() => Auditorium, (auditorium) => auditorium.id)
   @JoinColumn({ name: "auditoriumId" })
   auditorium: Auditorium;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

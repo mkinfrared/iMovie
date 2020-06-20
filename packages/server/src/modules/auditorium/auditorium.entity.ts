@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
@@ -25,6 +26,7 @@ export class Auditorium {
   @Column()
   cinemaId: number;
 
+  @Exclude()
   @OneToMany(() => Seat, (seat) => seat.auditorium, { eager: true })
   seats: Seat[];
 
