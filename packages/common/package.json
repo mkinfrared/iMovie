@@ -6,9 +6,9 @@
   "types": "./build/index.d.ts",
   "license": "MIT",
   "devDependencies": {
-    "@types/lodash": "^4.14.150",
-    "@types/yup": "^0.28.3",
-    "ts-node-dev": "^1.0.0-pre.44"
+    "@types/lodash": "^4.14.155",
+    "@types/yup": "^0.29.3",
+    "ts-node-dev": "^1.0.0-pre.49"
   },
   "scripts": {
     "start": "tsc -w",
@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "yup": "^0.28.5"
+    "yup": "^0.29.1"
   }
 }

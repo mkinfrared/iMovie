@@ -1,0 +1,19 @@
+.Option {
+  align-items: center;
+  display: flex;
+
+  .imageContainer {
+    height: 56px;
+    margin-right: 20px;
+    overflow: hidden;
+    width: 37px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  > p {
+    flex: 1;
+  }
+}

@@ -39,10 +39,10 @@ exports[`<AdminAddAuditorium /> should match a snapshot 1`] = `
             />
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-257"
+                class="PrivateNotchedOutline-legendLabelled-7"
               >
                 <span>
                   Auditorium Name
@@ -96,10 +96,10 @@ exports[`<AdminAddAuditorium /> should match a snapshot 1`] = `
                   </svg>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-257"
+                      class="PrivateNotchedOutline-legendLabelled-7"
                     >
                       <span>
                         Row A

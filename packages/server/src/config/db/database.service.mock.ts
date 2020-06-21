@@ -17,7 +17,8 @@ const repositoryMock = {
   setParameter: jest.fn().mockReturnThis(),
   returning: jest.fn().mockReturnThis(),
   execute: jest.fn((..._: any): Partial<InsertResult> => ({})),
-  findAndCount: jest.fn().mockReturnThis()
+  findAndCount: jest.fn().mockReturnThis(),
+  findByIds: jest.fn().mockReturnThis()
 };
 
 const queryRunnerMock = {

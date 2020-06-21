@@ -1,7 +1,16 @@
+import { AutocompleteInputChangeReason } from "@material-ui/lab/useAutocomplete/useAutocomplete";
+import * as React from "react";
+
 export interface SearchFieldProps<T extends {}> {
   options: T[];
   onChange: <U>(event: U, value: T | null) => void;
   onBlur?: React.FocusEventHandler;
+  onInputChange?: (
+    event: React.ChangeEvent<{}>,
+    value: string,
+    reason: AutocompleteInputChangeReason
+  ) => void;
+  renderOption?: (option: T, state: object) => React.ReactNode;
   loading?: boolean;
   helperText?: React.ReactNode;
   error?: boolean;

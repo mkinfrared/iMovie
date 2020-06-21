@@ -1,7 +1,7 @@
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import CinemaIcon from "@material-ui/icons/Apartment";
-import AuditoriumIcon from "@material-ui/icons/MeetingRoom";
+import MovieIcon from "@material-ui/icons/LocalMovies";
 import React, { useMemo } from "react";
 
 import AdminMenuLink from "components/AdminMenuLink";
@@ -17,9 +17,9 @@ const navigation: Navigation[] = [
     path: AdminRoutes.ADMIN_CINEMA
   },
   {
-    text: "Auditoriums",
-    icon: <AuditoriumIcon />,
-    path: "/auditoriums"
+    text: "Movies",
+    icon: <MovieIcon />,
+    path: AdminRoutes.ADMIN_MOVIES
   }
 ];
 

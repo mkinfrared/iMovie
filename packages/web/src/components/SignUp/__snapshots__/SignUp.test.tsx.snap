@@ -68,10 +68,10 @@ exports[`<SignUp /> should match a snapshot 1`] = `
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-347 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-349"
+                    class="PrivateNotchedOutline-legendLabelled-7"
                   >
                     <span>
                       Email Address
@@ -102,10 +102,10 @@ exports[`<SignUp /> should match a snapshot 1`] = `
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-347 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-349"
+                    class="PrivateNotchedOutline-legendLabelled-7"
                   >
                     <span>
                       Username
@@ -165,10 +165,10 @@ exports[`<SignUp /> should match a snapshot 1`] = `
                 </div>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-347 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-349"
+                    class="PrivateNotchedOutline-legendLabelled-7"
                   >
                     <span>
                       Password
@@ -228,10 +228,10 @@ exports[`<SignUp /> should match a snapshot 1`] = `
                 </div>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-347 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-349"
+                    class="PrivateNotchedOutline-legendLabelled-7"
                   >
                     <span>
                       Confirm

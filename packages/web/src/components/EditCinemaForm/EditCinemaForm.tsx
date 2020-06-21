@@ -141,7 +141,7 @@ const EditCinemaForm = ({
 
       fetchZipcodes(getValues("zipcode"));
     }
-  }, [open]);
+  }, [fetchZipcodes, getValues, open]);
 
   useEffect(() => {
     register({ name: "country" });

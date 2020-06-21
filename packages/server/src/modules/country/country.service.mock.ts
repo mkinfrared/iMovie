@@ -12,7 +12,8 @@ const countryMock = {
 
 const countryServiceMock = {
   getAll: jest.fn(),
-  getOne: jest.fn()
+  getOne: jest.fn(),
+  getMany: jest.fn()
 };
 
 export { countryMock, countryServiceMock };

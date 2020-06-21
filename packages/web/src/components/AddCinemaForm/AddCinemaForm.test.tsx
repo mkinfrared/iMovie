@@ -65,7 +65,9 @@ describe("<AddCinemaForm />", () => {
     const cinemaInput = getByTestId("cinemaName");
     const submitButton = getByTestId("submitButton");
 
-    fireEvent.change(countryInput, { target: { value: "us" } });
+    act(() => {
+      fireEvent.change(countryInput, { target: { value: "us" } });
+    });
 
     const listbox = await findByRole("listbox");
     const listItem = await within(listbox).findByText("USA");
@@ -140,7 +142,9 @@ describe("<AddCinemaForm />", () => {
     const cinemaInput = getByTestId("cinemaName");
     const submitButton = getByTestId("submitButton");
 
-    fireEvent.change(countryInput, { target: { value: "us" } });
+    act(() => {
+      fireEvent.change(countryInput, { target: { value: "us" } });
+    });
 
     const listbox = await findByRole("listbox");
     const listItem = await within(listbox).findByText("USA");
@@ -228,10 +232,10 @@ describe("<AddCinemaForm />", () => {
     const listbox = await findByRole("listbox");
     const listItem = await within(listbox).findByText("USA");
 
-    act(() => {
-      fireEvent.click(listItem);
+    await act(async () => {
+      await fireEvent.click(listItem);
 
-      fireEvent.blur(countryInput);
+      await fireEvent.blur(countryInput);
     });
 
     apiMock.get.mockReturnValueOnce(Promise.resolve({ data: zip }));

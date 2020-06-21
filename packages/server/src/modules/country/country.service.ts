@@ -69,4 +69,8 @@ export class CountryService implements OnApplicationBootstrap {
       this.fetchCountries();
     }
   }
+
+  getMany(alpha2Code: string[]) {
+    return this.countryRepository.findByIds(alpha2Code);
+  }
 }
