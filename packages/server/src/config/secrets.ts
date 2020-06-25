@@ -15,6 +15,7 @@ const CORS = process.env.CORS?.split(",") || [];
 const REDIS_HOST = process.env.REDIS_HOST;
 const EMAIL_USERNAME = process.env.EMAIL_USERNAME;
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 export {
   SERVER_PORT,
@@ -29,5 +30,6 @@ export {
   EMAIL_TOKEN_KEY,
   REDIS_HOST,
   EMAIL_USERNAME,
-  EMAIL_PASSWORD
+  EMAIL_PASSWORD,
+  TMDB_API_KEY
 };

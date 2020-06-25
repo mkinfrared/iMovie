@@ -4,9 +4,10 @@ exports[`<PageLoading /> should match a snapshot 1`] = `
 <div>
   <div
     class="PageLoading"
+    style="height: 0px;"
   >
     <div
-      class="MuiCircularProgress-root MuiCircularProgress-colorSecondary MuiCircularProgress-indeterminate"
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
       role="progressbar"
       style="width: 40px; height: 40px;"
     >

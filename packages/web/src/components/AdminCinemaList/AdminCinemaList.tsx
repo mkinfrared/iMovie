@@ -38,7 +38,7 @@ const AdminCinemaList = ({ dispatch, cinemas }: AdminCinemaListProps) => {
           onEdit={handleEditClick}
         />
       )),
-    [cinemas]
+    [cinemas, handleEditClick]
   );
 
   return (

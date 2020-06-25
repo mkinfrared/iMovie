@@ -39,10 +39,10 @@ exports[`<EditAuditoriumForm /> should match a snapshot 1`] = `
             />
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-257 PrivateNotchedOutline-legendNotched-258"
+                class="PrivateNotchedOutline-legendLabelled-7 PrivateNotchedOutline-legendNotched-8"
               >
                 <span>
                   Auditorium Name
@@ -94,10 +94,10 @@ exports[`<EditAuditoriumForm /> should match a snapshot 1`] = `
                   </svg>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-257 PrivateNotchedOutline-legendNotched-258"
+                      class="PrivateNotchedOutline-legendLabelled-7 PrivateNotchedOutline-legendNotched-8"
                     >
                       <span>
                         Row A
@@ -198,10 +198,10 @@ exports[`<EditAuditoriumForm /> should match a snapshot 1`] = `
                   </svg>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-255 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-257 PrivateNotchedOutline-legendNotched-258"
+                      class="PrivateNotchedOutline-legendLabelled-7 PrivateNotchedOutline-legendNotched-8"
                     >
                       <span>
                         Row B

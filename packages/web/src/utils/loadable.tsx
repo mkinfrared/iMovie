@@ -3,6 +3,7 @@ import React from "react";
 
 import { LoadableModal } from "react-app-env";
 import ModalLoading from "ui/ModalLoading";
+import PageLoading from "ui/PageLoading";
 
 // Wait a minimum of 250ms before loading home.
 const loadableModal: LoadableModal = (loadFn) =>
@@ -13,7 +14,7 @@ const loadableModal: LoadableModal = (loadFn) =>
 // Wait a minimum of 250ms before loading home.
 const loadablePage: LoadableModal = (loadFn) =>
   loadable(loadFn, {
-    fallback: <ModalLoading />
+    fallback: <PageLoading />
   });
 
 export { loadableModal, loadablePage };

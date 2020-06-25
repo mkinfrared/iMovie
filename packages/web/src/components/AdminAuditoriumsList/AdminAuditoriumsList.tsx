@@ -13,7 +13,7 @@ const AdminAuditoriumsList = ({
 }: AdminAuditoriumsListProps) => {
   useEffect(() => {
     dispatch(fetchCinemaAuditoriums(cinemaId));
-  }, []);
+  }, [cinemaId, dispatch]);
 
   const list = auditoriums.map(({ id, name, seats }) => (
     <AuditoriumCard

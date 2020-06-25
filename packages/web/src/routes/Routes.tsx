@@ -16,6 +16,9 @@ const AdminEditAuditorium = loadablePage(() =>
   import("pages/AdminEditAuditorium")
 );
 
+const AdminMovies = loadablePage(() => import("pages/AdminMovies"));
+const AdminAddMovie = loadablePage(() => import("pages/AdminAddMovie"));
+
 const Routes = ({ history, isAdmin }: RoutesProps) => {
   useEffect(() => {
     if (isAdmin && history.location.pathname === "/404") {
@@ -45,6 +48,12 @@ const Routes = ({ history, isAdmin }: RoutesProps) => {
             path={`${AdminRoutes.ADMIN_CINEMA}/:cinemaId/:auditoriumId/edit`}
             component={AdminEditAuditorium}
           />
+          <Route
+            exact
+            path={AdminRoutes.ADMIN_MOVIES}
+            component={AdminMovies}
+          />
+          <Route path={AdminRoutes.ADMIN_ADD_MOVIE} component={AdminAddMovie} />
           <Redirect to={AdminRoutes.NOT_FOUND} push />
         </>
       );

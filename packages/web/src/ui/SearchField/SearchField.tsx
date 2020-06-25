@@ -7,8 +7,9 @@ import { SearchFieldProps } from "./SearchField.type";
 
 const SearchField = <T,>({
   onChange,
-  getOptionSelected,
   onBlur,
+  onInputChange,
+  getOptionSelected,
   getOptionLabel,
   options,
   helperText,
@@ -16,6 +17,7 @@ const SearchField = <T,>({
   name,
   label,
   value,
+  renderOption,
   loading = false,
   error = false
 }: SearchFieldProps<T>) => {
@@ -23,12 +25,15 @@ const SearchField = <T,>({
     <Autocomplete
       freeSolo
       onChange={onChange}
-      getOptionSelected={getOptionSelected}
       onBlur={onBlur}
+      onInputChange={onInputChange}
+      getOptionSelected={getOptionSelected}
       getOptionLabel={getOptionLabel}
       options={options}
       loading={loading}
       value={value}
+      color="secondary"
+      renderOption={renderOption}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -41,7 +46,7 @@ const SearchField = <T,>({
           InputProps={{
             ...params.InputProps,
             endAdornment: loading && (
-              <CircularProgress color="inherit" size={20} />
+              <CircularProgress color="primary" size={20} />
             )
           }}
           helperText={helperText}

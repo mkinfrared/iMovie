@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn
 } from "typeorm";
+
+import { Movie } from "modules/movie/movie.entity";
 
 @Entity()
 export class Country {
@@ -40,4 +43,7 @@ export class Country {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Movie, (movie) => movie.countries)
+  movie: Movie;
 }

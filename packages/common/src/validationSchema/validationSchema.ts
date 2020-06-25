@@ -41,7 +41,7 @@ const loginValidation = yup.object().shape({
   password: yup.string().required()
 });
 
-const addAuditoriumValidation = yup.lazy((obj: object) =>
+const addAuditoriumValidation = yup.lazy((obj: object | undefined) =>
   yup.object(
     mapValues(obj, (_: any, key: string) => {
       if (key === "name") {
