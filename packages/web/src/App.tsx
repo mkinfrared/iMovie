@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import Content from "components/Content";
+import ErrorBoundary from "components/ErrorBoundary";
 import Header from "containers/Header";
 import Routes from "containers/Routes";
 import { loginUser } from "store/reducers/user/reducer";
@@ -31,16 +32,18 @@ const App = () => {
   });
 
   return (
-    <BrowserRouter>
-      <div className={css.App}>
-        <Header />
-        <main>
-          <Content>
-            <Routes />
-          </Content>
-        </main>
-      </div>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <div className={css.App}>
+          <Header />
+          <main>
+            <Content>
+              <Routes />
+            </Content>
+          </main>
+        </div>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 };
 
