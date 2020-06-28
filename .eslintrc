@@ -42,6 +42,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-key": [2, { "checkFragmentShorthand": true }],
+    "react/state-in-constructor": "off",
     "consistent-return": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",

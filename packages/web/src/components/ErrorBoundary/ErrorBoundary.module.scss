@@ -1,0 +1,29 @@
+@import "src/styles/colors";
+
+.ErrorBoundary {
+  padding: 40px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $error-main;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  code {
+    color: $error-light;
+    display: block;
+    font-family: monospace;
+    font-size: 18px;
+    margin-left: 20px;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}
