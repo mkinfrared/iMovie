@@ -1,0 +1,10 @@
+.MovieFilters {
+  max-width: 280px;
+
+  .select {
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+}

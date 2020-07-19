@@ -24,7 +24,7 @@ export class ZipcodeService {
     this.loggerService.setContext(Zipcode.name);
   }
 
-  async create(
+  create(
     code: string,
     cityId: number,
     stateId: number,
@@ -95,7 +95,7 @@ export class ZipcodeService {
     }
   }
 
-  async getAll() {
+  getAll() {
     return this.zipcodeRepository.find();
   }
 

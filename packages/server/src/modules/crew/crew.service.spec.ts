@@ -55,4 +55,16 @@ describe("CrewService", () => {
 
     expect(repositoryMock.save).toHaveBeenCalledWith([data]);
   });
+
+  it("should call find on crewRepository", async () => {
+    const movie = {
+      name: "Professor Chaos"
+    } as any;
+
+    const job = "Director";
+
+    await service.getCrewByByMovie(movie, job);
+
+    expect(repositoryMock.find).toHaveBeenCalled();
+  });
 });

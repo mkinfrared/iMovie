@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { fireEvent } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
 
@@ -12,13 +11,10 @@ describe("useTogglePassword", () => {
 
     expect(callback).not.toHaveBeenCalled();
 
-    await act(async () => {
-      // Change the viewport to 500px.
-      // @ts-ignore
-      window.innerWidth = 500;
+    await act(() => {
+      (window as any).innerWidth = 500;
 
-      // @ts-ignore
-      window.innerHeight = 500;
+      (window as any).innerHeight = 500;
 
       // Trigger the window resize event.
       // window.dispatchEvent(new Event('resize'))

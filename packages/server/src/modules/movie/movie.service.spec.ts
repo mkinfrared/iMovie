@@ -266,4 +266,64 @@ describe("MovieService", () => {
 
     expect(service.fetchBoxOfficePerformance).toHaveBeenCalledTimes(3);
   });
+
+  it("should call fetchBoxOfficePerformance", async () => {
+    const movie1 = { id: 42 } as any;
+    const movie2 = { id: 43 } as any;
+
+    service.fetchBoxOfficePerformance = jest.fn();
+
+    repositoryMock.find.mockReturnValueOnce([movie1, movie2]);
+
+    await service.updateNewReleases();
+
+    expect(service.fetchBoxOfficePerformance).toHaveBeenCalledTimes(2);
+  });
+
+  it("should call fetchBoxOfficePerformance", async () => {
+    const movie1 = { id: 42 } as any;
+    const movie2 = { id: 43 } as any;
+    const movie3 = { id: 44 } as any;
+
+    service.fetchBoxOfficePerformance = jest.fn();
+
+    repositoryMock.find.mockReturnValueOnce([movie1, movie2, movie3]);
+
+    await service.updateReleases();
+
+    expect(service.fetchBoxOfficePerformance).toHaveBeenCalledTimes(3);
+  });
+
+  it("should return movies", async () => {
+    const cast = [1];
+    const directors = [1];
+    const writers = [1];
+    const producers = [1];
+    const page = 42;
+
+    crewServiceMock.getCrewByByMovie.mockReturnValueOnce([{ id: 12 }]);
+
+    repositoryMock.getManyAndCount.mockReturnValueOnce([
+      [movieResponseMock],
+      33
+    ]);
+
+    const result = await service.getMoviesByCastAndCrew(
+      cast,
+      directors,
+      writers,
+      producers,
+      page
+    );
+
+    const { result: movie, total, page: currentPage } = result;
+
+    expect(crewServiceMock.getCrewByByMovie).toHaveBeenCalled();
+
+    expect(movie[0].id).toBe(movieResponseMock.id);
+
+    expect(total).toBe(33);
+
+    expect(currentPage).toBe(page);
+  });
 });

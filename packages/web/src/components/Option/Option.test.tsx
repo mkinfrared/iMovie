@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React, { ReactElement } from "react";
 
-import Option from "./Option";
+import Option from "components/Option/Option";
 
 describe("<Option />", () => {
   let Component: ReactElement;

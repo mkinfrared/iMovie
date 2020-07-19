@@ -3,18 +3,18 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import debounce from "lodash/debounce";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import MoviePreviewCard from "components/MoviePreviewCard";
+import Option from "components/Option";
 import NotificationAction from "ui/NotificationAction";
 import SearchField from "ui/SearchField";
 import api from "utils/api";
-import tmdbApi from "utils/tmdbApi";
+import tmdbApi, { getTmdbImage } from "utils/tmdbApi";
 
 import css from "./AdminMovieForm.module.scss";
 import { AddMovieFormProps, SearchResult } from "./AdminMovieForm.type";
-import Option from "./Option";
 
 const AddMovieForm = ({ onCancel }: AddMovieFormProps) => {
   const [movies, setMovies] = useState<SearchResult[]>([]);
@@ -22,7 +22,6 @@ const AddMovieForm = ({ onCancel }: AddMovieFormProps) => {
   const [selectedMovie, setSelectedMovie] = useState<SearchResult | null>(null);
   const { handleSubmit, formState } = useForm();
   const { enqueueSnackbar } = useSnackbar();
-  const imageUrl = "https://image.tmdb.org/t/p/";
 
   const fetchMovies = async (value: string) => {
     try {
@@ -41,18 +40,21 @@ const AddMovieForm = ({ onCancel }: AddMovieFormProps) => {
     }
   };
 
-  const handleInputChange = useRef(
+  const handleInputChange = useCallback(
     debounce((_: any, value: string) => {
       fetchMovies(value);
-    }, 1000)
-  ).current;
-
-  const renderOptions = useMemo(
-    () => ({ title, poster_path }: SearchResult) => {
-      return <Option title={title} imageUrl={`${imageUrl}w92${poster_path}`} />;
-    },
+    }, 350),
     []
   );
+
+  const renderOptions = useCallback(({ title, poster_path }: SearchResult) => {
+    return (
+      <Option
+        title={title}
+        imageUrl={getTmdbImage.posterSizes.w92 + poster_path}
+      />
+    );
+  }, []);
 
   const getOptionLabel = useCallback(
     (option: SearchResult) => option.title,
@@ -100,7 +102,7 @@ const AddMovieForm = ({ onCancel }: AddMovieFormProps) => {
             id={selectedMovie.id}
             className={css.movieCard}
             title={selectedMovie.title}
-            imageUrl={`${imageUrl}w300${selectedMovie.poster_path}`}
+            imageUrl={getTmdbImage.posterSizes.w342 + selectedMovie.poster_path}
             overview={selectedMovie.overview}
             popularity={selectedMovie.popularity}
             releaseDate={selectedMovie.release_date}

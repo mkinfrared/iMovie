@@ -14,7 +14,7 @@ export class Cast {
   @Column()
   order: number;
 
-  @ManyToOne(() => Person, (person) => person.id)
+  @ManyToOne(() => Person, (person) => person.id, { eager: true })
   person: Person;
 
   @ManyToOne(() => Movie, (movie) => movie.id)

@@ -11,6 +11,12 @@ jest.mock("react-router-dom", () => ({
   }))
 }));
 
+jest.mock("components/AdminMoviesList", () => (props: any) => (
+  <div data-testid="components/AdminMoviesList">
+    <code>{JSON.stringify(props)}</code>
+  </div>
+));
+
 describe("<AdminMovies />", () => {
   let Component: ReactElement;
 

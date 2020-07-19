@@ -97,6 +97,10 @@ export class PersonService {
       }
     });
 
+    const nullIds = people.filter(({ id }) => id === null);
+
+    this.loggerService.warn(`NULL IDs: ${nullIds.toString()}`);
+
     const {
       generatedMaps
     } = await this.personRepository
@@ -127,5 +131,13 @@ export class PersonService {
     });
 
     return ids;
+  }
+
+  getPeopleByName(value: string) {
+    return this.personRepository
+      .createQueryBuilder()
+      .where("LOWER(name) LIKE :name", { name: `%${value.toLowerCase()}%` })
+      .limit(10)
+      .getMany();
   }
 }

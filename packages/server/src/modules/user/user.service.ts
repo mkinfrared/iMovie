@@ -57,7 +57,7 @@ export class UserService implements OnApplicationBootstrap {
     return user;
   }
 
-  async getByEmail(email: string) {
+  getByEmail(email: string) {
     return this.userRepository.findOne({ where: { email } });
   }
 

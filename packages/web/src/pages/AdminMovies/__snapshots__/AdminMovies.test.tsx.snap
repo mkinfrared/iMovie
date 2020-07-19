@@ -2,8 +2,21 @@
 
 exports[`<AdminMovies /> should match a snapshot 1`] = `
 <div>
-  <div>
-    AdminMovies
+  <div
+    class="AdminMovies"
+  >
+    <h3
+      class="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter"
+    >
+      Admin Movies
+    </h3>
+  </div>
+  <div
+    data-testid="components/AdminMoviesList"
+  >
+    <code>
+      {}
+    </code>
   </div>
   <div
     class="FloatButton"

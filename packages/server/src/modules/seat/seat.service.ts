@@ -13,7 +13,7 @@ export class SeatService {
   createMany(rows: Record<string, number>, auditoriumId: number) {
     const seats: Seat[] = [];
 
-    Object.entries(rows).forEach(async (entry) => {
+    Object.entries(rows).forEach((entry) => {
       const [row, seatQuantity] = entry;
 
       for (let i = 0; i < seatQuantity; i++) {

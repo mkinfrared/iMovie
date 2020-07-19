@@ -23,7 +23,7 @@ describe("<AddCinemaForm />", () => {
     jest.resetAllMocks();
   });
 
-  it("should be defined", async () => {
+  it("should be defined", () => {
     apiMock.get.mockReturnValueOnce(Promise.resolve({ data: [42] }));
 
     const { baseElement } = render(Component);

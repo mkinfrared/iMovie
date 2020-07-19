@@ -8,9 +8,11 @@ import dayjs from "dayjs";
 import { MoreThan, Repository } from "typeorm";
 
 import { LoggerService } from "config/logger/logger.service";
+import { Cast } from "modules/cast/cast.entity";
 import { CastService } from "modules/cast/cast.service";
 import { CompanyService } from "modules/company/company.service";
 import { CountryService } from "modules/country/country.service";
+import { Crew } from "modules/crew/crew.entity";
 import { CrewService } from "modules/crew/crew.service";
 import { GenreService } from "modules/genre/genre.service";
 import {
@@ -18,6 +20,7 @@ import {
   MovieDetailsResponse
 } from "modules/movie/dto/movie.dto";
 import { Movie } from "modules/movie/movie.entity";
+import Pagination from "utils/pagination";
 import tmdbApi from "utils/tmdbApi";
 
 @Injectable()
@@ -135,6 +138,49 @@ export class MovieService {
     } catch (e) {
       this.loggerService.error(e);
     }
+  }
+
+  async getMoviesByCastAndCrew(
+    actors = [-1],
+    directors = [-1],
+    writers = [-1],
+    producers = [-1],
+    page: number
+  ) {
+    const limit = 10;
+
+    const result = await this.movieRepository
+      .createQueryBuilder("movie")
+      .innerJoin(Cast, "cast", '"movie"."id" = "cast"."movieId"')
+      .innerJoin(Crew, "crew", '"movie"."id" = "crew"."movieId"')
+      .select()
+      .distinct(true)
+      .where('"cast"."personId" in (:...actors)', { actors })
+      .orWhere(
+        '"crew"."personId" in (:...directors) and "crew"."job" LIKE :job',
+        { directors, job: "Director" }
+      )
+      .orWhere(
+        '"crew"."personId" in (:...writers) and "crew"."department" IN (:...department)',
+        { writers, department: ["Writing"] }
+      )
+      .orWhere(
+        '"crew"."personId" in (:...producers) and "crew"."job" LIKE :job',
+        { producers, job: "Producer" }
+      )
+      .offset(limit * (page - 1))
+      .limit(limit)
+      .getManyAndCount();
+
+    const [movies, total] = result;
+
+    for (const movie of movies) {
+      const crew = await this.crewService.getCrewByByMovie(movie, "Director");
+
+      movie.crew = crew;
+    }
+
+    return new Pagination(movies, total, page);
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
