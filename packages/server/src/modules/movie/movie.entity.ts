@@ -1,7 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
+import { Cast } from "modules/cast/cast.entity";
 import { Company } from "modules/company/company.entity";
 import { Country } from "modules/country/country.entity";
+import { Crew } from "modules/crew/crew.entity";
 import { Genre } from "modules/genre/genre.entity";
 
 @Entity()
@@ -65,4 +67,10 @@ export class Movie {
 
   @Column()
   posterPath: string;
+
+  @OneToMany(() => Cast, (cast) => cast.movie)
+  cast: Cast[];
+
+  @OneToMany(() => Crew, (crew) => crew.movie)
+  crew: Crew[];
 }

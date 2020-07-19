@@ -3,9 +3,9 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import React from "react";
 
-import { SearchFieldProps } from "./SearchField.type";
+import { MultiSearchFieldProps } from "./MultiSearchField.type";
 
-const SearchField = <T,>({
+const MultiSearchField = <T,>({
   onChange,
   onBlur,
   onInputChange,
@@ -18,12 +18,17 @@ const SearchField = <T,>({
   label,
   value,
   renderOption,
+  filterOptions,
+  filterSelectedOptions = false,
   loading = false,
   error = false
-}: SearchFieldProps<T>) => {
+}: MultiSearchFieldProps<T>) => {
   return (
     <Autocomplete
       freeSolo
+      multiple
+      filterSelectedOptions={filterSelectedOptions}
+      filterOptions={filterOptions}
       className={className}
       onChange={onChange}
       onBlur={onBlur}
@@ -57,4 +62,4 @@ const SearchField = <T,>({
   );
 };
 
-export default SearchField;
+export default MultiSearchField;

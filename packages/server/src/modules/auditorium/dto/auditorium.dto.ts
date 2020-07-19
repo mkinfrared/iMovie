@@ -8,4 +8,4 @@ type UpdateAuditoriumDto = Omit<AuditoriumDto, "cinemaId"> & {
   id: number;
 };
 
-export { AuditoriumDto, UpdateAuditoriumDto };
+export type { AuditoriumDto, UpdateAuditoriumDto };

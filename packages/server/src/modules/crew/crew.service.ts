@@ -34,4 +34,8 @@ export class CrewService {
 
     return this.crewRepository.save(crew);
   }
+
+  getCrewByByMovie(movie: Movie, job?: string) {
+    return this.crewRepository.find({ where: { movie, job } });
+  }
 }

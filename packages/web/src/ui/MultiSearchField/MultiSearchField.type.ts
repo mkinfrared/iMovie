@@ -1,8 +1,12 @@
-import { AutocompleteInputChangeReason } from "@material-ui/lab/useAutocomplete/useAutocomplete";
+import {
+  AutocompleteInputChangeReason,
+  FilterOptionsState
+} from "@material-ui/lab/useAutocomplete/useAutocomplete";
+import React from "react";
 
-export interface SearchFieldProps<T extends {}> {
+export interface MultiSearchFieldProps<T> {
   options: T[];
-  onChange: <U>(event: U, value: T | null) => void;
+  onChange: <U>(event: U, value: T[] | null) => void;
   onBlur?: React.FocusEventHandler;
   onInputChange?: (
     event: React.ChangeEvent<{}>,
@@ -18,5 +22,7 @@ export interface SearchFieldProps<T extends {}> {
   label: string;
   getOptionLabel?: (option: T) => string;
   getOptionSelected?: (option: T, value: T) => boolean;
-  value?: T;
+  value?: T[];
+  filterSelectedOptions?: boolean;
+  filterOptions?: (options: T[], state: FilterOptionsState<T>) => T[];
 }

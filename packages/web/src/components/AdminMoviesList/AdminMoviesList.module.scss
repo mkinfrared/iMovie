@@ -1,0 +1,13 @@
+.AdminMoviesList {
+  display: flex;
+
+  .movieFilters {
+    flex-basis: 100%;
+  }
+
+  .table {
+    flex: 1;
+    margin-left: 40px;
+    padding-bottom: 40px;
+  }
+}

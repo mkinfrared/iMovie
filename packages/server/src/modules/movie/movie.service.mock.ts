@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
+
 const movieResponseMock = {
   adult: false,
   backdrop_path: "/s3TBrRGB1iav7gFOCNx3H31MoES.jpg",
@@ -78,4 +79,13 @@ const movieResponseMock = {
   vote_count: 26242
 };
 
-export { movieResponseMock };
+const movieServiceMock = {
+  createMovie: jest.fn(),
+  fetchMovieCredits: jest.fn(),
+  fetchBoxOfficePerformance: jest.fn(),
+  getMoviesByCastAndCrew: jest.fn(),
+  updateNewReleases: jest.fn(),
+  updateReleases: jest.fn()
+};
+
+export { movieResponseMock, movieServiceMock };

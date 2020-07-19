@@ -1,10 +1,9 @@
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 
+import css from "components/Option/Option.module.scss";
+import { OptionProps } from "components/Option/Option.type";
 import Image from "ui/Image";
-
-import css from "./Option.module.scss";
-import { OptionProps } from "./Option.type";
 
 const Option = ({ title, imageUrl }: OptionProps) => {
   return (

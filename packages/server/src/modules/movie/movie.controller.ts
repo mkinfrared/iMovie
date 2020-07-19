@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
-  Post
+  Post,
+  Query
 } from "@nestjs/common";
 
 import { MovieDto } from "modules/movie/dto/movie.dto";
@@ -32,5 +34,36 @@ export class MovieController {
         HttpStatus.BAD_REQUEST
       );
     }
+  }
+
+  @Get()
+  getMovies(
+    @Query("cast") cast?: string,
+    @Query("directors") directors?: string,
+    @Query("writers") writers?: string,
+    @Query("producers") producers?: string,
+    @Query("page") page = "1"
+  ) {
+    const castArr = cast?.split(",").map((value) => parseInt(value, 0));
+
+    const directorsArr = directors
+      ?.split(",")
+      .map((value) => parseInt(value, 0));
+
+    const writersArr = writers?.split(",").map((value) => parseInt(value, 0));
+
+    const producersArr = producers
+      ?.split(",")
+      .map((value) => parseInt(value, 0));
+
+    const currentPage = parseInt(page, 0);
+
+    return this.movieService.getMoviesByCastAndCrew(
+      castArr,
+      directorsArr,
+      writersArr,
+      producersArr,
+      currentPage
+    );
   }
 }

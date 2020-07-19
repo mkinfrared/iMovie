@@ -47,7 +47,7 @@ const createOptions = (): TypeOrmModuleOptions => {
         autoLoadEntities: true,
         synchronize: true,
         logging: true,
-        dropSchema: true
+        dropSchema: false
       };
   }
 };

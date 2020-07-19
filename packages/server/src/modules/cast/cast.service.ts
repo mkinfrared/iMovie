@@ -34,4 +34,11 @@ export class CastService {
 
     return this.castRepository.save(cast);
   }
+
+  getCastByMovie(movie: Movie) {
+    return this.castRepository.find({
+      where: { movie },
+      order: { order: "ASC" }
+    });
+  }
 }

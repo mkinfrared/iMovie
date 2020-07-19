@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { fireEvent, render } from "@testing-library/react";
 import { act } from "@testing-library/react-hooks";
 import React, { ReactElement } from "react";
@@ -13,6 +12,7 @@ describe("<MoviePreviewCard />", () => {
   const releaseDate = "42-42-4242";
   const popularity = 42;
   const overview = "they took'er jobs!!";
+  const id = 77;
 
   beforeEach(() => {
     Component = (
@@ -22,6 +22,7 @@ describe("<MoviePreviewCard />", () => {
         releaseDate={releaseDate}
         popularity={popularity}
         overview={overview}
+        id={id}
       />
     );
   });
@@ -29,13 +30,11 @@ describe("<MoviePreviewCard />", () => {
   it("should be defined", async () => {
     const { container } = render(Component);
 
-    await act(async () => {
+    await act(() => {
       // Change the viewport to 500px.
-      // @ts-ignore
-      window.innerWidth = 500;
+      (window as any).innerWidth = 500;
 
-      // @ts-ignore
-      window.innerHeight = 500;
+      (window as any).innerHeight = 500;
 
       // Trigger the window resize event.
       // window.dispatchEvent(new Event('resize'))

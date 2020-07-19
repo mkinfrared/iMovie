@@ -18,7 +18,14 @@ const repositoryMock = {
   returning: jest.fn().mockReturnThis(),
   execute: jest.fn((..._: any): Partial<InsertResult> => ({})),
   findAndCount: jest.fn().mockReturnThis(),
-  findByIds: jest.fn().mockReturnThis()
+  findByIds: jest.fn().mockReturnThis(),
+  getManyAndCount: jest.fn().mockReturnThis(),
+  innerJoin: jest.fn().mockReturnThis(),
+  select: jest.fn().mockReturnThis(),
+  distinct: jest.fn().mockReturnThis(),
+  orWhere: jest.fn().mockReturnThis(),
+  offset: jest.fn().mockReturnThis(),
+  limit: jest.fn().mockReturnThis()
 };
 
 const queryRunnerMock = {

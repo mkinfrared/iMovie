@@ -64,7 +64,7 @@ export class CountryService implements OnApplicationBootstrap {
     this.fetchCountries();
   }
 
-  async onApplicationBootstrap() {
+  onApplicationBootstrap() {
     if (NODE_ENV !== "test") {
       this.fetchCountries();
     }
