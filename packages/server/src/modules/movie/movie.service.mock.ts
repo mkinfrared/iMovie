@@ -85,7 +85,8 @@ const movieServiceMock = {
   fetchBoxOfficePerformance: jest.fn(),
   getMoviesByCastAndCrew: jest.fn(),
   updateNewReleases: jest.fn(),
-  updateReleases: jest.fn()
+  updateReleases: jest.fn(),
+  getOne: jest.fn()
 };
 
 export { movieResponseMock, movieServiceMock };

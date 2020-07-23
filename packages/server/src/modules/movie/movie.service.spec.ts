@@ -326,4 +326,12 @@ describe("MovieService", () => {
 
     expect(currentPage).toBe(page);
   });
+
+  it("should call findOne on movieRepository", async () => {
+    const movieId = 42;
+
+    await service.getOne(movieId);
+
+    expect(repositoryMock.findOne).toHaveBeenCalledWith(movieId);
+  });
 });

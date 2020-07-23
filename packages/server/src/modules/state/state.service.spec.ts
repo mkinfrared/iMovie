@@ -8,7 +8,7 @@ import { StateService } from "./state.service";
 import { stateMock } from "./state.service.mock";
 
 describe("StateService", () => {
-  const mockRepository = jest.fn(() => ({ ...repositoryMock }));
+  const mockStateRepository = jest.fn(() => ({ ...repositoryMock }));
 
   let service: StateService;
 
@@ -16,7 +16,7 @@ describe("StateService", () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         StateService,
-        { provide: getRepositoryToken(State), useClass: mockRepository }
+        { provide: getRepositoryToken(State), useClass: mockStateRepository }
       ]
     }).compile();
 
