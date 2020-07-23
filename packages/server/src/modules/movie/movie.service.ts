@@ -204,4 +204,8 @@ export class MovieService {
 
     movies.forEach((movie) => this.fetchBoxOfficePerformance(movie));
   }
+
+  getOne(movieId: number) {
+    return this.movieRepository.findOne(movieId);
+  }
 }

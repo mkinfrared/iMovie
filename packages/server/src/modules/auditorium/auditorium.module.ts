@@ -9,6 +9,7 @@ import { SeatModule } from "modules/seat/seat.module";
 @Module({
   imports: [TypeOrmModule.forFeature([Auditorium]), SeatModule],
   providers: [AuditoriumService],
-  controllers: [AuditoriumController]
+  controllers: [AuditoriumController],
+  exports: [AuditoriumService]
 })
 export class AuditoriumModule {}

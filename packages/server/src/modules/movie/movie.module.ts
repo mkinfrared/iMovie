@@ -22,6 +22,7 @@ import { MovieService } from "modules/movie/movie.service";
     LoggerModule
   ],
   providers: [MovieService],
-  controllers: [MovieController]
+  controllers: [MovieController],
+  exports: [MovieService]
 })
 export class MovieModule {}

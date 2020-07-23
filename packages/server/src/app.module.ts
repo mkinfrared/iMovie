@@ -26,6 +26,7 @@ import { MailerModule } from "utils/mailer/mailer.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { ScreeningModule } from "./modules/screening/screening.module";
 
 @Module({
   imports: [
@@ -49,7 +50,8 @@ import { AppService } from "./app.service";
     CompanyModule,
     CastModule,
     CrewModule,
-    GenreModule
+    GenreModule,
+    ScreeningModule
   ],
   controllers: [AppController],
   providers: [AppService]
