@@ -53,7 +53,8 @@ describe("City Controller", () => {
     expect(result).toMatchObject(movieDtoMock);
   });
 
-  it("should call getMoviesByCastAndCrew on movieService", async () => {
+  it("should call getMovies on movieService", async () => {
+    const title = "Cartman";
     const cast = "1,2,3";
     const directors = "4,5,6";
     const writers = "7,8,9";
@@ -64,14 +65,49 @@ describe("City Controller", () => {
     const writersArray = [7, 8, 9];
     const producersArray = [10, 11, 12];
 
-    await controller.getMovies(cast, directors, writers, producers, page);
+    await controller.getMovies(
+      page,
+      title,
+      cast,
+      directors,
+      writers,
+      producers
+    );
 
-    expect(movieServiceMock.getMoviesByCastAndCrew).toHaveBeenCalledWith(
+    expect(movieServiceMock.getMovies).toHaveBeenCalledWith(
+      42,
+      title,
       castArray,
       directorsArray,
       writersArray,
-      producersArray,
-      42
+      producersArray
+    );
+  });
+
+  it("should call getMovies on movieService", async () => {
+    const title = undefined;
+    const cast = undefined;
+    const directors = undefined;
+    const writers = undefined;
+    const producers = undefined;
+    const page = undefined;
+
+    await controller.getMovies(
+      page,
+      title,
+      cast,
+      directors,
+      writers,
+      producers
+    );
+
+    expect(movieServiceMock.getMovies).toHaveBeenCalledWith(
+      1,
+      title,
+      cast,
+      directors,
+      writers,
+      producers
     );
   });
 });

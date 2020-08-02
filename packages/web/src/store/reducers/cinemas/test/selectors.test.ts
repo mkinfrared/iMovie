@@ -15,7 +15,7 @@ describe("selectors", () => {
   it("should return a cinema from store by id", () => {
     const { data } = cinemaStateMock;
     const { id } = data[0];
-    const result = selectCinema(id).resultFunc(cinemaStateMock);
+    const result = selectCinema(id).resultFunc(cinemaStateMock.data);
 
     expect(result?.id).toBe(id);
   });

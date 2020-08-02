@@ -34,4 +34,8 @@ export class StateService {
 
     return result as State;
   }
+
+  getByCountry(countryId: string) {
+    return this.stateRepository.find({ where: { countryId } });
+  }
 }

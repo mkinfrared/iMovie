@@ -35,4 +35,8 @@ export class CityService {
 
     return result as City;
   }
+
+  getByState(stateId: number) {
+    return this.cityRepository.find({ where: { stateId } });
+  }
 }

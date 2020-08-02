@@ -24,8 +24,14 @@ export class CinemaController {
   }
 
   @Get()
-  getAll(@Query("page") page: string, @Query("limit") limit: string) {
-    return this.cinemaService.getAll(+page, +limit);
+  getAll(
+    @Query("page") page = "1",
+    @Query("limit") limit = "20",
+    @Query("zipcodeId") zipcodeId?: string
+  ) {
+    const zipcode = parseInt(zipcodeId as any, 0) || undefined;
+
+    return this.cinemaService.getAll(+page, +limit, zipcode);
   }
 
   @Get(":id")

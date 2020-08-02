@@ -5,19 +5,19 @@ import { Repository } from "typeorm";
 
 import { AuditoriumService } from "modules/auditorium/auditorium.service";
 import { MovieService } from "modules/movie/movie.service";
-import { ScreeningDto } from "modules/screening/dto/screening.dto";
-import { Screening } from "modules/screening/screening.entity";
+import { ShowtimeDto } from "modules/showtime/dto/showtime.dto";
+import { Showtime } from "modules/showtime/showtime.entity";
 
 @Injectable()
-export class ScreeningService {
+export class ShowtimeService {
   constructor(
-    @InjectRepository(Screening)
-    private readonly screeningRepository: Repository<Screening>,
+    @InjectRepository(Showtime)
+    private readonly showtimeRepository: Repository<Showtime>,
     private readonly movieService: MovieService,
     private readonly auditoriumService: AuditoriumService
   ) {}
 
-  async create(screeningDto: ScreeningDto) {
+  async create(screeningDto: ShowtimeDto) {
     const { startDate, auditoriumId, movieId } = screeningDto;
     const movie = await this.movieService.getOne(movieId);
     const auditorium = await this.auditoriumService.getOne(auditoriumId);
@@ -31,12 +31,12 @@ export class ScreeningService {
       throw new Error("Auditorium was not found");
     }
 
-    const screening = this.screeningRepository.create({
+    const screening = this.showtimeRepository.create({
       movie,
       auditorium,
       startDate: date
     });
 
-    return this.screeningRepository.save(screening);
+    return this.showtimeRepository.save(screening);
   }
 }

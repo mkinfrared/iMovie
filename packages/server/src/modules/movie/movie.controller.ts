@@ -38,11 +38,12 @@ export class MovieController {
 
   @Get()
   getMovies(
+    @Query("page") page = "1",
+    @Query("title") title?: string,
     @Query("cast") cast?: string,
     @Query("directors") directors?: string,
     @Query("writers") writers?: string,
-    @Query("producers") producers?: string,
-    @Query("page") page = "1"
+    @Query("producers") producers?: string
   ) {
     const castArr = cast?.split(",").map((value) => parseInt(value, 0));
 
@@ -58,12 +59,13 @@ export class MovieController {
 
     const currentPage = parseInt(page, 0);
 
-    return this.movieService.getMoviesByCastAndCrew(
+    return this.movieService.getMovies(
+      currentPage,
+      title,
       castArr,
       directorsArr,
       writersArr,
-      producersArr,
-      currentPage
+      producersArr
     );
   }
 }

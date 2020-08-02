@@ -17,6 +17,13 @@ export class ZipcodeController {
     return this.zipcodeService.getAll();
   }
 
+  @Get("city/:cityId")
+  getZipcodesByCity(@Param("cityId") cityId: string) {
+    const id = parseInt(cityId, 0);
+
+    return this.zipcodeService.getByCity(id);
+  }
+
   @Get(":id")
   getOne(@Param("id") id: number) {
     return this.zipcodeService.getOne(id);

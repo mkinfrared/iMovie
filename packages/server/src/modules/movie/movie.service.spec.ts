@@ -295,6 +295,7 @@ describe("MovieService", () => {
   });
 
   it("should return movies", async () => {
+    const title = "Butters";
     const cast = [1];
     const directors = [1];
     const writers = [1];
@@ -308,12 +309,48 @@ describe("MovieService", () => {
       33
     ]);
 
-    const result = await service.getMoviesByCastAndCrew(
+    const result = await service.getMovies(
+      page,
+      title,
       cast,
       directors,
       writers,
-      producers,
-      page
+      producers
+    );
+
+    const { result: movie, total, page: currentPage } = result;
+
+    expect(crewServiceMock.getCrewByByMovie).toHaveBeenCalled();
+
+    expect(movie[0].id).toBe(movieResponseMock.id);
+
+    expect(total).toBe(33);
+
+    expect(currentPage).toBe(page);
+  });
+
+  it("should return movies", async () => {
+    const title = undefined;
+    const cast = undefined;
+    const directors = undefined;
+    const writers = undefined;
+    const producers = undefined;
+    const page = 42;
+
+    crewServiceMock.getCrewByByMovie.mockReturnValueOnce([{ id: 12 }]);
+
+    repositoryMock.getManyAndCount.mockReturnValueOnce([
+      [movieResponseMock],
+      33
+    ]);
+
+    const result = await service.getMovies(
+      page,
+      title,
+      cast,
+      directors,
+      writers,
+      producers
     );
 
     const { result: movie, total, page: currentPage } = result;

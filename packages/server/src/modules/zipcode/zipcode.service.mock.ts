@@ -7,7 +7,8 @@ const zipcodeServiceMock = {
   getByCodeAndCountry: jest.fn(),
   getAll: jest.fn(),
   getOne: jest.fn(),
-  createZipcodesByCity: jest.fn()
+  createZipcodesByCity: jest.fn(),
+  getByCity: jest.fn()
 };
 
 const zipcodeMock = {

@@ -140,12 +140,13 @@ export class MovieService {
     }
   }
 
-  async getMoviesByCastAndCrew(
+  async getMovies(
+    page: number,
+    title?: string,
     actors = [-1],
     directors = [-1],
     writers = [-1],
-    producers = [-1],
-    page: number
+    producers = [-1]
   ) {
     const limit = 10;
 
@@ -168,6 +169,9 @@ export class MovieService {
         '"crew"."personId" in (:...producers) and "crew"."job" LIKE :job',
         { producers, job: "Producer" }
       )
+      .orWhere(title ? '"movie"."title" ILIKE :title' : "1=2", {
+        title: `%${title}%`
+      })
       .offset(limit * (page - 1))
       .limit(limit)
       .getManyAndCount();

@@ -19,4 +19,5 @@ export interface SearchFieldProps<T extends {}> {
   getOptionLabel?: (option: T) => string;
   getOptionSelected?: (option: T, value: T) => boolean;
   value?: T;
+  id?: string;
 }

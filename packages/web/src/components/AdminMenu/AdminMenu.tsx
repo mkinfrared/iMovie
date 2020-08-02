@@ -2,6 +2,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import CinemaIcon from "@material-ui/icons/Apartment";
 import MovieIcon from "@material-ui/icons/LocalMovies";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 import React, { useMemo } from "react";
 
 import AdminMenuLink from "components/AdminMenuLink";
@@ -20,6 +21,11 @@ const navigation: Navigation[] = [
     text: "Movies",
     icon: <MovieIcon />,
     path: AdminRoutes.ADMIN_MOVIES
+  },
+  {
+    text: "Showtimes",
+    icon: <ScheduleIcon />,
+    path: AdminRoutes.ADMIN_SHOWTIMES
   }
 ];
 

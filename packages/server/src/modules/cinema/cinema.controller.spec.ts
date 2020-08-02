@@ -48,7 +48,11 @@ describe("Cinema Controller", () => {
 
     expect(result).toBeDefined();
 
-    expect(cinemaServiceMock.getAll).toHaveBeenCalledWith(+page, +limit);
+    expect(cinemaServiceMock.getAll).toHaveBeenCalledWith(
+      +page,
+      +limit,
+      undefined
+    );
   });
 
   it("should call 'get' on cinema service and return a cinema by id", async () => {

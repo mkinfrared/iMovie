@@ -18,6 +18,7 @@ const SearchField = <T,>({
   label,
   value,
   renderOption,
+  id,
   loading = false,
   error = false
 }: SearchFieldProps<T>) => {
@@ -39,10 +40,11 @@ const SearchField = <T,>({
         <TextField
           {...params}
           fullWidth
-          autoComplete="off"
+          autoComplete="new-password"
           name={name}
           label={label}
           variant="outlined"
+          id={id}
           InputProps={{
             ...params.InputProps,
             endAdornment: loading && (
@@ -57,4 +59,4 @@ const SearchField = <T,>({
   );
 };
 
-export default SearchField;
+export default React.memo(SearchField) as typeof SearchField;

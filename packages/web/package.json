@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@date-io/dayjs": "1.3.13",
     "@imovie/common": "0.0.0",
     "@loadable/component": "^5.12.0",
     "@material-ui/core": "4.9.14",

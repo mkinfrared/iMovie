@@ -146,4 +146,8 @@ export class ZipcodeService {
       this.loggerService.log(e);
     }
   }
+
+  getByCity(cityId: number) {
+    return this.zipcodeRepository.find({ where: { cityId } });
+  }
 }
