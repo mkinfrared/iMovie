@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseFilters
 } from "@nestjs/common";
 
@@ -26,6 +27,11 @@ export class AuditoriumController {
   @UseFilters(DatabaseException)
   create(@Body() auditoriumDto: AuditoriumDto) {
     return this.auditoriumService.create(auditoriumDto);
+  }
+
+  @Get()
+  getMany(@Query("cinemaId") cinemaId = "-1") {
+    return this.auditoriumService.getMany(+cinemaId);
   }
 
   @Get(":id")

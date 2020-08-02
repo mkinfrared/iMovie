@@ -4,11 +4,11 @@ import { Auditorium } from "modules/auditorium/auditorium.entity";
 import { Movie } from "modules/movie/movie.entity";
 
 @Entity()
-export class Screening {
+export class Showtime {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "time with time zone" })
+  @Column({ type: "timestamptz" })
   startDate: Date;
 
   @ManyToOne(() => Movie, (movie) => movie.id)

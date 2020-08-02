@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import AdminShowtimes from "pages/AdminShowtimes";
 import { loadablePage } from "utils/loadable";
 
 import { AdminRoutes, RoutesProps } from "./Routes.type";
@@ -54,6 +55,10 @@ const Routes = ({ history, isAdmin }: RoutesProps) => {
             component={AdminMovies}
           />
           <Route path={AdminRoutes.ADMIN_ADD_MOVIE} component={AdminAddMovie} />
+          <Route
+            path={AdminRoutes.ADMIN_SHOWTIMES}
+            component={AdminShowtimes}
+          />
           <Redirect to={AdminRoutes.NOT_FOUND} push />
         </>
       );

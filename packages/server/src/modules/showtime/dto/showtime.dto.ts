@@ -1,4 +1,4 @@
-export class ScreeningDto {
+export class ShowtimeDto {
   startDate: string;
 
   movieId: number;

@@ -18,6 +18,7 @@ import { GenreModule } from "modules/genre/genre.module";
 import { MovieModule } from "modules/movie/movie.module";
 import { PersonModule } from "modules/person/person.module";
 import { SeatModule } from "modules/seat/seat.module";
+import { ShowtimeModule } from "modules/showtime/showtime.module";
 import { StateModule } from "modules/state/state.module";
 import { TokenModule } from "modules/token/token.module";
 import { UserModule } from "modules/user/user.module";
@@ -26,7 +27,6 @@ import { MailerModule } from "utils/mailer/mailer.module";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { ScreeningModule } from "./modules/screening/screening.module";
 
 @Module({
   imports: [
@@ -51,7 +51,7 @@ import { ScreeningModule } from "./modules/screening/screening.module";
     CastModule,
     CrewModule,
     GenreModule,
-    ScreeningModule
+    ShowtimeModule
   ],
   controllers: [AppController],
   providers: [AppService]

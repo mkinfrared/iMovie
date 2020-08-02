@@ -122,4 +122,12 @@ describe("AuditoriumService", () => {
 
     expect(repositoryMock.delete).toHaveBeenCalledWith(id);
   });
+
+  it("should call 'find' on auditoriumRepository", async () => {
+    const cinemaId = 42;
+
+    await service.getMany(cinemaId);
+
+    expect(repositoryMock.find).toHaveBeenCalled();
+  });
 });

@@ -6,22 +6,22 @@ import { AuditoriumService } from "modules/auditorium/auditorium.service";
 import { auditoriumServiceMock } from "modules/auditorium/auditorium.service.mock";
 import { MovieService } from "modules/movie/movie.service";
 import { movieServiceMock } from "modules/movie/movie.service.mock";
-import { Screening } from "modules/screening/screening.entity";
-import { ScreeningService } from "modules/screening/screening.service";
+import { Showtime } from "modules/showtime/showtime.entity";
+import { ShowtimeService } from "modules/showtime/showtime.service";
 
 describe("ScreeningService", () => {
   const mockScreeningRepository = jest.fn(() => ({ ...repositoryMock }));
   const mockMovieService = jest.fn(() => ({ ...movieServiceMock }));
   const mockAuditoriumService = jest.fn(() => ({ ...auditoriumServiceMock }));
 
-  let service: ScreeningService;
+  let service: ShowtimeService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        ScreeningService,
+        ShowtimeService,
         {
-          provide: getRepositoryToken(Screening),
+          provide: getRepositoryToken(Showtime),
           useClass: mockScreeningRepository
         },
         { provide: MovieService, useClass: mockMovieService },
@@ -29,7 +29,7 @@ describe("ScreeningService", () => {
       ]
     }).compile();
 
-    service = module.get<ScreeningService>(ScreeningService);
+    service = module.get<ShowtimeService>(ShowtimeService);
   });
 
   it("should be defined", () => {

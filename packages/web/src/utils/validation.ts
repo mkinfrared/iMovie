@@ -14,4 +14,10 @@ const addCinemaFormValidation = yup.object().shape({
   zipcode: yup.string().required()
 });
 
-export { addCinemaFormValidation };
+const addShowtimeValidation = yup.object().shape({
+  movie: yup.object().required(),
+  auditorium: yup.object().required(),
+  date: yup.object().required()
+});
+
+export { addCinemaFormValidation, addShowtimeValidation };

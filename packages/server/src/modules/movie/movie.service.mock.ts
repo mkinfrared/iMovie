@@ -83,7 +83,7 @@ const movieServiceMock = {
   createMovie: jest.fn(),
   fetchMovieCredits: jest.fn(),
   fetchBoxOfficePerformance: jest.fn(),
-  getMoviesByCastAndCrew: jest.fn(),
+  getMovies: jest.fn(),
   updateNewReleases: jest.fn(),
   updateReleases: jest.fn(),
   getOne: jest.fn()

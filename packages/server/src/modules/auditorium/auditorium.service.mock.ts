@@ -30,7 +30,8 @@ const auditoriumServiceMock = {
   create: jest.fn(),
   getOne: jest.fn(),
   update: jest.fn(),
-  delete: jest.fn()
+  delete: jest.fn(),
+  getMany: jest.fn()
 };
 
 export { auditoriumMock, auditoriumServiceMock, auditoriumDtoMock };

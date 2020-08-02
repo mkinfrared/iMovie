@@ -278,7 +278,7 @@ describe("ZipcodeService", () => {
     expect(result[0]).toBe(zipcodeMock);
   });
 
-  it("should a zipcode", async () => {
+  it("should return a zipcode", async () => {
     repositoryMock.findOne.mockReturnValueOnce(zipcodeMock);
 
     const result = await service.getOne(42);
@@ -288,5 +288,11 @@ describe("ZipcodeService", () => {
     expect(result?.code).toBe(zipcodeMock.code);
 
     expect(result?.cityId).toBe(zipcodeMock.cityId);
+  });
+
+  it("should call 'find' on zipcodeRepository", async () => {
+    await service.getByCity(42);
+
+    expect(repositoryMock.find).toHaveBeenCalled();
   });
 });

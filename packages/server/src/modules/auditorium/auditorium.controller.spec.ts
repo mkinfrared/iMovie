@@ -121,4 +121,10 @@ describe("Auditorium Controller", () => {
 
     expect(auditoriumServiceMock.delete).toHaveBeenCalledWith(id);
   });
+
+  it("should call 'getMany' on auditoriumService", async () => {
+    await controller.getMany();
+
+    expect(auditoriumServiceMock.getMany).toHaveBeenCalledWith(-1);
+  });
 });

@@ -99,4 +99,12 @@ describe("Zipcode Controller", () => {
       expect(e.status).toBe(400);
     }
   });
+
+  it("should call 'getByCity' on zipcodeService", async () => {
+    const cityId = "42";
+
+    await controller.getZipcodesByCity(cityId);
+
+    expect(zipcodeServiceMock.getByCity).toHaveBeenCalledWith(42);
+  });
 });

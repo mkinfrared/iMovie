@@ -53,4 +53,8 @@ export class AuditoriumService {
 
     return result;
   }
+
+  getMany(cinemaId: number) {
+    return this.auditoriumRepository.find({ where: { cinemaId } });
+  }
 }

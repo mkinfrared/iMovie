@@ -119,6 +119,8 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
     []
   );
 
+  const getOptionLabel = useCallback((option) => option.name, []);
+
   useEffect(() => {
     if (open) {
       fetchCountries();
@@ -159,7 +161,7 @@ const AddCinemaForm = ({ open, onClose, dispatch }: AddCinemaFormProps) => {
             className={css.input}
             name="country"
             label="Country"
-            getOptionLabel={(option) => option.name}
+            getOptionLabel={getOptionLabel}
             getOptionSelected={getOptionSelected}
           />
           <TextField
