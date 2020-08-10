@@ -80,10 +80,12 @@ describe("ScreeningService", () => {
 
   it("should call save on screeningRepository", async () => {
     const screeningDto = {
-      startDate: "12-12-2020",
+      startDate: "2020-08-10T19:02:27.641Z",
       movieId: 42,
       auditoriumId: 7
     };
+
+    service.getTimeSlotAvailable = jest.fn(() => Promise.resolve(true));
 
     movieServiceMock.getOne.mockReturnValueOnce(42);
 
@@ -92,5 +94,27 @@ describe("ScreeningService", () => {
     await service.create(screeningDto);
 
     expect(repositoryMock.save).toHaveBeenCalled();
+  });
+
+  it("should throw an error", () => {
+    const screeningDto = {
+      startDate: "2020-08-10T19:02:27.641Z",
+      movieId: 42,
+      auditoriumId: 7
+    };
+
+    service.getTimeSlotAvailable = jest.fn(() => Promise.resolve(false));
+
+    movieServiceMock.getOne.mockReturnValueOnce(42);
+
+    auditoriumServiceMock.getOne.mockReturnValueOnce(7);
+
+    try {
+      service.create(screeningDto);
+    } catch (e) {
+      expect(service.create).toThrow();
+
+      expect(e.message).toBe("Slot is not available");
+    }
   });
 });
